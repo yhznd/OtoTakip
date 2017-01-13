@@ -10,5 +10,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Merhaba ben Yunus'tan clone edildim.
+        //heyy ben eren reis
+
+
     }
 }
