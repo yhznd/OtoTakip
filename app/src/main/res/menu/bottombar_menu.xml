@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:id="@+id/bb_menu_arac"
+    android:enabled="true"
+    android:icon="@drawable/icon_car"
+    android:title="@string/araclarim"
+    app:showAsAction="ifRoom" />
+<item
+    android:id="@+id/bb_menu_yakin"
+    android:enabled="true"
+    android:icon="@drawable/icon_yer"
+    android:title="@string/yakinimdakiler"
+    app:showAsAction="ifRoom" />
+<item
+    android:id="@+id/bb_menu_yaklasan"
+    android:enabled="true"
+    android:icon="@drawable/icon_takvim"
+    android:title="@string/yaklasanlar"
+    app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bb_menu_ipucu"
+        android:enabled="true"
+        android:icon="@drawable/icon_ipucu"
+        android:title="@string/ipuclari"
+        app:showAsAction="ifRoom" />
+</menu>

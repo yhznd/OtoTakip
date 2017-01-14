@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OtoTakip</string>
+    <string name="araclarim">Araçlarım</string>
+    <string name="yaklasanlar">Yaklaşanlar</string>
+    <string name="yakinimdakiler">Yakınımdakiler</string>
+    <string name="ipuclari">İpuçları</string>
 </resources>
