@@ -15,6 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AraclarimFragment" />
+        <activity android:name=".YaklasanlarFragment" />
+        <activity android:name=".Yakinimdakiler" />
+        <activity android:name=".IpuclariFragment"></activity>
     </application>
 
 </manifest>
