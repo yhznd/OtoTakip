@@ -8,21 +8,25 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <!--
+        <activity android:name=".AraclarimFragment" />
+        <activity android:name=".YaklasanlarFragment" />
+        <activity android:name=".Yakinimdakiler" />
+        <activity android:name=".IpuclariFragment" />
+        -->
+        <activity
+            android:name=".MyIntro"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-       <!-- <activity android:name=".AraclarimFragment" />
-        <activity android:name=".YaklasanlarFragment" />
-        <activity android:name=".Yakinimdakiler" />
-        <activity android:name=".IpuclariFragment" />-->
-        <activity
-            android:name=".MyIntro"
-            android:theme="@style/FullscreenTheme"
-            android:windowSoftInputMode="stateHidden" >
         </activity>
     </application>
 

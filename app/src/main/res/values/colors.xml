@@ -2,9 +2,12 @@
 <resources>
     <color name="colorPrimary">#19323C</color>
     <color name="colorPrimaryDark">#19323C</color>
-    <color name="colorAccent">#00958C</color>
-    <color name="beyaz">#FFFFFF</color>
-    <color name="sari">#FFAE00</color>
-
+    <color name="colorAccent">#00958c</color>
+    <color name="beyaz">#ffffff</color>
+    <color name="sari">#ffae00</color>
+    <color name="circular_progress_default_progress">#bada55</color>
+    <color name="circular_progress_default_background">#787878</color>
+    <color name="circular_progress_default_title">#bada55</color>
+    <color name="circular_progress_default_subtitle">#D1D1D1</color>
 
 </resources>
