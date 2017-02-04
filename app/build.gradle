@@ -29,6 +29,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.github.paolorotolo:appintro:3.3.0'
     compile 'com.github.medyo:fancybuttons:1.8.2'
+    compile 'com.github.javiersantos:MaterialStyledDialogs:2.0'
     testCompile 'junit:junit:4.12'
 
 }
