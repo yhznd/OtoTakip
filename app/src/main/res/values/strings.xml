@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">OtoTakip</string>
+    <string name="app_name">Oto Takip</string>
+    <string name="araclarim">Araçlarım</string>
+    <string name="yaklasanlar">Yaklaşanlar</string>
+    <string name="yakinimdakiler">Yakındakiler</string>
+    <string name="ipuclari">İpuçları</string>
+    <string name="navigation1">Hesabım</string>
+    <string name="navigation2">Hatırlatma Ayarları</string>
+    <string name="navigation3">İpuçları</string>
+    <string name="navigation4">Uygulamayı Oyla</string>
+    <string name="navigation5">Çıkış Yap</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="hakkimizda">Hakkımızda</string>
+
 </resources>
