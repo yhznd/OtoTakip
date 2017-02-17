@@ -6,6 +6,7 @@
     android:id="@+id/activity_arac_ekle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F6F8"
     tools:context="com.example.yunus.ototakip.AracEkle">
 
     <TextView
@@ -243,6 +244,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_width="match_parent">
+        android:layout_width="0dp">
     </android.support.design.widget.CoordinatorLayout>
 </android.support.constraint.ConstraintLayout>
