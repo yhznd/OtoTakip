@@ -35,7 +35,7 @@ public class MyIntro extends AppIntro {
     public void onSkipPressed()
     {
         finish();
-        //startActivity(new Intent(this,SignInActivity.class));
+        startActivity(new Intent(this,MainActivity.class));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class MyIntro extends AppIntro {
     public void onDonePressed()
     {
         finish();
-        //startActivity(new Intent(this,BluetoothBaglanti.class));
+        startActivity(new Intent(this,MainActivity.class));
     }
 
     @Override
@@ -56,29 +56,4 @@ public class MyIntro extends AppIntro {
 
     }
 
-    //SignIn Activity onCreate metoduna eklenecek kod.
-    /*Thread t = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            //  Initialize SharedPreferences
-            SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-            //  Create a new boolean and preference and set it to true
-            isFirstStart = getPrefs.getBoolean("firstStart", true);
-            //  If the activity has never started before...
-            if (isFirstStart) {
-                //  Launch app intro
-                Intent i = new Intent(BluetoothBaglanti.this, MyIntro.class);
-                startActivity(i);
-                //  Make a new preferences editor
-                SharedPreferences.Editor e = getPrefs.edit();
-                //  Edit preference to make it false because we don't want this to run again
-                e.putBoolean("firstStart", false);
-                //  Apply changes
-                e.apply();
-            }
-        }
-    });
-
-// Start the thread
-    t.start();*/
 }

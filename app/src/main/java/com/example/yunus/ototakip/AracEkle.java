@@ -34,7 +34,7 @@ public class AracEkle extends AppCompatActivity {
                             @Override
                             public void onClick(View v)
                             {
-                               //tamama basıldığında olacak olan olay
+                               //guncelleye basıldığında olacak olan olay
                             }
                         } )
                         .show();
@@ -50,7 +50,8 @@ public class AracEkle extends AppCompatActivity {
                             @Override
                             public void onClick(View v)
                             {
-                                //tamama basıldığında olacak olan olay
+                                //boş bırakıldığında dismiss oluyor
+                                //sil basıldığında olacak olan olay
                             }
                         } )
                         .show();
