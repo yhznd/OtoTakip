@@ -1,10 +1,13 @@
 package com.example.yunus.ototakip;
 
+
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class IpuclariSayfasi extends AppCompatActivity {
 
@@ -14,16 +17,40 @@ public class IpuclariSayfasi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ipuclari_sayfasi);
 
-        ipucu1= (ImageView) findViewById(R.id.imageView13);
-        ipucu2= (ImageView) findViewById(R.id.imageView14);
-        ipucu3= (ImageView) findViewById(R.id.imageView15);
+        ipucu1= (ImageView) findViewById(R.id.imageTraffic);
+        ipucu2= (ImageView) findViewById(R.id.imageAid);
+       ipucu3= (ImageView) findViewById(R.id.imageEngine);
+
 
         ipucu1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Toast.makeText(IpuclariSayfasi.this,"SELAM SUAT. TRAFİĞE BASTIN.",Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
+
+                startActivity(new Intent(IpuclariSayfasi.this,TrafficActivity.class));
             }
         });
+
+      ipucu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(IpuclariSayfasi.this,AidActivity.class));
+            }
+        });
+
+        ipucu3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(IpuclariSayfasi.this,EngineActivity.class));
+            }
+        });
+
     }
+
+
+
+
+
+
 }

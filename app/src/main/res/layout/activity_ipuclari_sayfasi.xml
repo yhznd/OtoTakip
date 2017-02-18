@@ -7,29 +7,45 @@
     android:layout_height="match_parent"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
+    <LinearLayout
+        android:layout_width="640dp"
+        android:layout_height="25dp"
+        android:background="@color/sari"
+        android:orientation="horizontal">
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/as1"
-        android:id="@+id/imageView13"
+        app:srcCompat="@drawable/engine"
+        android:id="@+id/imageEngine"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/traffic"
+        android:id="@+id/imageTraffic"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp" />
+
+    <LinearLayout
+        android:layout_width="640dp"
+        android:layout_height="25dp"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/as2"
-        android:id="@+id/imageView14"
-        android:layout_below="@+id/imageView13"
+        app:srcCompat="@drawable/aid"
+        android:id="@+id/imageAid"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/as3"
-        android:id="@+id/imageView15"
-        android:layout_below="@+id/imageView14"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
