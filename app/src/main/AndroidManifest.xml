@@ -32,8 +32,11 @@
         <activity android:name=".AracEkle" />
         <activity
             android:name=".InternetCon"
-            android:theme="@style/FullscreenTheme" >
-            </activity>
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".IpuclariSayfasi" />
+        <activity android:name=".TrafficActivity" />
+        <activity android:name=".EngineActivity" />
+        <activity android:name=".AidActivity"></activity>
     </application>
 
 </manifest>

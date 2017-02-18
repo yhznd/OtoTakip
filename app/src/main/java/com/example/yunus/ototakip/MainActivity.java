@@ -127,14 +127,9 @@ public class MainActivity extends AppCompatActivity
 
 
         }
-        else if (id == R.id.nav_hatirlatma)
-        {
+         else if (id == R.id.nav_ipucu) {
 
-        }
-         else if (id == R.id.nav_ipucu)
-        {
-            //startActivity(new Intent(MainActivity.this,IpuclariSayfasi.class));
-        }
+        } else if (id == R.id.nav_oyla) {
 
         else if (id == R.id.nav_oyla)
         {
