@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
 
-public class CustomPageAdapter extends PagerAdapter {
+public class  CustomPageAdapter extends PagerAdapter {
 
 
     String bilgiler[] = {"34 YNS 54","54 E 2554"};
