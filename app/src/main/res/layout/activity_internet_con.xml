@@ -6,72 +6,67 @@
     android:id="@+id/activity_internet_con"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/mor"
+    android:background="@drawable/bgimage"
     tools:context="com.example.yunus.ototakip.InternetCon">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ghost"
-        android:id="@+id/imageView4"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="90dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
 
-    <ImageView
-        android:layout_width="300dp"
-        app:srcCompat="@drawable/net"
-        android:id="@+id/imageView3"
-        android:layout_height="200dp"
-        android:layout_marginTop="98dp"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_centerHorizontal="true" />
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="800px"
+        android:layout_height="520px"
+        android:background="@drawable/netgif"
+        android:id="@+id/gifTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp" />
 
     <TextView
         android:text="HAY AKSİ!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:id="@+id/textNoInternet"
         android:fontFamily="Roboto"
         android:textColor="@color/beyaz"
         android:textStyle="normal|bold"
         android:textSize="18sp"
-        android:layout_below="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
-
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/buttonTekrarDene"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        fancy:fb_borderColor="@color/sari"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="@color/sari"
-        fancy:fb_focusColor="@color/sari"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="TEKRAR DENE"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/textNoInternet2"
-        android:layout_centerHorizontal="true">
-    </mehdi.sakout.fancybuttons.FancyButton>
+        android:layout_below="@+id/gifTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
 
     <TextView
-        android:text="İnternet bağlantınızı kontrol edip \n yeniden deneyiniz"
+        android:text="@string/netyok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="Roboto"
         android:id="@+id/textNoInternet2"
         android:textStyle="normal|bold"
         android:textColor="@color/ekru"
-        android:layout_marginTop="21dp"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:gravity="center"
+        android:textAlignment="center"
+        android:layout_alignTop="@+id/textNoInternet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp" />
+
+    <TextView
+        android:text="@string/tekrardene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="Roboto"
+        android:id="@+id/textDene"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/pembe"
+        android:layout_marginTop="78dp"
         android:layout_below="@+id/textNoInternet"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true">
+    </TextView>
+
+    <android.support.design.widget.CoordinatorLayout
+    android:layout_height="50dp"
+    android:id="@+id/myCoordinatorLayout2"
+        android:layout_width="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
