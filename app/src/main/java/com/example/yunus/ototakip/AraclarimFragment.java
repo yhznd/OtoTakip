@@ -20,8 +20,10 @@ public class AraclarimFragment extends Fragment {
     {
        View view=inflater.inflate(R.layout.activity_araclarim_fragment, container, false);
 
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(),AracEkle.class));
