@@ -4,39 +4,44 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permisson.INTERNET"/>
+    <uses-permission android:name="android.permisson.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/oto_takip"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MyIntro"
             android:theme="@style/FullscreenTheme"
-            android:windowSoftInputMode="stateHidden" >
-
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".AracEkle" />
         <activity
             android:name=".InternetCon"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".IpuclariSayfasi" />
-        <activity android:name=".TrafficActivity" />
-        <activity android:name=".EngineActivity" />
-        <activity android:name=".AidActivity"></activity>
+        <activity android:name=".IpuclariSayfasi"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".TrafficActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EngineActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AidActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
