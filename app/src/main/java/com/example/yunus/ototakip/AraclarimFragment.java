@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class AraclarimFragment extends Fragment {
 
+    public Button button;
     public AraclarimFragment() {}
 
     @Override
@@ -27,6 +29,13 @@ public class AraclarimFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(),AracEkle.class));
+            }
+        });
+        button= (Button) view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),InternetCon.class));
             }
         });
 

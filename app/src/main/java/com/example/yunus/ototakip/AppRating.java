@@ -73,8 +73,9 @@ public class AppRating
 
 
         new MaterialStyledDialog.Builder(mContext)
-                .setTitle("Puan Ver!")
-                .setDescription("Eğer uygulamayı beğendiyseniz lütfen puan verin!")
+                .setTitle("Bizi beğendiniz mi?")
+                .setDescription("O halde mağazadan puan verin ve yorumlarınızı bizimle paylaşın." +
+                        "Görüşleriniz bizim için değerli!")
                 .setCancelable(false)
                 .setNegativeText("Hayır, bunu bir daha gösterme")
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -99,7 +100,7 @@ public class AppRating
 
                     }
                 })
-                .setIcon(R.drawable.banner_apprating)
+                .setIcon(R.drawable.appicon)
                 .withIconAnimation(true)
                 .setPositiveText("Puan Ver")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {

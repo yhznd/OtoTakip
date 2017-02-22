@@ -2,6 +2,7 @@ package com.example.yunus.ototakip;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
@@ -34,8 +35,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setTheme(R.style.AppTheme_NoActionBar);
+        setContentView(R.layout.activity_main);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
         SharedPreferences.Editor dateEditor  = dateShared.edit();
@@ -52,13 +54,13 @@ public class MainActivity extends AppCompatActivity
         AppRating.app_launched(this);
 
         tarih = (TextView) findViewById(R.id.tarihText);
-        tarih.setText("Bugün- "+sistemTarihiniGetir());
+        tarih.setText("Bugün - "+sistemTarihiniGetir());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -122,28 +124,31 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_kullanici)
-        {
+        if (id == R.id.nav_kullanici) {
 
 
-        }
-         else if (id == R.id.nav_ipucu) {
-
-        } else if (id == R.id.nav_oyla) {
-
-        else if (id == R.id.nav_oyla)
+        } else if (id == R.id.nav_hatirlatma)
         {
 
         }
+        else if (id == R.id.nav_ipucu)
+        {
+            startActivity(new Intent(MainActivity.this,IpuclariSayfasi.class));
+        }
 
+
+        else if (id == R.id.nav_oyla) {
+
+            }
         else if (id == R.id.nav_cikis)
         {
-            //startActivity(new Intent(MainActivity.this,GirisActivity.class));
-        }
+                //startActivity(new Intent(MainActivity.this,GirisActivity.class));
+            }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
     }
 
     public String sistemTarihiniGetir()
