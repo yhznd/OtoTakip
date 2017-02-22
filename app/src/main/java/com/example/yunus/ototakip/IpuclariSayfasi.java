@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,15 @@ public class IpuclariSayfasi extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ipuclari_sayfasi);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_ipuclari);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(IpuclariSayfasi.this, MainActivity.class));
+            }
+        });
+
         ipucu1 = (ImageView) findViewById(R.id.imageTraffic);
         ipucu2 = (ImageView) findViewById(R.id.imageAid);
         ipucu3 = (ImageView) findViewById(R.id.imageEngine);

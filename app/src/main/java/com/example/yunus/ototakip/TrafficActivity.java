@@ -17,7 +17,7 @@ public class TrafficActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traffic);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_traffic);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

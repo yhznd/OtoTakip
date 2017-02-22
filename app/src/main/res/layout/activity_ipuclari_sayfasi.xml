@@ -5,13 +5,35 @@
     android:id="@+id/activity_ipuclari_sayfasi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ipucu_arkaplan"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_ipuclari"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/back_24dp"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/beyaz"
+        app:subtitleTextColor="@color/beyaz"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/iceriklerLayout"
+        android:orientation="horizontal"
+        android:paddingTop="50dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -21,8 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/traffic"
-                android:id="@+id/imageTraffic"
-                android:paddingTop="4dp" />
+                android:id="@+id/imageTraffic" />
         </TableRow>
 
         <TableRow

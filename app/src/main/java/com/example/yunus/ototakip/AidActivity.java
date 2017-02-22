@@ -14,7 +14,7 @@ public class AidActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aid);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aid);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
