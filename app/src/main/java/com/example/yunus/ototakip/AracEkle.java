@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +23,18 @@ public class AracEkle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arac_ekle);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aracekle);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AracEkle.this, MainActivity.class));
+            }
+        });
         guncelle= (FancyButton) findViewById(R.id.buttonGuncelle);
         sil= (FancyButton) findViewById(R.id.buttonSil);
+
+
 
         guncelle.setOnClickListener(new View.OnClickListener() {
             @Override

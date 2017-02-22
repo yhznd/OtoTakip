@@ -5,47 +5,69 @@
     android:id="@+id/activity_ipuclari_sayfasi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ipucu_arkaplan"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
-    <LinearLayout
-        android:layout_width="640dp"
-        android:layout_height="25dp"
-        android:background="@color/sari"
-        android:orientation="horizontal">
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/engine"
-        android:id="@+id/imageEngine"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="12dp" />
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/traffic"
-        android:id="@+id/imageTraffic"
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_ipuclari"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/back_24dp"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/beyaz"
+        app:subtitleTextColor="@color/beyaz"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp" />
-
-    <LinearLayout
-        android:layout_width="640dp"
-        android:layout_height="25dp"
-        android:background="@color/colorAccent"
+        android:id="@+id/iceriklerLayout"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
-    </LinearLayout>
+        android:paddingTop="50dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/aid"
-        android:id="@+id/imageAid"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/traffic"
+                android:id="@+id/imageTraffic" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/aid"
+                android:id="@+id/imageAid" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/engine"
+                android:id="@+id/imageEngine"
+                android:layout_height="wrap_content" />
+
+        </TableRow>
+
+    </TableLayout>
 </RelativeLayout>

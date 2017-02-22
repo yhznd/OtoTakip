@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/beyaz"
+        app:itemIconTint="@drawable/selector"
         app:itemTextColor="@color/beyaz"
         app:menu="@menu/bottombar_menu" />
 
