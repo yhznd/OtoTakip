@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_yakinimdakiler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,11 +11,72 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.yunus.ototakip.Yakinimdakiler">
 
-    <TextView
-        android:text="Yakınımdakiler elemanları buraya"
+    <CheckBox
+        android:text="Sigorta Acenteleri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="14dp"
+        android:id="@+id/checkSigorta"
+        android:layout_below="@+id/checkBakim"
+        android:layout_alignStart="@+id/checkBakim"
+        android:layout_alignEnd="@+id/checkBakim" />
+
+
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="200px"
+        android:layout_height="150px"
+        android:background="@drawable/questiongif"
+        android:id="@+id/gifSoru"
+        android:layout_above="@+id/checkMuayene"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView4" />
+        android:layout_marginBottom="48dp" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/buttonHaritayaGotur"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        fancy:fb_borderColor="@android:color/holo_orange_light"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@android:color/holo_orange_light"
+        fancy:fb_focusColor="@android:color/holo_orange_light"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="HARİTAYA YÖNLENDİR"
+        fancy:fb_textColor="@color/beyaz"
+        android:layout_marginTop="62dp"
+        fancy:fb_iconResource="@drawable/maps_64dp"
+        android:layout_below="@+id/checkSigorta"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4" />
+
+    <CheckBox
+        android:text="Muayene İstasyonları"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:id="@+id/checkMuayene"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:text="Bakım İstasyonları"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBakim"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/checkMuayene"
+        android:layout_alignStart="@+id/checkMuayene"
+        android:layout_alignEnd="@+id/checkMuayene" />
+
+    <TextView
+        android:text="Biraz ipucuna ihtiyacımız var.\n Haritada nereleri görüntülemek istersin?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_marginTop="183dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
