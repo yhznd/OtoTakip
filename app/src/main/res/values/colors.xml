@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#313b4c</color>
+    <color name="colorPrimaryDark">#313B4C</color>
+    <color name="colorAccent">#00958c</color>
+    <color name="beyaz">#ffffff</color>
+    <color name="sari">#ffae00</color>
+    <color name="siyah">#000000</color>
+    <color name="mor">#5b3997</color>
+    <color name="ekru">#DED9E8</color>
+    <color name="introkirmizi">#ec6b5c</color>
+    <color name="icon_arkasi">#E74F4F</color>
+    <color name="navigation_arkasi">#19323C</color>
+    <color name="pembe">#E54F93</color>
+    <color name="acik_yesil">#bada55</color>
+    <color name="acik_gri">#D1D1D1</color>
+    <color name="mavi">#42C0FB</color>
+    <color name="internetarka">#F5FAFF</color>
+    <color name="internet_yazi">#615472</color>
+    <color name="internet_yazi2">#8c849c</color>
 </resources>

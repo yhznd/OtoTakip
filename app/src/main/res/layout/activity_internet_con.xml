@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_internet_con"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/internetarka"
+    tools:context="com.example.yunus.ototakip.InternetCon">
+
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/nointernetdribble"
+        android:id="@+id/imageInternet"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/textNoInternet"
+        android:layout_alignParentEnd="true"
+        android:layout_height="480dp" />
+
+    <TextView
+        android:text="HAY AKSİ!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textNoInternet"
+        android:fontFamily="Roboto"
+        android:textColor="@color/internet_yazi"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/textNoInternet2"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="@string/tekrardene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="Roboto"
+        android:id="@+id/textDene"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="#F8B363"
+        android:layout_marginTop="59dp"
+        android:layout_below="@+id/textNoInternet"
+        android:layout_alignStart="@+id/textNoInternet"
+        android:textStyle="normal|bold"
+        android:textAlignment="center">
+    </TextView>
+
+    <TextView
+        android:text="@string/netyok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="Roboto"
+        android:id="@+id/textNoInternet2"
+        android:textStyle="normal|bold"
+        android:textColor="@color/internet_yazi2"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_marginBottom="96dp"
+        android:layout_above="@+id/myCoordinatorLayout2"
+        android:layout_centerHorizontal="true" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_height="50dp"
+        android:id="@+id/myCoordinatorLayout2"
+        android:layout_width="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
