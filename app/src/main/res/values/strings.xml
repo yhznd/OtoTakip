@@ -18,5 +18,6 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA
     </string>
+    <string name="title_activity_ayarlar">Ayarlar</string>
 
 </resources>

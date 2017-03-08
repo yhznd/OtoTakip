@@ -10,7 +10,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarTraffic">
 
     </android.support.design.widget.AppBarLayout>
 
@@ -27,7 +28,18 @@
         android:layout_alignParentStart="true" />
 
 
-
+    <TextView
+        android:text="Trafik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTrafik"
+        android:textColor="@color/beyaz"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/appBarTraffic"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
 
 
