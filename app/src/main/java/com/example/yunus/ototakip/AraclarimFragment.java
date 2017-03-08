@@ -28,7 +28,7 @@ public class AraclarimFragment extends Fragment {
         {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),AracEkle.class));
+                startActivity(new Intent(getActivity(),AracEkle.class));
             }
         });
         button= (Button) view.findViewById(R.id.button);

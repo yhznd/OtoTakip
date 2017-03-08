@@ -22,9 +22,7 @@ import android.widget.TextView;
 public class IpuclariSayfasi extends AppCompatActivity  {
 
     public ImageView ipucu1, ipucu2, ipucu3;
-    public TextView tarih;
-    private Fragment fragment;
-    private FragmentManager fragmentManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

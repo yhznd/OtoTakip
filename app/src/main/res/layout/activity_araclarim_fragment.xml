@@ -14,9 +14,9 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_ekle"
+        android:src="@drawable/iconaracekle"
         app:backgroundTint="@color/sari"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="12dp">
