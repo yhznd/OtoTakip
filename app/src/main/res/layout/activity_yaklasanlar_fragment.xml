@@ -21,6 +21,8 @@
             android:layout_height="wrap_content"
             app:selectedDotColor="@color/acik_gri"
             app:unselectedDotColor="@color/colorAccent"
+            app:dotRadius="5dp"
+            app:dotPadding="10dp"
             android:layout_gravity="bottom|center_horizontal"
             android:gravity="center_vertical"/>
     </android.support.v4.view.ViewPager>
