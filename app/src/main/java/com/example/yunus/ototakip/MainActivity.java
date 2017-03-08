@@ -124,12 +124,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_kullanici) {
+        if (id == R.id.nav_kullanici)
+        {
 
 
         } else if (id == R.id.nav_hatirlatma)
         {
-
+            startActivity(new Intent(MainActivity.this,AyarlarActivity.class));
         }
         else if (id == R.id.nav_ipucu)
         {
