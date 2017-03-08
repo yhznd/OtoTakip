@@ -11,6 +11,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/appBarLayoutEngine"
         android:theme="@style/AppTheme.AppBarOverlay">
 
     </android.support.design.widget.AppBarLayout>
@@ -27,4 +28,23 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:text="Motor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewEngine"
+        android:textColor="@color/beyaz"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/appBarLayoutEngine"
+        android:layout_alignParentStart="true" />
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/engineExpList"
+        android:layout_below="@+id/toolbar_engine"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
