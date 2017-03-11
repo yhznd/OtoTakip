@@ -20,7 +20,7 @@
         android:layout_gravity="bottom|end"
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@color/beyaz"
+        app:itemTextColor="@drawable/selector"
         app:menu="@menu/bottombar_menu" />
 
     <android.support.v7.widget.Toolbar

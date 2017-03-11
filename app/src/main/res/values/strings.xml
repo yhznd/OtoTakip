@@ -19,5 +19,5 @@
         AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA
     </string>
     <string name="title_activity_ayarlar">Ayarlar</string>
-
+    <string name="app_name_with_index">Oto Takip (%1$d/%2$d)</string>
 </resources>

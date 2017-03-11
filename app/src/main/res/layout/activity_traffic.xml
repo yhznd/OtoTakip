@@ -40,6 +40,14 @@
         android:layout_marginTop="16dp"
         android:layout_below="@+id/appBarTraffic"
         android:layout_alignParentStart="true" />
+
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TrafficActivity"
+        tools:ignore="MergeRootFrame" />
 </RelativeLayout>
 
 

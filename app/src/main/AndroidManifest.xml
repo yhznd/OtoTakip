@@ -81,9 +81,11 @@
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".AyarlarActivity"
+        <activity
+            android:name=".AyarlarActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Hesabim"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
     </application>
 
