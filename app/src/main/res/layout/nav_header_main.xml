@@ -12,15 +12,15 @@
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/kullaniciNavHesapResmi"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:foregroundGravity="center"
+        android:paddingBottom="10dp"
         android:src="@drawable/kullaniciresim"
         app:civ_border_color="@color/colorAccent"
-        app:civ_border_width="2dp"
-        android:layout_alignStart="@+id/textKullaniciAd"
-        android:layout_above="@+id/textKullaniciAd"
-        android:layout_alignParentTop="true" />
+        app:civ_border_width="2dp" />
 
 
     <TextView
