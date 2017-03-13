@@ -202,7 +202,7 @@
     <ImageView
         android:layout_width="82dp"
         android:layout_height="79dp"
-        android:src="@drawable/ic_car_24dp"
+        app:srcCompat="@drawable/ic_car_24dp"
         android:id="@+id/imageView2"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"

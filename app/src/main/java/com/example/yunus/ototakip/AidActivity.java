@@ -12,10 +12,7 @@ public class AidActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aid);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aid);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

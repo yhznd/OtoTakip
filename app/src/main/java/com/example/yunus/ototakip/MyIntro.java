@@ -16,6 +16,8 @@ public class MyIntro extends AppIntro {
         addSlide(SampleSlide.newInstance(R.layout.intro1));
         addSlide(SampleSlide.newInstance(R.layout.intro2));
         addSlide(SampleSlide.newInstance(R.layout.intro3));
+        addSlide(SampleSlide.newInstance(R.layout.intro4));
+        addSlide(SampleSlide.newInstance(R.layout.intro5));
 
 
         // Hide Skip/Done button
@@ -35,7 +37,7 @@ public class MyIntro extends AppIntro {
     public void onSkipPressed()
     {
         finish();
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,Giris.class));
     }
 
     @Override
@@ -47,7 +49,7 @@ public class MyIntro extends AppIntro {
     public void onDonePressed()
     {
         finish();
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,Giris.class));
     }
 
     @Override

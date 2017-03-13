@@ -20,36 +20,26 @@ public class InternetCon extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_internet_con);
-        dene= (TextView) findViewById(R.id.textDene);
+        dene = (TextView) findViewById(R.id.textDene);
 
         dene.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
-                CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout2);
-                Snackbar.make(rootLayout, "İnternet bağlantısı kurulamadı.", Snackbar.LENGTH_LONG)
-                        .setAction("YENİDEN DENE", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                if (internetErisimi())
-                                {
-                                    startActivity(new Intent(InternetCon.this, MainActivity.class));
-                                }
-                                else
-                                {
-
-                                }
-
-                            }
-                        } )
-                        .show();
-
+                if (internetErisimi())
+                {
+                    finish();
+                    startActivity(new Intent(InternetCon.this, Giris.class));
+                }
+                else
+                {
+                    CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout2);
+                    Snackbar.make(rootLayout, "İnternet bağlantısı kurulamadı.", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
-
     }
+
 
     public boolean internetErisimi() {
 
