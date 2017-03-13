@@ -2,22 +2,24 @@ package com.example.yunus.ototakip;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -32,12 +34,30 @@ public class MainActivity extends AppCompatActivity
     final String PREFS_NAME = "MyPrefsFile";
     final String SHAREDPREF_DATE = "SharedPrefDate";
 
+    private FirebaseAuth firebaseAuth;
+
+    private TextView textViewUseremail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_main);
+
+
+        firebaseAuth=FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser()==null){
+            finish();
+            startActivity(new Intent(this,Giris.class));
+        }
+
+
+
+
+
+
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
         SharedPreferences.Editor dateEditor  = dateShared.edit();
@@ -59,6 +79,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
 
 
@@ -143,6 +167,9 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_cikis)
         {
                 //startActivity(new Intent(MainActivity.this,GirisActivity.class));
+            firebaseAuth.signOut();
+            startActivity(new Intent(MainActivity.this, Giris.class));
+            finish();
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

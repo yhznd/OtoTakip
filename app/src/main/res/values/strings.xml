@@ -18,5 +18,7 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA
     </string>
+    <string name="email">email</string>
+    <string name="password">password</string>
 
 </resources>
