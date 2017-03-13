@@ -75,14 +75,16 @@
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name=".KayitOl">
+        <activity android:name=".KayitOl"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Giris"></activity>
+        <activity android:name=".Giris"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
