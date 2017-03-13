@@ -24,12 +24,12 @@
 
 
     <TextView
-        android:id="@+id/textKullaniciAd"
+        android:id="@+id/textKullaniciBilgisi"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Yunus Haznedar \nyunushaznedar@gmail.com"
+        android:text="default_mail"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_alignParentBottom="true"
