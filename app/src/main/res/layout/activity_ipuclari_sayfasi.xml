@@ -5,13 +5,14 @@
     android:id="@+id/activity_ipuclari_sayfasi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ipucu_arkaplan"
+    android:background="@drawable/arkaplan_ipuc"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarIpuclari">
 
     </android.support.design.widget.AppBarLayout>
 
@@ -26,24 +27,39 @@
         app:subtitleTextColor="@color/beyaz"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+
+    <TextView
+        android:text="İpuçları"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewIpuclari"
+        android:textColor="@color/beyaz"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/appBarIpuclari"
         android:layout_alignParentStart="true"
+        />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/iceriklerLayout"
         android:orientation="horizontal"
-        android:paddingTop="50dp">
+        android:layout_marginBottom="21dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/traffic"
-                android:id="@+id/imageTraffic" />
+                android:id="@+id/imageTraffic"
+                android:layout_width="match_parent" />
         </TableRow>
 
         <TableRow
@@ -51,8 +67,8 @@
             android:layout_height="match_parent" >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/aid"
                 android:id="@+id/imageAid" />
         </TableRow>
