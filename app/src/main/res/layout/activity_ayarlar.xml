@@ -60,14 +60,14 @@
         android:textSize="16sp"
         android:layout_alignEnd="@+id/textBildirim" />
 
-    <Spinner
-        android:layout_height="wrap_content"
+    <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/spinnerTarihAraliklari"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewBildirimTrh"
         android:layout_alignBottom="@+id/textViewBildirimTrh"
         android:layout_alignEnd="@+id/toggleButton"
-        android:layout_width="160dp"
-        android:spinnerMode="dialog"
-        android:textAlignment="viewEnd" />
+        android:textSize="16sp" />
 
     <TextView
         android:text="Hatırlatma Ayarları"

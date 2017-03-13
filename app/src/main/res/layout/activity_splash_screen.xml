@@ -5,16 +5,8 @@
     android:id="@+id/activity_splash_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@color/icon_arkasi"
+   android:background="@drawable/background_splash"
     tools:context="com.example.yunus.ototakip.SplashScreen">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/splashmain"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imageView6" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit"
@@ -23,8 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:SpinKit_Color="@color/beyaz"
-        android:layout_below="@+id/imageView6"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_marginBottom="76dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

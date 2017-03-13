@@ -145,14 +145,14 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Navigation itemlerinin click olaylarını burada yapıyoruz.
         int id = item.getItemId();
-
         if (id == R.id.nav_kullanici)
         {
+            startActivity(new Intent(MainActivity.this,Hesabim.class));
 
-
-        } else if (id == R.id.nav_hatirlatma)
+        }
+        else if (id == R.id.nav_hatirlatma)
         {
             startActivity(new Intent(MainActivity.this,AyarlarActivity.class));
         }
@@ -162,9 +162,11 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        else if (id == R.id.nav_oyla) {
+        else if (id == R.id.nav_oyla)
+        {
 
-            }
+
+        }
         else if (id == R.id.nav_cikis)
         {
                 //startActivity(new Intent(MainActivity.this,GirisActivity.class));
