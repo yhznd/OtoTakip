@@ -1,7 +1,10 @@
 package com.example.yunus.ototakip;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,31 +20,29 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class KayitOl extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonRegister;
+    private FancyButton buttonRegister;
     private EditText editTextEmail;
-    private EditText editTextPassword;
+    public boolean cancel=false;
+    private EditText editTextPassword,editTextPasswordRepeat;
     private TextView textViewSignin;
-
     private ProgressDialog progressDialog;
-
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kayit_ol);
-
         firebaseAuth = FirebaseAuth.getInstance();
-
         progressDialog= new ProgressDialog(this);
-
-        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonRegister = (FancyButton) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
         textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
-
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
 
@@ -50,56 +51,123 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
     private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-
+        String passwordRepeat = editTextPasswordRepeat.getText().toString().trim();
+        editTextEmail.setError(null);
+        editTextPassword.setError(null);
+        editTextPasswordRepeat.setError(null);
+        View focusView = null;
         if (TextUtils.isEmpty(email)) {
-            //email is empty
-            Toast.makeText(this, "lütfen e-mailinizi giriniz.", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
+            editTextEmail.setError(getString(R.string.mail_alan_gerekli));
+            focusView = editTextEmail;
+            cancel = true;
             return;
+        } else if (!isEmailValid(email)) {
+            editTextEmail.setError(getString(R.string.eposta_gecersiz));
+            focusView = editTextEmail;
+            cancel = true;
         }
 
         if (TextUtils.isEmpty(password)) {
-            //password is empty
-            Toast.makeText(this, "lütfen şifrenizi giriniz.", Toast.LENGTH_SHORT).show();
-            //stopping the function execution futher
+            editTextPassword.setError(getString(R.string.sifre_alan_gerekli));
+            focusView = editTextPassword;
+            cancel = true;
             return;
+        } else if (!isPasswordValid(password)) {
+            editTextPassword.setError(getString(R.string.sifre_gecersiz));
+            focusView = editTextPassword;
+            cancel = true;
         }
 
-        progressDialog.setMessage("Kayıt Olunuyor...");
-        progressDialog.show();
+        if (TextUtils.isEmpty(passwordRepeat)) {
+            editTextPasswordRepeat.setError(getString(R.string.sifre_alan_gerekli));
+            focusView = editTextPasswordRepeat;
+            cancel = true;
+            return;
+        } else if (!isPasswordValid(passwordRepeat)) {
+            editTextPasswordRepeat.setError(getString(R.string.sifre_gecersiz));
+            focusView = editTextPasswordRepeat;
+            cancel = true;
+        }
+        if (!password.equals(passwordRepeat))  //şifre uyuşmazlık kontrolü
+        {
+            editTextPasswordRepeat.setError(getString(R.string.parola_uyusmuyor));
+            focusView = editTextPasswordRepeat;
+            cancel = true;
+        }
 
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(KayitOl.this,"Kayıt Başarılı",Toast.LENGTH_SHORT).show();
+        if (internetErisimi()) {
+            if (cancel == false) {
 
-                            finish();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+            progressDialog.setMessage("İşlem sürdürülüyor...");
+            progressDialog.show();
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                finish();
+                                Intent i = new Intent(KayitOl.this, MainActivity.class);
+                                i.putExtra("email",firebaseAuth.getCurrentUser().getEmail());
+                                startActivity(i);
+
+                            } else {
+                                Toast.makeText(KayitOl.this, "Kayıt başarısız. Tekrar Deneyiniz.", Toast.LENGTH_LONG).show();
+
+                            }
+                            progressDialog.dismiss();
 
                         }
-                        else {
-                            Toast.makeText(KayitOl.this,"Kayıt Başarısız.Tekrar Deneyiniz",Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
 
-                        }
-                       // progressDialog.dismiss();
-                    }
-                });
+        else
+
+        {
+            startActivity(new Intent(KayitOl.this, InternetCon.class));
+
+        }
+
+        cancel = false;
     }
 
 
     @Override
     public void onClick(View view) {
 
-        if (view == buttonRegister) {
+        if (view == buttonRegister)
+        {
             registerUser();
 
         }
         if (view == textViewSignin) {
-            //vill open login activity here
-            Intent uyeolagit=new Intent(KayitOl.this,Giris.class);
-            startActivity(uyeolagit);
+            //will open login activity here
+            startActivity(new Intent(KayitOl.this,Giris.class));
+
         }
     }
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@") && email.contains(".com");
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 5;
+    }
+    public boolean internetErisimi() {
+
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
+        //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

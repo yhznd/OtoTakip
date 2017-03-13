@@ -1,11 +1,18 @@
 package com.example.yunus.ototakip;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,92 +23,204 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Giris extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonSignIn;
+    private FancyButton buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignup;
-
+    private TextView textViewSignup,textViewSifreUnuttum;
+    public boolean cancel=false;
+    public boolean isFirstStart;
     private FirebaseAuth firebaseAuth;
-
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giris);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //  Initialize SharedPreferences
+                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                //  Create a new boolean and preference and set it to true
+                isFirstStart = getPrefs.getBoolean("firstStart", true);
+                //  If the activity has never started before...
+                if (isFirstStart)
+                {
+                    //  Launch app intro
+                    startActivity(new Intent(Giris.this, MyIntro.class));
+                    //  Make a new preferences editor
+                    SharedPreferences.Editor e = getPrefs.edit();
+                    //  Edit preference to make it false because we don't want this to run again
+                    e.putBoolean("firstStart", false);
+                    //  Apply changes
+                    e.apply();
+                }
+            }
+        });
+        // Start the thread
+        t.start();
+
 
         firebaseAuth=FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() != null){
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // Kullanıcı oturumu açtı
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    Log.d("onCreate","onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // Kullanıcı oturumu kapattı.
+                    Log.d("onCreate", "onAuthStateChanged:signed_out");
+                }
 
-            finish();
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-
-        }
+            }
+        };
 
         editTextEmail=(EditText)findViewById(R.id.editTextEmail);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
-        buttonSignIn=(Button)findViewById(R.id.buttonSignin);
+        buttonSignIn=(FancyButton)findViewById(R.id.buttonSignin);
         textViewSignup=(TextView)findViewById(R.id.textViewSignUp);
-
+        textViewSifreUnuttum= (TextView) findViewById(R.id.textViewSifreUnuttum);
         progressDialog=new ProgressDialog(this);
-
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
 
     }
 
-    private void userLogin(){
-        String email=editTextEmail.getText().toString().trim();
-        String password=editTextPassword.getText().toString().trim();
-
+    private void userLogin() {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+        editTextEmail.setError(null);
+        editTextPassword.setError(null);
+        View focusView = null;
         if (TextUtils.isEmpty(email)) {
-            //email is empty
-            Toast.makeText(this, "lütfen e-mailinizi giriniz.", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
+            editTextEmail.setError(getString(R.string.mail_alan_gerekli));
+            focusView = editTextEmail;
+            cancel = true;
             return;
+        } else if (!isEmailValid(email)) {
+            editTextEmail.setError(getString(R.string.eposta_gecersiz));
+            focusView = editTextEmail;
+            cancel = true;
         }
 
         if (TextUtils.isEmpty(password)) {
-            //password is empty
-            Toast.makeText(this, "lütfen şifrenizi giriniz.", Toast.LENGTH_SHORT).show();
-            //stopping the function execution futher
+            editTextPassword.setError(getString(R.string.sifre_alan_gerekli));
+            focusView = editTextPassword;
+            cancel = true;
             return;
+        } else if (!isPasswordValid(password)) {
+            editTextPassword.setError(getString(R.string.sifre_gecersiz));
+            focusView = editTextPassword;
+            cancel = true;
         }
 
-        progressDialog.setMessage("giris yapılıyor..");
-        progressDialog.show();
+        if (internetErisimi()) {
+            if (cancel == false) {
 
-        firebaseAuth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
+                progressDialog.setMessage("Giriş Yapılıyor...");
+                progressDialog.show();
 
-                            if(task.isSuccessful()){
-                                //start the profile activity
-                                finish();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+
+                                if (task.isSuccessful()) {
+                                    //start the profile activity
+
+                                    finish();
+                                    Intent i = new Intent(Giris.this, MainActivity.class);
+                                    i.putExtra("email",firebaseAuth.getCurrentUser().getEmail());
+                                    startActivity(i);
+                                }
+
+                                else
+                                {
+                                    Toast.makeText(Giris.this,"Girdiğin e-posta ve şifre kayıtlarımızdakiyle eşleşmedi. Lütfen doğru girdiğinden emin ol ve tekrar dene.",
+                                    Toast.LENGTH_LONG).show();
+                                }
+
+                                progressDialog.dismiss();
                             }
-                    }
-                });
+                        });
 
+
+            }
+        }
+
+        else
+        {
+            Intent hata = new Intent(Giris.this, InternetCon.class);
+            startActivity(hata);
+        }
+        cancel = false;
 
     }
+
+    //buraya bakmamız gerek
+   /* @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            firebaseAuth.removeAuthStateListener(mAuthListener);
+        }
+    }*/
 
 
     @Override
     public void onClick(View view) {
-        if(view== buttonSignIn){
-            userLogin();
+            if (view == buttonSignIn)
+            {
+                userLogin();
+            }
+
+            if (view == textViewSignup)
+            {
+                finish();
+                startActivity(new Intent(this, KayitOl.class));
+            }
         }
 
-        if(view==textViewSignup){
-            finish();
-            startActivity(new Intent(this,KayitOl.class));
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@") && email.contains(".com");
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 5;
+    }
+
+    public boolean internetErisimi() {
+
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
+        //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
         }
+
     }
 }

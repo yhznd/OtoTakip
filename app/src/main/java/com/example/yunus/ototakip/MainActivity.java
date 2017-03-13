@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,30 +34,20 @@ public class MainActivity extends AppCompatActivity
     public TextView tarih;
     final String PREFS_NAME = "MyPrefsFile";
     final String SHAREDPREF_DATE = "SharedPrefDate";
-
     private FirebaseAuth firebaseAuth;
-
-    private TextView textViewUseremail;
+    private TextView textViewUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setTheme(R.style.AppTheme_NoActionBar);
-        setContentView(R.layout.activity_main);
-
-
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser()==null){
-            finish();
+
             startActivity(new Intent(this,Giris.class));
+            finish();
         }
-
-
-
-
-
+        setContentView(R.layout.activity_main);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
@@ -73,14 +64,16 @@ public class MainActivity extends AppCompatActivity
 
         AppRating.app_launched(this);
 
+        firebaseAuth=FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()==null){
+            finish();
+            startActivity(new Intent(this,Giris.class));
+        }
+
         tarih = (TextView) findViewById(R.id.tarihText);
         tarih.setText("Bugün - "+sistemTarihiniGetir());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,9 +82,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
+        View headerView = navigationView.getHeaderView(0); //giriste gelen maili Navigation header'a at
+        textViewUserEmail= (TextView) headerView.findViewById(R.id.textKullaniciBilgisi);
+        textViewUserEmail.setText(getIntent().getExtras().getString("email"));
 
         fragmentManager = getSupportFragmentManager();
         fragment = new AraclarimFragment();
