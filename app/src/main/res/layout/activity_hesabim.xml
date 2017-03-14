@@ -60,7 +60,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:gravity="center"
-        android:text="Yunus Haznedar"
+        android:text="Oto Takip Kullanıcısı"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
