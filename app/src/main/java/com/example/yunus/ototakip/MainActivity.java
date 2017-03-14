@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity
         AppRating.app_launched(this);
 
         firebaseAuth=FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser()==null){
+        if(firebaseAuth.getCurrentUser()==null)
+        {
             finish();
             startActivity(new Intent(this,Giris.class));
         }
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0); //giriste gelen maili Navigation header'a at
         textViewUserEmail= (TextView) headerView.findViewById(R.id.textKullaniciBilgisi);
-        textViewUserEmail.setText(getIntent().getExtras().getString("email"));
+        textViewUserEmail.setText(firebaseAuth.getCurrentUser().getEmail()); //gelen maili alıyoruz.
 
         fragmentManager = getSupportFragmentManager();
         fragment = new AraclarimFragment();
@@ -118,6 +119,13 @@ public class MainActivity extends AppCompatActivity
 
 
                 });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
 
     }
 
@@ -162,10 +170,11 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_cikis)
         {
-                //startActivity(new Intent(MainActivity.this,GirisActivity.class));
+
             firebaseAuth.signOut();
-            startActivity(new Intent(MainActivity.this, Giris.class));
             finish();
+            startActivity(new Intent(MainActivity.this, Giris.class));
+
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
