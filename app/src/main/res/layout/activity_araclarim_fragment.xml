@@ -22,14 +22,7 @@
         android:layout_marginEnd="12dp">
     </android.support.design.widget.FloatingActionButton>
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/fab"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="222dp"
-        android:id="@+id/button" />
+
 
 
 </RelativeLayout>

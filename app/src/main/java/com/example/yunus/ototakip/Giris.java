@@ -142,9 +142,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
                                     //start the profile activity
 
                                     finish();
-                                    Intent i = new Intent(Giris.this, MainActivity.class);
-                                    i.putExtra("email",firebaseAuth.getCurrentUser().getEmail());
-                                    startActivity(i);
+                                    startActivity(new Intent(Giris.this, MainActivity.class));
                                 }
 
                                 else
