@@ -1,16 +1,25 @@
 package com.example.yunus.ototakip;
 
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.location.Location;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.akexorcist.googledirection.DirectionCallback;
+import com.akexorcist.googledirection.GoogleDirection;
+import com.akexorcist.googledirection.constant.TransportMode;
+import com.akexorcist.googledirection.model.Direction;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -25,16 +34,27 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnMarkerClickListener,
+        LocationListener,DirectionCallback {
 
     GoogleApiClient mGoogleApiClient;
+    private String serverKey = "AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA";
     Location sonKonum;
-    Marker suAnKonumMarker;
+    Marker suAnKonumMarker,muayene1;
     LocationRequest yerIstek;
     private GoogleMap mMap;
+    public LatLng suanKonumumuz;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    DataBaseHelper dbHelper;
+    public ArrayList<Marker> bakimyerleri = new ArrayList<Marker>();
+    ArrayList<Marker> gelenMarkerlar=new ArrayList<>();
+    Map <String, Integer> mMarkers = new HashMap<String, Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +68,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        dbHelper=new DataBaseHelper(this);
+        try
+        {
+            dbHelper.CreateDataBase();
+
+        }
+        catch (Exception ex)
+        {
+            Log.w("hata","Veritabanı oluşturulamadı ve kopyalanamadı!");
+        }
+
     }
 
 
@@ -186,20 +218,87 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //O anki konumu markerla ve yerleştir
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        suanKonumumuz= new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
+        markerOptions.position(suanKonumumuz);
         markerOptions.title("Şu anki konumunuz");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.suankonumunuz));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker));
         suAnKonumMarker = mMap.addMarker(markerOptions);
-
-        //kamerayı taşı
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(suanKonumumuz));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
 
+        if(Yakinimdakiler.bakim.isChecked())
+        {
+            SQLiteDatabase db=dbHelper.getReadableDatabase();
+            String[] getColumnName={"bakim_enlem,bakim_boylam,bakim_title"};
+            Cursor imlec=db.query("bakim_yerleri", getColumnName, null, null, null, null, null);
+
+            while(imlec.moveToNext())
+            {
+                int i=0;
+                double bakim_enlem=imlec.getDouble(imlec.getColumnIndex("bakim_enlem"));
+                double bakim_boylam=imlec.getDouble(imlec.getColumnIndex("bakim_boylam"));
+                String bakim_title= imlec.getString(imlec.getColumnIndex("bakim_title"));
+                Marker marker=mMap.addMarker(new MarkerOptions().position(new LatLng
+                        (bakim_enlem,bakim_boylam))
+                        .title(bakim_title).
+                        icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
+                gelenMarkerlar.add(i,marker);
+                mMarkers.put(marker.getId(),i);
+                i++;
+            }
+
+
+        }
+
+        else if(Yakinimdakiler.muayene.isChecked())
+        {
+
+        }
+
+        else if(Yakinimdakiler.sigorta.isChecked())
+        {
+
+        }
+        else
+        {
+
+        }
+
         //stop location updates
-        if (mGoogleApiClient != null) {
+        if (mGoogleApiClient != null)
+        {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+
+
+    }
+
+    @Override
+    public void onDirectionSuccess(Direction direction, String rawBody) {
+
+    }
+
+    @Override
+    public void onDirectionFailure(Throwable t)
+    {
+        CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.mapCoordinatorLayout);
+        Snackbar.make(rootLayout, "Rota oluşturulamadı."+t.getMessage(), Snackbar.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker)
+    {
+        int id = mMarkers.get(marker.getId());
+        CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.mapCoordinatorLayout);
+        Snackbar.make(rootLayout, "Rota oluşturuluyor...", Snackbar.LENGTH_LONG).show();
+        GoogleDirection.withServerKey(serverKey)
+                .from(suanKonumumuz)
+                .to(gelenMarkerlar.get(id).getPosition())
+                .transportMode(TransportMode.DRIVING)
+                .execute(this);
+       return false;
     }
 }

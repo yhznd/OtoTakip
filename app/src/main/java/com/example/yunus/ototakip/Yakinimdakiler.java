@@ -29,7 +29,7 @@ public class Yakinimdakiler extends Fragment {
     private View view;
     public Yakinimdakiler() {}
     public FancyButton haritayaAktar;
-    public CheckBox muayene,bakim,sigorta;
+    public static CheckBox muayene,bakim,sigorta;
     private final static int PERMISSION_REQUEST_CODE=200;
 
     @Override
