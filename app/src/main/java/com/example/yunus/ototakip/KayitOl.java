@@ -19,6 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.taishi.flipprogressdialog.FlipProgressDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -29,15 +33,15 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
     public boolean cancel=false;
     private EditText editTextPassword,editTextPasswordRepeat;
     private TextView textViewSignin;
-    private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private FlipProgressDialog progressDialog;
+    List<Integer> imageList2 = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kayit_ol);
         firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog= new ProgressDialog(this);
         buttonRegister = (FancyButton) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -45,6 +49,18 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
         textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
+        progressDialog = new FlipProgressDialog();
+        imageList2.add(R.drawable.hourglass);
+        progressDialog.setImageList(imageList2);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setBackgroundAlpha(1.0f);
+        progressDialog.setImageSize(80);
+        progressDialog.setBackgroundColor(getResources().getColor(R.color.icon_arkasi));
+        progressDialog.setCornerRadius(32);
+        progressDialog.setDuration(600);
+        progressDialog.setStartAngle(0.0f);                                  // Set an angle when flipping ratation start
+        progressDialog.setDimAmount(0.6f);
+        progressDialog.setOrientation("rotationX");
 
     }
 
@@ -98,9 +114,7 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
         if (internetErisimi()) {
             if (cancel == false) {
 
-
-            progressDialog.setMessage("İşlem sürdürülüyor...");
-            progressDialog.show();
+                progressDialog.show(getFragmentManager(),"");
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
