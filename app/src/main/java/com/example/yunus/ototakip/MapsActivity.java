@@ -33,6 +33,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,40 +52,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleApiClient mGoogleApiClient;
     private String serverKey = "AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA";
     Location sonKonum;
-    Marker suAnKonumMarker,muayene1;
+    CoordinatorLayout rootLayout;
+    Marker suAnKonumMarker,bakim,muayene,sigorta;
     LocationRequest yerIstek;
     private GoogleMap mMap;
     public LatLng suanKonumumuz;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    DataBaseHelper dbHelper;
-    public ArrayList<Marker> bakimyerleri = new ArrayList<Marker>();
-    ArrayList<Marker> gelenMarkerlar=new ArrayList<>();
-    Map <String, Integer> mMarkers = new HashMap<String, Integer>();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref = database.child("bakim_yerleri");
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        rootLayout = (CoordinatorLayout) findViewById(R.id.mapCoordinatorLayout);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
             checkLocationPermission();
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        dbHelper=new DataBaseHelper(this);
-        try
-        {
-            dbHelper.CreateDataBase();
-
-        }
-        catch (Exception ex)
-        {
-            Log.w("hata","Veritabanı oluşturulamadı ve kopyalanamadı!");
-        }
-
     }
 
 
@@ -112,6 +109,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+        if (Yakinimdakiler.bakim.isChecked())
+        {
+
+
+            ref.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    Snackbar.make(rootLayout, "Bakım istasyonları haritaya yerleştiriliyor...", Snackbar.LENGTH_LONG).show();
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                             .title(dataSnapshot.child("ad").getValue().toString())
+                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
+                    Log.v("Firebase Data Alma", "başarılı");
+
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }
+
+        else if(Yakinimdakiler.muayene.isChecked())
+        {
+
+        }
+
+        else if(Yakinimdakiler.sigorta.isChecked())
+        {
+
+
+        }
+        mMap.setOnMarkerClickListener(this);
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -213,67 +265,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location)
     {
         sonKonum = location;
-        if (suAnKonumMarker != null) {
+        if (suAnKonumMarker != null)
+        {
             suAnKonumMarker.remove();
         }
 
         //O anki konumu markerla ve yerleştir
-        suanKonumumuz= new LatLng(location.getLatitude(), location.getLongitude());
+        suanKonumumuz = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(suanKonumumuz);
         markerOptions.title("Şu anki konumunuz");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker));
         suAnKonumMarker = mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(suanKonumumuz));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-
-        if(Yakinimdakiler.bakim.isChecked())
-        {
-            SQLiteDatabase db=dbHelper.getReadableDatabase();
-            String[] getColumnName={"bakim_enlem,bakim_boylam,bakim_title"};
-            Cursor imlec=db.query("bakim_yerleri", getColumnName, null, null, null, null, null);
-
-            while(imlec.moveToNext())
-            {
-                int i=0;
-                double bakim_enlem=imlec.getDouble(imlec.getColumnIndex("bakim_enlem"));
-                double bakim_boylam=imlec.getDouble(imlec.getColumnIndex("bakim_boylam"));
-                String bakim_title= imlec.getString(imlec.getColumnIndex("bakim_title"));
-                Marker marker=mMap.addMarker(new MarkerOptions().position(new LatLng
-                        (bakim_enlem,bakim_boylam))
-                        .title(bakim_title).
-                        icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
-                gelenMarkerlar.add(i,marker);
-                mMarkers.put(marker.getId(),i);
-                i++;
-            }
-
-
-        }
-
-        else if(Yakinimdakiler.muayene.isChecked())
-        {
-
-        }
-
-        else if(Yakinimdakiler.sigorta.isChecked())
-        {
-
-        }
-        else
-        {
-
-        }
+        /*mMap.moveCamera(CameraUpdateFactory.newLatLng(suanKonumumuz));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));*/
 
         //stop location updates
-        if (mGoogleApiClient != null)
-        {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+        if (mGoogleApiClient != null) {
+                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            }
 
 
 
     }
+
+
+
 
     @Override
     public void onDirectionSuccess(Direction direction, String rawBody) {
@@ -287,18 +304,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Snackbar.make(rootLayout, "Rota oluşturulamadı."+t.getMessage(), Snackbar.LENGTH_LONG).show();
     }
 
-
     @Override
-    public boolean onMarkerClick(Marker marker)
+    public boolean onMarkerClick(final Marker marker)
     {
-        int id = mMarkers.get(marker.getId());
-        CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.mapCoordinatorLayout);
-        Snackbar.make(rootLayout, "Rota oluşturuluyor...", Snackbar.LENGTH_LONG).show();
-        GoogleDirection.withServerKey(serverKey)
-                .from(suanKonumumuz)
-                .to(gelenMarkerlar.get(id).getPosition())
-                .transportMode(TransportMode.DRIVING)
-                .execute(this);
-       return false;
+       /* if (marker.equals(bakim)) {
+            Snackbar.make(rootLayout, "Rota oluşturuluyor...", Snackbar.LENGTH_LONG).show();
+            GoogleDirection.withServerKey(serverKey)
+                    .from(suanKonumumuz)
+                    .to(bakim.getPosition())
+                    .transportMode(TransportMode.DRIVING)
+                    .execute(this);
+
+        }*/
+        return false;
     }
+
+
+
+
 }

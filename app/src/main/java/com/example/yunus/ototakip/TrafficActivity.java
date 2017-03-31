@@ -12,7 +12,7 @@ import android.view.View;
 
 public class TrafficActivity extends AppCompatActivity {
 
-    public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +27,6 @@ public class TrafficActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PdfRendererBasicFragment(),
-                            FRAGMENT_PDF_RENDERER_BASIC)
-                    .commit();
-        }
 
 
     }
