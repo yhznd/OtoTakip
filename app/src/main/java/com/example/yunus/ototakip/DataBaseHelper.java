@@ -14,9 +14,9 @@ import java.util.List;
 
 public class DataBaseHelper  extends SQLiteOpenHelper
 {
-    static String DB_PATH;
+    static String DB_PATH="/data/data/com.example.yunus.ototakip/databases/";
     //Veritabanı ismini veriyoruz
-    static String DB_NAME = "yerler";
+    static String DB_NAME = "yerler.sqlite";
 
     SQLiteDatabase myDatabase;
 
@@ -59,7 +59,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper
         {
             String myPath = DB_PATH + DB_NAME;
 
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
         }
         catch (Exception ex)
         {
@@ -106,9 +106,9 @@ public class DataBaseHelper  extends SQLiteOpenHelper
     void openDataBase()
     {
         String myPath = DB_PATH + DB_NAME;
-
-        myDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-    }
+        myDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+        Log.w("Tamam", "Veritabanı açıldı.");
+}
 
     @Override
     public synchronized void close()

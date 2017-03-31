@@ -24,7 +24,7 @@ import java.io.InputStream;
 public class PdfRendererBasicFragment extends Fragment implements View.OnClickListener
 {
     private static final String O_ANKI_SAYFA_DURUMU = "guncel_sayfa_index";
-    private static final String DOSYAADI = "sample.pdf";
+    private static final String DOSYAADI = "motor.pdf";
     private ParcelFileDescriptor mFileDescriptor;
     private PdfRenderer mPdfRenderer;
     private PdfRenderer.Page mGuncelSayfa;

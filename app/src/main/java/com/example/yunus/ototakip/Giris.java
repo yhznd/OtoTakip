@@ -108,10 +108,10 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setImageList(imageList);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setBackgroundAlpha(1.0f);
-        progressDialog.setImageSize(80);
+        progressDialog.setImageSize(100);
         progressDialog.setBackgroundColor(getResources().getColor(R.color.icon_arkasi));
         progressDialog.setCornerRadius(32);
-        progressDialog.setDuration(600);
+        progressDialog.setDuration(500);
         progressDialog.setStartAngle(0.0f);                                  // Set an angle when flipping ratation start
         progressDialog.setDimAmount(0.6f);
         progressDialog.setOrientation("rotationX");
@@ -185,9 +185,9 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         cancel = false;
 
     }
-
+/*
     //buraya bakmamız gerek
-   /* @Override
+    @Override
     public void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(mAuthListener);
@@ -199,8 +199,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         if (mAuthListener != null) {
             firebaseAuth.removeAuthStateListener(mAuthListener);
         }
-    }*/
-
+    }
+*/
 
     @Override
     public void onClick(View view) {

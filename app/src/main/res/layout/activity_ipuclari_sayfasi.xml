@@ -5,14 +5,67 @@
     android:id="@+id/activity_ipuclari_sayfasi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/arkaplan_ipuc"
+    android:background="@color/introkirmizi"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
-    <android.support.design.widget.AppBarLayout
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout5">
+        <ImageButton
+            android:id="@+id/imageButtonTraffic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/sari"
+            app:srcCompat="@drawable/trafficback" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout6"
+            android:layout_above="@+id/linearLayout7"
+            android:layout_alignParentStart="true">
+
+            <ImageButton
+                android:id="@+id/imageButtonAid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linearLayout7"
+                android:layout_alignParentStart="true"
+                android:background="@color/introkirmizi"
+                app:srcCompat="@drawable/aid" />
+        </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appBarIpuclari">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_above="@+id/linearLayout5"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout7">
+
+        <ImageButton
+            android:id="@+id/imageButtonEngine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            app:srcCompat="@drawable/engineback" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarIpuclari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
     </android.support.design.widget.AppBarLayout>
 
@@ -20,70 +73,26 @@
         android:id="@+id/toolbar_ipuclari"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/back_24dp"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="@color/beyaz"
-        app:subtitleTextColor="@color/beyaz"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/back_24dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:subtitleTextColor="@color/beyaz"
+        app:titleTextColor="@color/beyaz" />
 
     <TextView
-        android:text="İpuçları"
+        android:id="@+id/textViewIpuclari"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewIpuclari"
-        android:textColor="@color/beyaz"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appBarIpuclari"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/appBarIpuclari"
-        android:layout_alignParentStart="true"
-        />
+        android:text="İpuçları"
+        android:textColor="@color/beyaz"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iceriklerLayout"
-        android:orientation="horizontal"
-        android:layout_marginBottom="21dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/traffic"
-                android:id="@+id/imageTraffic"
-                android:layout_width="match_parent" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/aid"
-                android:id="@+id/imageAid" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                app:srcCompat="@drawable/engine"
-                android:id="@+id/imageEngine"
-                android:layout_height="wrap_content" />
-
-        </TableRow>
-
-    </TableLayout>
 </RelativeLayout>
