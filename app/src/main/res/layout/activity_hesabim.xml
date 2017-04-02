@@ -41,95 +41,116 @@
         android:layout_below="@+id/appBarLayoutHesabim"
         android:layout_alignParentStart="true" />
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/kullaniciHesapResmi"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/kullanici_pp"
-        app:civ_border_color="@color/colorAccent"
-        app:civ_border_width="2dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_hesabim"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="79dp" />
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/kullaniciHesapAd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/kullaniciHesapResmi"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:gravity="center"
-        android:text="Oto Takip Kullanıcısı"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/lay1"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.7">
 
-    <TextView
-        android:id="@+id/kullaniciHesapMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/kullaniciHesapAd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:text="yunushaznedar@gmail.com"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/kullaniciHesapResmi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/buttonSifreDegistir"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        fancy:fb_borderColor="@color/colorPrimary"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="Şifre Değiştir"
-        fancy:fb_textColor="@color/beyaz"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_below="@+id/kullaniciHesapMail"
-        android:layout_alignStart="@+id/kullaniciHesapResmi"
-        android:layout_marginTop="34dp"
-        android:layout_alignEnd="@+id/kullaniciHesapResmi">
-    </mehdi.sakout.fancybuttons.FancyButton>
+                android:src="@drawable/kullanici_pp"
+                fancy:civ_border_color="@color/colorAccent"
+                fancy:civ_border_width="2dp" />
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/buttonHesapGuncelle"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        fancy:fb_borderColor="@color/colorPrimary"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="Bilgilerimi Güncelle"
-        fancy:fb_textColor="@color/beyaz"
-        android:layout_below="@+id/buttonSifreDegistir"
-        android:layout_alignStart="@+id/buttonSifreDegistir"
-        android:layout_marginTop="23dp"
-        android:layout_alignEnd="@+id/buttonSifreDegistir">
-    </mehdi.sakout.fancybuttons.FancyButton>
+        </LinearLayout>
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/buttonHesapSil"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        fancy:fb_borderColor="@color/colorPrimary"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorPrimary"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="Hesabı Sil"
-        fancy:fb_textColor="@color/beyaz"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/buttonHesapGuncelle"
-        android:layout_alignStart="@+id/buttonHesapGuncelle"
-        android:layout_alignEnd="@+id/buttonHesapGuncelle">
-    </mehdi.sakout.fancybuttons.FancyButton>
+        <LinearLayout
+            android:id="@+id/lay2"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/kullaniciHesapAd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="58dp"
+                android:gravity="center"
+                android:text="Oto Takip Kullanıcısı"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/kullaniciHesapMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="yunushaznedar@gmail.com"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/lay3"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/buttonSifreDegistir"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="34dp"
+                android:layout_weight="0.02"
+                fancy:fb_borderColor="@color/colorPrimary"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_radius="6dp"
+                fancy:fb_text="Şifre Değiştir"
+                fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/buttonHesapGuncelle"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="23dp"
+                fancy:fb_borderColor="@color/colorPrimary"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_radius="6dp"
+                fancy:fb_text="Bilgilerimi Güncelle"
+                fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/buttonHesapSil"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                fancy:fb_borderColor="@color/colorPrimary"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_radius="6dp"
+                fancy:fb_text="Hesabı Sil"
+                fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

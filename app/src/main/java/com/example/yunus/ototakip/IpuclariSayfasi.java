@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 public class IpuclariSayfasi extends AppCompatActivity  {
 
-    public ImageButton ipucu1, ipucu2, ipucu3;
+    public ImageView ipucu1, ipucu2, ipucu3;
 
 
     @Override
@@ -38,9 +38,9 @@ public class IpuclariSayfasi extends AppCompatActivity  {
             }
         });
 
-        ipucu1 = (ImageButton) findViewById(R.id.imageButtonTraffic);
-        ipucu2 = (ImageButton) findViewById(R.id.imageButtonAid);
-        ipucu3 = (ImageButton) findViewById(R.id.imageButtonEngine);
+        ipucu1 = (ImageView) findViewById(R.id.go_Traffic);
+        ipucu2 = (ImageView) findViewById(R.id.go_Aid);
+        ipucu3 = (ImageView) findViewById(R.id.go_Engine);
 
         ipucu1.setOnClickListener(new View.OnClickListener() {
             @Override

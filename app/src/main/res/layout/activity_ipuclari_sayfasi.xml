@@ -5,61 +5,11 @@
     android:id="@+id/activity_ipuclari_sayfasi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/introkirmizi"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout5">
-        <ImageButton
-            android:id="@+id/imageButtonTraffic"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/sari"
-            app:srcCompat="@drawable/trafficback" />
-    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout6"
-            android:layout_above="@+id/linearLayout7"
-            android:layout_alignParentStart="true">
 
-            <ImageButton
-                android:id="@+id/imageButtonAid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/linearLayout7"
-                android:layout_alignParentStart="true"
-                android:background="@color/introkirmizi"
-                app:srcCompat="@drawable/aid" />
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_above="@+id/linearLayout5"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout7">
-
-        <ImageButton
-            android:id="@+id/imageButtonEngine"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"
-            app:srcCompat="@drawable/engineback" />
-
-    </LinearLayout>
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarIpuclari"
@@ -94,5 +44,84 @@
         android:textSize="18sp"
         android:textStyle="normal|bold" />
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar_ipuclari">
+
+    <LinearLayout
+        android:id="@+id/lay1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/divide1" >
+
+        <ImageView
+            android:id="@+id/traffic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:paddingStart="30dp"
+            android:src="@drawable/divide_traffic" />
+
+        <ImageView
+            android:id="@+id/go_Traffic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@color/divide2" >
+
+        <ImageView
+            android:id="@+id/aid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:src="@drawable/divide_aid" />
+
+        <ImageView
+            android:id="@+id/go_Aid"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay3"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:background="@color/divide3">
+
+            <ImageView
+                android:id="@+id/engine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:src="@drawable/divide_engine" />
+
+            <ImageView
+                android:id="@+id/go_Engine"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0.1"
+                app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+        </LinearLayout>
+</LinearLayout>
 
 </RelativeLayout>
+

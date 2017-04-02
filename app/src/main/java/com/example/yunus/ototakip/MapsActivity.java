@@ -1,8 +1,6 @@
 package com.example.yunus.ototakip;
 
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,10 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.akexorcist.googledirection.DirectionCallback;
-import com.akexorcist.googledirection.GoogleDirection;
-import com.akexorcist.googledirection.constant.TransportMode;
-import com.akexorcist.googledirection.model.Direction;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -40,14 +35,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnMarkerClickListener,
-        LocationListener,DirectionCallback {
+        LocationListener {
 
     GoogleApiClient mGoogleApiClient;
     private String serverKey = "AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA";
@@ -59,7 +50,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public LatLng suanKonumumuz;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference ref = database.child("bakim_yerleri");
+    DatabaseReference ref_bakim = database.child("bakim_yerleri");
+    DatabaseReference ref_muayene = database.child("muayene_yerleri");
+    DatabaseReference ref_sigorta = database.child("sigorta_yerleri");
 
 
 
@@ -110,59 +103,89 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         }
 
+
         if (Yakinimdakiler.bakim.isChecked())
         {
 
 
-            ref.addChildEventListener(new ChildEventListener() {
+            ref_bakim.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s)
                 {
-                    Snackbar.make(rootLayout, "Bakım istasyonları haritaya yerleştiriliyor...", Snackbar.LENGTH_LONG).show();
                     mMap.addMarker(new MarkerOptions().
                             position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
                                     Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
                              .title(dataSnapshot.child("ad").getValue().toString())
-                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
-                    Log.v("Firebase Data Alma", "başarılı");
-
-
+                            .snippet(dataSnapshot.child("adres").getValue().toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                    Log.v("Firebase Bakim Data", "başarılı");
                 }
-
                 @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
                 @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
                 @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
             });
 
 
         }
 
-        else if(Yakinimdakiler.muayene.isChecked())
+        if(Yakinimdakiler.muayene.isChecked())
         {
+            ref_muayene.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            .title(dataSnapshot.child("ad").getValue().toString())
+                            .snippet(dataSnapshot.child("adres").getValue().toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                    Log.v("Firebase Muayene Data", "başarılı");
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+        }
+
+        if(Yakinimdakiler.sigorta.isChecked())
+        {
+            ref_sigorta.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            .title(dataSnapshot.child("ad").getValue().toString())
+                            .snippet(dataSnapshot.child("adres").getValue().toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    Log.v("Firebase Sigorta Data", "başarılı");
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
 
         }
 
-        else if(Yakinimdakiler.sigorta.isChecked())
-        {
-
-
-        }
+        Snackbar.make(rootLayout, "Harita hazırlandı!", Snackbar.LENGTH_LONG).show();
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(mMap.getCameraPosition().zoom - 0.5f));
         mMap.setOnMarkerClickListener(this);
     }
 
@@ -274,11 +297,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         suanKonumumuz = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(suanKonumumuz);
-        markerOptions.title("Şu anki konumunuz");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker));
+        markerOptions.title("Şu anki buradasınız!");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         suAnKonumMarker = mMap.addMarker(markerOptions);
-        /*mMap.moveCamera(CameraUpdateFactory.newLatLng(suanKonumumuz));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));*/
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz, 14));
+
 
         //stop location updates
         if (mGoogleApiClient != null) {
@@ -291,33 +314,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
-    @Override
-    public void onDirectionSuccess(Direction direction, String rawBody) {
-
-    }
-
-    @Override
-    public void onDirectionFailure(Throwable t)
-    {
-        CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.mapCoordinatorLayout);
-        Snackbar.make(rootLayout, "Rota oluşturulamadı."+t.getMessage(), Snackbar.LENGTH_LONG).show();
-    }
-
     @Override
     public boolean onMarkerClick(final Marker marker)
     {
-       /* if (marker.equals(bakim)) {
-            Snackbar.make(rootLayout, "Rota oluşturuluyor...", Snackbar.LENGTH_LONG).show();
-            GoogleDirection.withServerKey(serverKey)
-                    .from(suanKonumumuz)
-                    .to(bakim.getPosition())
-                    .transportMode(TransportMode.DRIVING)
-                    .execute(this);
 
-        }*/
         return false;
     }
+
 
 
 
