@@ -13,6 +13,7 @@ import java.util.List;
 
 public class EngineActivity extends AppCompatActivity {
 
+    public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,13 @@ public class EngineActivity extends AppCompatActivity {
                 startActivity(new Intent(EngineActivity.this, IpuclariSayfasi.class));
             }
         });
+
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new PdfRendererBasicFragment(),
+                            FRAGMENT_PDF_RENDERER_BASIC)
+                    .commit();
+        }
 
 
 

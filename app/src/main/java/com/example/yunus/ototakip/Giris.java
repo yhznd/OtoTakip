@@ -1,9 +1,11 @@
 package com.example.yunus.ototakip;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -24,6 +26,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.taishi.flipprogressdialog.FlipProgressDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -37,7 +43,10 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
     public boolean isFirstStart;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressDialog progressDialog;
+    private FlipProgressDialog progressDialog;
+    List<Integer> imageList = new ArrayList<Integer>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +101,20 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         buttonSignIn=(FancyButton)findViewById(R.id.buttonSignin);
         textViewSignup=(TextView)findViewById(R.id.textViewSignUp);
         textViewSifreUnuttum= (TextView) findViewById(R.id.textViewSifreUnuttum);
-        progressDialog=new ProgressDialog(this);
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
+        progressDialog = new FlipProgressDialog();
+        imageList.add(R.drawable.hourglass);
+        progressDialog.setImageList(imageList);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setBackgroundAlpha(1.0f);
+        progressDialog.setImageSize(100);
+        progressDialog.setBackgroundColor(getResources().getColor(R.color.icon_arkasi));
+        progressDialog.setCornerRadius(32);
+        progressDialog.setDuration(500);
+        progressDialog.setStartAngle(0.0f);                                  // Set an angle when flipping ratation start
+        progressDialog.setDimAmount(0.6f);
+        progressDialog.setOrientation("rotationX");
 
     }
 
@@ -129,8 +149,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         if (internetErisimi()) {
             if (cancel == false) {
 
-                progressDialog.setMessage("Giriş Yapılıyor...");
-                progressDialog.show();
+                progressDialog.show(getFragmentManager(),"");
 
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -140,7 +159,6 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
                                 if (task.isSuccessful()) {
                                     //start the profile activity
-
                                     finish();
                                     startActivity(new Intent(Giris.this, MainActivity.class));
                                 }
@@ -167,9 +185,9 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         cancel = false;
 
     }
-
+/*
     //buraya bakmamız gerek
-   /* @Override
+    @Override
     public void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(mAuthListener);
@@ -181,8 +199,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         if (mAuthListener != null) {
             firebaseAuth.removeAuthStateListener(mAuthListener);
         }
-    }*/
-
+    }
+*/
 
     @Override
     public void onClick(View view) {

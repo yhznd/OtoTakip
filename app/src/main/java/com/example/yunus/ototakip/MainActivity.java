@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,7 +29,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
@@ -41,9 +43,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        if(firebaseAuth.getCurrentUser()==null){
-
+        if(firebaseAuth.getCurrentUser()==null)
+        {
             startActivity(new Intent(this,Giris.class));
             finish();
         }
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor dateEditor  = dateShared.edit();
         SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy");
 
-        if (settings.getBoolean("ilk_calisma_zamani", true)) {
+        if (settings.getBoolean("ilk_calisma_zamani", true))
+        {
             Log.d("Comments", "İlk çalışma");
             Calendar cal = Calendar.getInstance();
             dateEditor.putString("dateVal",dfDate.format(cal.getTime()));
@@ -63,13 +65,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         AppRating.app_launched(this);
-
-        firebaseAuth=FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser()==null)
-        {
-            finish();
-            startActivity(new Intent(this,Giris.class));
-        }
 
         tarih = (TextView) findViewById(R.id.tarihText);
         tarih.setText("Bugün - "+sistemTarihiniGetir());
@@ -189,4 +184,6 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy E", new Locale("tr"));
         return sdf.format(takvim.getTime());
     }
+
+
 }
