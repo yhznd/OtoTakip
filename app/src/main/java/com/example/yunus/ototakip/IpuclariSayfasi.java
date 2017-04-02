@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 public class IpuclariSayfasi extends AppCompatActivity  {
 
-    public ImageButton ipucu1, ipucu2, ipucu3;
+    public ImageView ipucu1, ipucu2, ipucu3;
 
 
     @Override

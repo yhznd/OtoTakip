@@ -1,6 +1,7 @@
 package com.example.yunus.ototakip;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,8 +44,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
     public boolean isFirstStart;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private FlipProgressDialog progressDialog;
-    List<Integer> imageList = new ArrayList<Integer>();
+    private Dialog progressDialog;
 
 
 
@@ -103,19 +103,32 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         textViewSifreUnuttum= (TextView) findViewById(R.id.textViewSifreUnuttum);
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
-        progressDialog = new FlipProgressDialog();
-        imageList.add(R.drawable.hourglass);
-        progressDialog.setImageList(imageList);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setBackgroundAlpha(1.0f);
-        progressDialog.setImageSize(100);
-        progressDialog.setBackgroundColor(getResources().getColor(R.color.icon_arkasi));
-        progressDialog.setCornerRadius(32);
-        progressDialog.setDuration(500);
-        progressDialog.setStartAngle(0.0f);                                  // Set an angle when flipping ratation start
-        progressDialog.setDimAmount(0.6f);
-        progressDialog.setOrientation("rotationX");
+        progressDialog = new Dialog(this,R.style.progress_dialog);
+        progressDialog.setContentView(R.layout.dialog);
+        progressDialog.setCancelable(true);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView giris_mesaji = (TextView) progressDialog.findViewById(R.id.id_tv_loadingmsg);
+        giris_mesaji.setText("Giriş Yapılıyor...");
 
+
+
+
+
+    }
+
+    //buraya bakmamız gerek
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            firebaseAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     private void userLogin() {
@@ -149,7 +162,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         if (internetErisimi()) {
             if (cancel == false) {
 
-                progressDialog.show(getFragmentManager(),"");
+                progressDialog.show();
 
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -185,22 +198,9 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         cancel = false;
 
     }
-/*
-    //buraya bakmamız gerek
-    @Override
-    public void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(mAuthListener);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            firebaseAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-*/
+
+
 
     @Override
     public void onClick(View view) {

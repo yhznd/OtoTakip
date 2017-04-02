@@ -42,13 +42,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()==null)
         {
-            startActivity(new Intent(this,Giris.class));
             finish();
+            startActivity(new Intent(this,Giris.class));
+
         }
-        setContentView(R.layout.activity_main);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
@@ -166,7 +167,7 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_cikis)
         {
 
-            firebaseAuth.signOut();
+            FirebaseAuth.getInstance().signOut();
             finish();
             startActivity(new Intent(MainActivity.this, Giris.class));
 

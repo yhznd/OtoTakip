@@ -1,5 +1,6 @@
 package com.example.yunus.ototakip;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -34,8 +35,7 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextPassword,editTextPasswordRepeat;
     private TextView textViewSignin;
     private FirebaseAuth firebaseAuth;
-    private FlipProgressDialog progressDialog;
-    List<Integer> imageList2 = new ArrayList<Integer>();
+    private Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +49,12 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
         textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
-        progressDialog = new FlipProgressDialog();
-        imageList2.add(R.drawable.hourglass);
-        progressDialog.setImageList(imageList2);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setBackgroundAlpha(1.0f);
-        progressDialog.setImageSize(80);
-        progressDialog.setBackgroundColor(getResources().getColor(R.color.icon_arkasi));
-        progressDialog.setCornerRadius(32);
-        progressDialog.setDuration(600);
-        progressDialog.setStartAngle(0.0f);                                  // Set an angle when flipping ratation start
-        progressDialog.setDimAmount(0.6f);
-        progressDialog.setOrientation("rotationX");
+        progressDialog = new Dialog(this,R.style.progress_dialog);
+        progressDialog.setContentView(R.layout.dialog);
+        progressDialog.setCancelable(true);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView kayitol_mesaji = (TextView) progressDialog.findViewById(R.id.id_tv_loadingmsg);
+        kayitol_mesaji.setText("İşlem sürdürülüyor...");
 
     }
 
@@ -114,7 +108,7 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
         if (internetErisimi()) {
             if (cancel == false) {
 
-                progressDialog.show(getFragmentManager(),"");
+                progressDialog.show();
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
