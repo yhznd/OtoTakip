@@ -75,10 +75,10 @@
 
             <TextView
                 android:id="@+id/kullaniciHesapAd"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="Oto Takip Kullanıcısı"
                 android:textAlignment="center"
@@ -87,8 +87,8 @@
 
             <TextView
                 android:id="@+id/kullaniciHesapMail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
                 android:gravity="center"

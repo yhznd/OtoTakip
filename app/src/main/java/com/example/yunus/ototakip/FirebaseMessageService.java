@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.media.*;
 import android.net.*;
+import android.os.Build;
 import android.support.v4.app.*;
 import android.util.Log;
 import com.google.firebase.messaging.*;
@@ -45,13 +46,18 @@ public class FirebaseMessageService extends FirebaseMessagingService
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.oto_takip)
-                .setContentTitle("Oto Takip")
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        notificationBuilder.setContentTitle("Oto Takip");
+        notificationBuilder.setContentText(messageBody);
+        notificationBuilder.setAutoCancel(true);
+        notificationBuilder.setSound(defaultSoundUri);
+        notificationBuilder.setContentIntent(pendingIntent);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            notificationBuilder.setSmallIcon(R.drawable.oto_takip_saydam);
+        } else {
+            notificationBuilder.setSmallIcon(R.mipmap.oto_takip);
+        }
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
