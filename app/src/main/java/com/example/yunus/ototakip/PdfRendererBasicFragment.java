@@ -24,15 +24,18 @@ import java.io.InputStream;
 public class PdfRendererBasicFragment extends Fragment implements View.OnClickListener
 {
     private static final String O_ANKI_SAYFA_DURUMU = "guncel_sayfa_index";
-    private static final String DOSYAADI = "motor.pdf";
     private ParcelFileDescriptor mFileDescriptor;
     private PdfRenderer mPdfRenderer;
     private PdfRenderer.Page mGuncelSayfa;
     private ImageView mImageView;
     private ImageButton mOncekiButon;
     private ImageButton mSonrakiButon;
+    public static String FILENAME;
+
     //kurucu
-    public PdfRendererBasicFragment() {
+    public PdfRendererBasicFragment()
+    {
+
     }
 
     @Override
@@ -105,11 +108,14 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     }
 
 
-    private void openRenderer(Context context) throws IOException {
+    private void openRenderer(Context context) throws IOException
+    {
         // bu ornekte, asset klasöründeki PDF'i okuyoruz.
-        File file = new File(context.getCacheDir(), DOSYAADI);
-        if (!file.exists()) {
-            InputStream asset = context.getAssets().open(DOSYAADI);
+        FILENAME= getArguments().getString("file_name");
+        File file = new File(context.getCacheDir(), FILENAME);
+        if (!file.exists())
+        {
+            InputStream asset = context.getAssets().open(FILENAME);
             FileOutputStream output = new FileOutputStream(file);
             final byte[] buffer = new byte[1024];
             int size;
@@ -121,6 +127,7 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         }
         mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
         mPdfRenderer = new PdfRenderer(mFileDescriptor);
+
     }
 
     private void closeRenderer() throws IOException {

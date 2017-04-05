@@ -23,6 +23,10 @@ import android.widget.TextView;
 public class IpuclariSayfasi extends AppCompatActivity  {
 
     public ImageView ipucu1, ipucu2, ipucu3;
+    public static final String trafic_dosya_adi = "sample3.pdf";
+    public static final String aid_dosya_adi = "sample2.pdf";
+    public static final String engine_dosya_adi = "sample.pdf";
+
 
 
     @Override
@@ -51,14 +55,17 @@ public class IpuclariSayfasi extends AppCompatActivity  {
 
         ipucu2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 startActivity(new Intent(IpuclariSayfasi.this,AidActivity.class));
             }
         });
 
         ipucu3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+
                 startActivity(new Intent(IpuclariSayfasi.this,EngineActivity.class));
             }
         });

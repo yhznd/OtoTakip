@@ -8,6 +8,7 @@ import android.view.View;
 
 public class AidActivity extends AppCompatActivity {
 
+    public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,5 +20,16 @@ public class AidActivity extends AppCompatActivity {
                 startActivity(new Intent(AidActivity.this, IpuclariSayfasi.class));
             }
         });
+
+        if (savedInstanceState == null)
+        {
+            Bundle bundle = new Bundle();
+            bundle.putString("file_name", "sample3.pdf");
+            PdfRendererBasicFragment ff=new PdfRendererBasicFragment();
+            ff.setArguments(bundle);
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, ff, FRAGMENT_PDF_RENDERER_BASIC)
+                    .commit();
+        }
     }
 }
