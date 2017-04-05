@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "875723180843-a98dgvk6sltv6jpn4q3qm54n2prlglfk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yunus.ototakip",
+            "certificate_hash": "6c6e881763bb4d3d04d71beb114c562a57350b34"
+          }
+        },
+        {
           "client_id": "875723180843-0ru13kt3hv4d7oiikls7r8gbaetvr2lf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
@@ -7,65 +7,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F6F8"
-    tools:context="com.example.yunus.ototakip.AracEkle">
+    tools:context="com.example.yunus.ototakip.AracEkle"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:theme="@style/AppTheme.AppBarOverlay"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        android:id="@+id/appBarLayout">
+        android:id="@+id/appBarAracEkleLayout">
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_aracekle"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         app:navigationIcon="@drawable/back_24dp"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:titleTextColor="@color/beyaz"
         app:subtitleTextColor="@color/beyaz"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        tools:layout_editor_absoluteY="0dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/appBarLayout"
-        android:layout_width="420dp" />
+        android:layout_alignParentStart="true" />
     <TextView
-        android:text="Aracınıza ait bilgiler"
+        android:text="Aracınıza ait birkaç bilgiyi topluyoruz!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
         android:textStyle="normal|bold"
         android:fontFamily="sans-serif"
         android:textSize="18sp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        android:layout_below="@+id/imageView2"
+        android:layout_alignEnd="@+id/editText" />
+
     <View
         android:id="@+id/cizgi"
-        android:background="@android:color/black"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.33"
+        android:layout_width="360dp"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.25"
-        android:layout_width="360dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/textView3"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/appBarAracEkleLayout"
+        android:background="@android:color/black" />
 
     <EditText
         android:layout_width="300dp"
@@ -74,20 +58,16 @@
         android:ems="10"
         android:drawablePadding="5dp"
         android:id="@+id/editText"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_plaka"
         android:inputType="text"
         android:hint="Model"
         tools:text="textPlaka"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.3" />
+        tools:layout_editor_absoluteY="205dp"
+        tools:layout_editor_absoluteX="56dp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/editText3" />
 
     <EditText
         android:layout_width="300dp"
@@ -96,26 +76,22 @@
         android:ems="10"
         android:id="@+id/editText2"
         android:drawablePadding="5dp"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_calendar_24dp"
         android:hint="Model"
         android:inputType="text"
         tools:text="textKaskoTarihi"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.71" />
+        tools:layout_editor_absoluteY="465dp"
+        tools:layout_editor_absoluteX="56dp"
+        android:layout_below="@+id/editText3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp" />
 
     <EditText
         android:text="Emisyon Tarihi"
         android:ems="10"
         android:id="@+id/editText4"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_calendar_24dp"
         android:inputType="text"
         android:hint="Model"
@@ -123,14 +99,11 @@
         tools:text="textEmisyonTarihi"
         android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="332dp"
+        tools:layout_editor_absoluteX="56dp"
+        android:layout_below="@+id/editText5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp" />
 
     <EditText
         android:layout_height="40dp"
@@ -138,21 +111,17 @@
         android:ems="10"
         android:drawablePadding="5dp"
         android:id="@+id/editText6"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_calendar_24dp"
         android:inputType="text"
         android:hint="Model"
         tools:text="textMuayeneTarihi"
         android:layout_width="300dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.61" />
+        tools:layout_editor_absoluteY="402dp"
+        tools:layout_editor_absoluteX="56dp"
+        android:layout_below="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_marginTop="18dp" />
 
     <EditText
         android:layout_width="300dp"
@@ -160,22 +129,17 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:id="@+id/editText5"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_calendar_24dp"
         android:inputType="text"
         android:hint="Model"
         tools:text="textSigortaTarihi"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82"
-        app:layout_constraintHorizontal_bias="0.47" />
+        tools:layout_editor_absoluteY="536dp"
+        tools:layout_editor_absoluteX="53dp"
+        android:layout_below="@+id/editText3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="133dp" />
 
     <EditText
         android:layout_width="300dp"
@@ -184,35 +148,26 @@
         android:ems="10"
         android:drawablePadding="5dp"
         android:id="@+id/editText3"
-        android:background="@drawable/bg_edittext"
+        android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_plaka"
         android:inputType="text"
         android:hint="Model"
         tools:text="textModel"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        tools:layout_editor_absoluteY="268dp"
+        tools:layout_editor_absoluteX="56dp"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/editText"
+        android:layout_alignStart="@+id/editText2" />
 
     <ImageView
         android:layout_width="82dp"
         android:layout_height="79dp"
         app:srcCompat="@drawable/ic_car_24dp"
         android:id="@+id/imageView2"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.060000002" />
+        tools:layout_editor_absoluteY="52dp"
+        tools:layout_editor_absoluteX="165dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar_aracekle" />
 
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -223,19 +178,14 @@
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/sari"
         fancy:fb_focusColor="@color/sari"
-        fancy:fb_radius="30dp"
+        fancy:fb_radius="10dp"
         fancy:fb_text="ARACI SİL"
         fancy:fb_textColor="@color/beyaz"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintVertical_bias="1.0">
+        tools:layout_editor_absoluteY="641dp"
+        tools:layout_editor_absoluteX="226dp"
+        android:layout_marginBottom="41dp"
+        android:layout_above="@+id/myCoordinatorLayout"
+        android:layout_alignStart="@+id/editText4">
     </mehdi.sakout.fancybuttons.FancyButton>
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -246,29 +196,19 @@
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/sari"
         fancy:fb_focusColor="@color/sari"
-        fancy:fb_radius="30dp"
+        fancy:fb_radius="10dp"
         fancy:fb_text="GÜNCELLE"
         fancy:fb_textColor="@color/beyaz"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:layout_editor_absoluteY="641dp"
+        tools:layout_editor_absoluteX="86dp"
+        android:layout_alignTop="@+id/buttonSil"
+        android:layout_alignEnd="@+id/editText4" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_height="50dp"
         android:id="@+id/myCoordinatorLayout"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_width="0dp">
+        android:layout_width="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
     </android.support.design.widget.CoordinatorLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

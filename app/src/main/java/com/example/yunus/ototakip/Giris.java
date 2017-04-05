@@ -1,9 +1,12 @@
 package com.example.yunus.ototakip;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -24,6 +27,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.taishi.flipprogressdialog.FlipProgressDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -37,7 +44,9 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
     public boolean isFirstStart;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressDialog progressDialog;
+    private Dialog progressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +101,34 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         buttonSignIn=(FancyButton)findViewById(R.id.buttonSignin);
         textViewSignup=(TextView)findViewById(R.id.textViewSignUp);
         textViewSifreUnuttum= (TextView) findViewById(R.id.textViewSifreUnuttum);
-        progressDialog=new ProgressDialog(this);
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
+        progressDialog = new Dialog(this,R.style.progress_dialog);
+        progressDialog.setContentView(R.layout.dialog);
+        progressDialog.setCancelable(true);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView giris_mesaji = (TextView) progressDialog.findViewById(R.id.id_tv_loadingmsg);
+        giris_mesaji.setText("Giriş Yapılıyor...");
 
+
+
+
+
+    }
+
+    //buraya bakmamız gerek
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            firebaseAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     private void userLogin() {
@@ -129,7 +162,6 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         if (internetErisimi()) {
             if (cancel == false) {
 
-                progressDialog.setMessage("Giriş Yapılıyor...");
                 progressDialog.show();
 
                 firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -140,11 +172,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
                                 if (task.isSuccessful()) {
                                     //start the profile activity
-
                                     finish();
-                                    Intent i = new Intent(Giris.this, MainActivity.class);
-                                    i.putExtra("email",firebaseAuth.getCurrentUser().getEmail());
-                                    startActivity(i);
+                                    startActivity(new Intent(Giris.this, MainActivity.class));
                                 }
 
                                 else
@@ -170,20 +199,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    //buraya bakmamız gerek
-   /* @Override
-    public void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(mAuthListener);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            firebaseAuth.removeAuthStateListener(mAuthListener);
-        }
-    }*/
 
 
     @Override

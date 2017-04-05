@@ -18,7 +18,7 @@
         android:layout_centerVertical="true"
         android:foregroundGravity="center"
         android:paddingBottom="10dp"
-        android:src="@drawable/kullaniciresim"
+        android:src="@drawable/kullanici_pp"
         app:civ_border_color="@color/colorAccent"
         app:civ_border_width="2dp" />
 
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="default_mail"
+        android:text="default_mail@google.com"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_alignParentBottom="true"

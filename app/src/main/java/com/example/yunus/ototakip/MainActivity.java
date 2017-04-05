@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,7 +29,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
@@ -40,21 +42,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        if(firebaseAuth.getCurrentUser()==null){
-
-            startActivity(new Intent(this,Giris.class));
-            finish();
-        }
         setContentView(R.layout.activity_main);
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()==null)
+        {
+            finish();
+            startActivity(new Intent(this,Giris.class));
+
+        }
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
         SharedPreferences.Editor dateEditor  = dateShared.edit();
         SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy");
 
-        if (settings.getBoolean("ilk_calisma_zamani", true)) {
+        if (settings.getBoolean("ilk_calisma_zamani", true))
+        {
             Log.d("Comments", "İlk çalışma");
             Calendar cal = Calendar.getInstance();
             dateEditor.putString("dateVal",dfDate.format(cal.getTime()));
@@ -63,12 +66,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         AppRating.app_launched(this);
-
-        firebaseAuth=FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser()==null){
-            finish();
-            startActivity(new Intent(this,Giris.class));
-        }
 
         tarih = (TextView) findViewById(R.id.tarihText);
         tarih.setText("Bugün - "+sistemTarihiniGetir());
@@ -84,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0); //giriste gelen maili Navigation header'a at
         textViewUserEmail= (TextView) headerView.findViewById(R.id.textKullaniciBilgisi);
-        textViewUserEmail.setText(getIntent().getExtras().getString("email"));
+        textViewUserEmail.setText(firebaseAuth.getCurrentUser().getEmail()); //gelen maili alıyoruz.
 
         fragmentManager = getSupportFragmentManager();
         fragment = new AraclarimFragment();
@@ -118,6 +115,13 @@ public class MainActivity extends AppCompatActivity
 
 
                 });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
 
     }
 
@@ -162,10 +166,11 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_cikis)
         {
-                //startActivity(new Intent(MainActivity.this,GirisActivity.class));
-            firebaseAuth.signOut();
-            startActivity(new Intent(MainActivity.this, Giris.class));
+
+            FirebaseAuth.getInstance().signOut();
             finish();
+            startActivity(new Intent(MainActivity.this, Giris.class));
+
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -180,4 +185,6 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy E", new Locale("tr"));
         return sdf.format(takvim.getTime());
     }
+
+
 }
