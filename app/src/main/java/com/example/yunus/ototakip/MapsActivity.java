@@ -4,12 +4,16 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.location.Location;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
@@ -24,24 +28,42 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnMarkerClickListener,
         LocationListener {
 
     GoogleApiClient mGoogleApiClient;
+    private String serverKey = "AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA";
     Location sonKonum;
-    Marker suAnKonumMarker;
+    CoordinatorLayout rootLayout;
+    Marker suAnKonumMarker,bakim,muayene,sigorta;
     LocationRequest yerIstek;
     private GoogleMap mMap;
+    public LatLng suanKonumumuz;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref_bakim = database.child("bakim_yerleri");
+    DatabaseReference ref_muayene = database.child("muayene_yerleri");
+    DatabaseReference ref_sigorta = database.child("sigorta_yerleri");
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        rootLayout = (CoordinatorLayout) findViewById(R.id.mapCoordinatorLayout);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
             checkLocationPermission();
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -80,6 +102,91 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+
+        if (Yakinimdakiler.bakim.isChecked())
+        {
+
+
+            ref_bakim.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                             .title(dataSnapshot.child("ad").getValue().toString())
+                            .snippet(dataSnapshot.child("adres").getValue().toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                    Log.v("Firebase Bakim Data", "başarılı");
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+
+
+        }
+
+        if(Yakinimdakiler.muayene.isChecked())
+        {
+            ref_muayene.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            .title(dataSnapshot.child("ad").getValue().toString())
+                            .snippet(dataSnapshot.child("adres").getValue().toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                    Log.v("Firebase Muayene Data", "başarılı");
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+        }
+
+        if(Yakinimdakiler.sigorta.isChecked())
+        {
+            ref_sigorta.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            .title(dataSnapshot.child("ad").getValue().toString())
+                            .snippet(dataSnapshot.child("adres").getValue().toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    Log.v("Firebase Sigorta Data", "başarılı");
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+
+        }
+
+        Snackbar.make(rootLayout, "Harita hazırlandı!", Snackbar.LENGTH_LONG).show();
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(mMap.getCameraPosition().zoom - 0.5f));
+        mMap.setOnMarkerClickListener(this);
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -181,25 +288,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location)
     {
         sonKonum = location;
-        if (suAnKonumMarker != null) {
+        if (suAnKonumMarker != null)
+        {
             suAnKonumMarker.remove();
         }
 
         //O anki konumu markerla ve yerleştir
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        suanKonumumuz = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Şu anki konumunuz");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.suankonumunuz));
+        markerOptions.position(suanKonumumuz);
+        markerOptions.title("Şu anki buradasınız!");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         suAnKonumMarker = mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz, 14));
 
-        //kamerayı taşı
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
 
         //stop location updates
         if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            }
+
+
+
     }
+
+
+
+    @Override
+    public boolean onMarkerClick(final Marker marker)
+    {
+
+        return false;
+    }
+
+
+
+
+
 }

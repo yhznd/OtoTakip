@@ -1,5 +1,6 @@
 package com.example.yunus.ototakip;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.taishi.flipprogressdialog.FlipProgressDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -29,15 +34,14 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
     public boolean cancel=false;
     private EditText editTextPassword,editTextPasswordRepeat;
     private TextView textViewSignin;
-    private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kayit_ol);
         firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog= new ProgressDialog(this);
         buttonRegister = (FancyButton) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -45,6 +49,12 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
         textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
+        progressDialog = new Dialog(this,R.style.progress_dialog);
+        progressDialog.setContentView(R.layout.dialog);
+        progressDialog.setCancelable(true);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView kayitol_mesaji = (TextView) progressDialog.findViewById(R.id.id_tv_loadingmsg);
+        kayitol_mesaji.setText("İşlem sürdürülüyor...");
 
     }
 
@@ -98,9 +108,7 @@ public class KayitOl extends AppCompatActivity implements View.OnClickListener {
         if (internetErisimi()) {
             if (cancel == false) {
 
-
-            progressDialog.setMessage("İşlem sürdürülüyor...");
-            progressDialog.show();
+                progressDialog.show();
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

@@ -14,9 +14,14 @@
     <color name="pembe">#E54F93</color>
     <color name="acik_yesil">#bada55</color>
     <color name="acik_gri">#D1D1D1</color>
-    <color name="mavi">#42C0FB</color>
+    <color name="mavi">#42c0fb</color>
     <color name="internetarka">#F5FAFF</color>
     <color name="internet_yazi">#615472</color>
+    <color name="koyu_sari">#E5AC16</color>
     <color name="internet_yazi2">#8c849c</color>
     <color name="twitter_arka">#1EA1F3</color>
+    <color name="primary_acik">#8d9fc9</color>
+    <color name="divide1">#547787</color>
+    <color name="divide2">#989d9c</color>
+    <color name="divide3">#b8c7bc</color>
 </resources>

@@ -5,14 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ExpandableListView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class EngineActivity extends AppCompatActivity {
 
+    public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +21,17 @@ public class EngineActivity extends AppCompatActivity {
                 startActivity(new Intent(EngineActivity.this, IpuclariSayfasi.class));
             }
         });
+
+        if (savedInstanceState == null)
+        {
+            Bundle bundle = new Bundle();
+            bundle.putString("file_name", "sample.pdf");
+            PdfRendererBasicFragment ff=new PdfRendererBasicFragment();
+            ff.setArguments(bundle);
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, ff, FRAGMENT_PDF_RENDERER_BASIC)
+                    .commit();
+        }
 
 
 
