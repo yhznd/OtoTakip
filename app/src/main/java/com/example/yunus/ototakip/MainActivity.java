@@ -2,6 +2,7 @@ package com.example.yunus.ototakip;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,13 +20,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity
@@ -37,7 +45,9 @@ public class MainActivity extends AppCompatActivity
     final String PREFS_NAME = "MyPrefsFile";
     final String SHAREDPREF_DATE = "SharedPrefDate";
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
     private TextView textViewUserEmail;
+    public CircleImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +91,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0); //giriste gelen maili Navigation header'a at
         textViewUserEmail= (TextView) headerView.findViewById(R.id.textKullaniciBilgisi);
-        textViewUserEmail.setText(firebaseAuth.getCurrentUser().getEmail()); //gelen maili alıyoruz.
-
+        textViewUserEmail.setText(firebaseAuth.getCurrentUser().getEmail());
+        userImage= (CircleImageView) findViewById(R.id.kullaniciNavHesapResmi);
         fragmentManager = getSupportFragmentManager();
         fragment = new AraclarimFragment();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -167,11 +177,23 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_cikis)
         {
 
-            FirebaseAuth.getInstance().signOut();
-            finish();
-            startActivity(new Intent(MainActivity.this, Giris.class));
+            Intent gelen=getIntent();
+            String loginType=gelen.getStringExtra("giris");
+            if(loginType=="facebook")
+            {
+                finish();
+                firebaseAuth.signOut();
+                LoginManager.getInstance().logOut();
 
+                startActivity(new Intent(MainActivity.this, Giris.class));
             }
+            else
+            {
+                finish();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this, Giris.class));
+            }
+        }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -185,6 +207,8 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy E", new Locale("tr"));
         return sdf.format(takvim.getTime());
     }
+
+
 
 
 }
