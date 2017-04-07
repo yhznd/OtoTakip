@@ -186,7 +186,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         Snackbar.make(rootLayout, "Harita hazırlandı!", Snackbar.LENGTH_LONG).show();
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(mMap.getCameraPosition().zoom - 0.1f));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(mMap.getCameraPosition().zoom - 0.9f));
         mMap.setOnMarkerClickListener(this);
     }
 
@@ -298,10 +298,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         suanKonumumuz = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(suanKonumumuz);
-        markerOptions.title("Şu anki buradasınız!");
+        markerOptions.title("Şu an buradasınız!");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.kullanicikonum));
         suAnKonumMarker = mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz, 14));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz,10));
 
 
         //stop location updates

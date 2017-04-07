@@ -20,19 +20,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.ProfilePictureView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.squareup.picasso.Picasso;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -48,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser user;
     private TextView textViewUserEmail;
     public CircleImageView userImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,23 +175,12 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_cikis)
         {
+            
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+            startActivity(new Intent(MainActivity.this, Giris.class));
+            finish();
 
-            Intent gelen=getIntent();
-            String loginType=gelen.getStringExtra("giris");
-            if(loginType=="facebook")
-            {
-                finish();
-                firebaseAuth.signOut();
-                LoginManager.getInstance().logOut();
-
-                startActivity(new Intent(MainActivity.this, Giris.class));
-            }
-            else
-            {
-                finish();
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, Giris.class));
-            }
         }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -209,6 +197,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-
 }
+
+
+
+

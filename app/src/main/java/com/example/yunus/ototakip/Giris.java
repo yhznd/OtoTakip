@@ -27,6 +27,9 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,11 +39,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.taishi.flipprogressdialog.FlipProgressDialog;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Giris extends AppCompatActivity implements View.OnClickListener {
@@ -61,7 +59,6 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_giris);
         Thread t = new Thread(new Runnable() {
             @Override
@@ -86,7 +83,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         // Start the thread
         t.start();
 
-
+        FacebookSdk.sdkInitialize(getApplicationContext());
         firebaseAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -105,6 +102,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
             }
         };
+        firebaseAuth.addAuthStateListener(mAuthListener);
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
@@ -200,10 +198,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
                                 if (task.isSuccessful()) {
                                     //start the profile activity
+                                    startActivity(new Intent(Giris.this, MainActivity.class));
                                     finish();
-                                    Intent normalGiris=new Intent(Giris.this, MainActivity.class);
-                                    normalGiris.putExtra("giris","normal");
-                                    startActivity(normalGiris);
                                 } else {
                                     Toast.makeText(Giris.this, "Girdiğin e-posta ve şifre kayıtlarımızdakiyle eşleşmedi. Lütfen doğru girdiğinden emin ol ve tekrar dene.",
                                             Toast.LENGTH_LONG).show();
@@ -257,7 +253,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         return password.length() > 5;
     }
 
-    public boolean internetErisimi() {
+    public boolean internetErisimi()
+    {
 
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
@@ -271,7 +268,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
@@ -294,10 +292,9 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
                             //
                             if(task.isSuccessful())
                             {
+
+                                startActivity(new Intent(Giris.this, MainActivity.class));
                                 finish();
-                                Intent fGiris=new Intent(Giris.this, MainActivity.class);
-                                fGiris.putExtra("giris","facebook");
-                                startActivity(fGiris);
 
                             }
                             else
@@ -319,6 +316,15 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
+
+    public static void facebookLogout()
+    {
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+
+    }
+
+
 
 
 
