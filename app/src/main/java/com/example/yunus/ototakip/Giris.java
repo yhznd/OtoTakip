@@ -39,6 +39,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONObject;
+
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Giris extends AppCompatActivity implements View.OnClickListener {
@@ -88,14 +91,16 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
+            {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // Kullanıcı oturumu açtı
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     Log.d("onCreate", "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                } else
+                {
                     // Kullanıcı oturumu kapattı.
                     Log.d("onCreate", "onAuthStateChanged:signed_out");
                 }
@@ -108,13 +113,15 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(LoginResult loginResult)
+            {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
-            public void onCancel() {
+            public void onCancel()
+            {
                 Log.d(TAG, "facebook:onCancel");
             }
 
@@ -211,9 +218,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
 
             }
-        }
-        else
-        {
+        } else {
             Intent hata = new Intent(Giris.this, InternetCon.class);
             startActivity(hata);
         }
@@ -230,13 +235,14 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         }
 
         if (view == textViewSignup) {
-            finish();
+
             startActivity(new Intent(this, KayitOl.class));
-        }
-        if (view ==  textViewSifreUnuttum)
-        {
             finish();
+        }
+        if (view == textViewSifreUnuttum) {
+
             startActivity(new Intent(this, SifreUnuttum.class));
+            finish();
         }
 
 
@@ -253,8 +259,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         return password.length() > 5;
     }
 
-    public boolean internetErisimi()
-    {
+    public boolean internetErisimi() {
 
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
@@ -268,13 +273,13 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
+    private void handleFacebookAccessToken(AccessToken token)
+    {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
         if (internetErisimi())
         {
@@ -286,20 +291,17 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task)
                         {
-                            Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            //
-                            if(task.isSuccessful())
-                            {
 
+                            if (task.isSuccessful())
+                            {
+                                Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                                 startActivity(new Intent(Giris.this, MainActivity.class));
                                 finish();
 
                             }
                             else
                             {
-                                Log.w(TAG, "signInWithCredential", task.getException());
+                                Log.d(TAG, "signInWithCredential", task.getException());
                                 Toast.makeText(Giris.this, "Facebook ile bağlantı başarız oldu.",
                                         Toast.LENGTH_SHORT).show();
 
@@ -309,6 +311,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
 
                     });
         }
+
         else
         {
             Intent hata = new Intent(Giris.this, InternetCon.class);
@@ -316,17 +319,6 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
-
-    public static void facebookLogout()
-    {
-        FirebaseAuth.getInstance().signOut();
-        LoginManager.getInstance().logOut();
-
-    }
-
-
-
-
 
 
 }

@@ -109,16 +109,13 @@
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/buttonSignin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/login_button"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="0.17"
-                android:background="@color/koyu_sari"
-                fancy:fb_borderColor="@color/koyu_sari"
+                android:layout_height="48dp"
+                android:background="@color/sari"
+                fancy:fb_borderColor="@color/sari"
                 fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/koyu_sari"
-                fancy:fb_focusColor="@color/koyu_sari"
+                fancy:fb_textSize="15sp"
+                fancy:fb_defaultColor="@color/sari"
+                fancy:fb_focusColor="@color/sari"
                 fancy:fb_radius="6dp"
                 fancy:fb_text="GİRİŞ YAP"
                 fancy:fb_textColor="@color/beyaz" />
@@ -127,7 +124,7 @@
                 android:id="@+id/textVeya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:layout_weight="0.22"
                 android:contextClickable="true"
                 android:text="VEYA"
@@ -137,15 +134,16 @@
                 android:textSize="16sp" />
 
             <com.facebook.login.widget.LoginButton
+                xmlns:facebook="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/login_button"
+                facebook:com_facebook_login_text="Facebook ile bağlan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/textViewSignUp"
-                android:layout_alignParentStart="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_weight="0.13"></com.facebook.login.widget.LoginButton>
-
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textSize="15sp">
+            </com.facebook.login.widget.LoginButton>
         </LinearLayout>
 
 
