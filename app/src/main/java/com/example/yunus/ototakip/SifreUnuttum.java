@@ -23,12 +23,10 @@ public class SifreUnuttum extends AppCompatActivity {
     public EditText sifirlamaMail;
     public TextView geriDonus;
     public FancyButton sifirlaButton;
-    public CoordinatorLayout bilgiLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sifre_unuttum);
-        bilgiLayout = (CoordinatorLayout) findViewById(R.id.sifreUnuttumCoordinatorLayout);
         geriDonus= (TextView) findViewById(R.id.textGeriDon);
         sifirlamaMail= (EditText) findViewById(R.id.editTextSifirlamaEmail);
         sifirlaButton= (FancyButton) findViewById(R.id.buttonSifirla);
@@ -48,9 +46,18 @@ public class SifreUnuttum extends AppCompatActivity {
                                 if (task.isSuccessful())
                                 {
                                     Log.d("SifreUnuttum", "Sıfırlama e-postası yollandı.");
-                                    Snackbar.make(bilgiLayout, "Sıfırlama linki e-posta hesabınıza gönderildi!",
-                                            Snackbar.LENGTH_LONG).show();
+                                    Toast.makeText(SifreUnuttum.this, "Şifre sıfırlama linki e-posta hesabınıza gönderildi!",
+                                            Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(SifreUnuttum.this,Giris.class));
+                                    finish();
+
+                                }
+
+                                else
+                                {
+                                    Log.d("SifreUnuttum", "Sıfırlama e-postası yollanamadı.");
+                                    Toast.makeText(SifreUnuttum.this, "Girdiğiniz e-posta bulunamadı.",
+                                            Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

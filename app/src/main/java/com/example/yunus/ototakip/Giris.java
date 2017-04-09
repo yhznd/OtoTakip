@@ -237,12 +237,10 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         if (view == textViewSignup) {
 
             startActivity(new Intent(this, KayitOl.class));
-            finish();
         }
         if (view == textViewSifreUnuttum) {
 
             startActivity(new Intent(this, SifreUnuttum.class));
-            finish();
         }
 
 

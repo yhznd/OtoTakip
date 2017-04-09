@@ -117,7 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.bakim)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mavimarker))).showInfoWindow();
                     Log.v("Firebase Bakim Data", "başarılı");
                 }
                 @Override
@@ -144,7 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.muayene)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.turuncumarker))).showInfoWindow();
                     Log.v("Firebase Muayene Data", "başarılı");
                 }
                 @Override
@@ -169,7 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.sigorta)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.kirmizimarker))).showInfoWindow();
 
                     Log.v("Firebase Sigorta Data", "başarılı");
                 }
@@ -299,8 +299,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(suanKonumumuz);
         markerOptions.title("Şu an buradasınız!");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.kullanicikonum));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.mormarker));
         suAnKonumMarker = mMap.addMarker(markerOptions);
+        suAnKonumMarker.showInfoWindow();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz,10));
 
 

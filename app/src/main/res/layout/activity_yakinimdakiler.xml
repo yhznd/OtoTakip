@@ -11,72 +11,112 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.yunus.ototakip.Yakinimdakiler">
 
-    <CheckBox
-        android:text="Sigorta Acenteleri"
+
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:id="@+id/checkSigorta"
-        android:layout_below="@+id/checkBakim"
-        android:layout_alignStart="@+id/checkBakim"
-        android:layout_alignEnd="@+id/checkBakim" />
-
+        android:layout_marginTop="9dp"
+        android:text="Biraz ipucuna ihtiyacımız var.\n Haritada nereleri görüntülemek istersin?"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:layout_below="@+id/gifSoru"
+        android:layout_centerHorizontal="true" />
 
     <pl.droidsonroids.gif.GifTextView
         android:layout_width="200px"
         android:layout_height="150px"
         android:background="@drawable/questiongif"
         android:id="@+id/gifSoru"
-        android:layout_above="@+id/checkMuayene"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginTop="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/buttonHaritayaGotur"
         android:layout_width="100dp"
         android:layout_height="48dp"
-        fancy:fb_borderColor="@android:color/holo_orange_light"
+        fancy:fb_borderColor="@color/sari"
         fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="@android:color/holo_orange_light"
-        fancy:fb_focusColor="@android:color/holo_orange_light"
-        fancy:fb_radius="30dp"
+        fancy:fb_defaultColor="@color/sari"
+        fancy:fb_focusColor="@color/sari"
+        fancy:fb_iconResource="@drawable/maps_64dp"
+        fancy:fb_radius="6dp"
         fancy:fb_text="HARİTAYA YÖNLENDİR"
         fancy:fb_textColor="@color/beyaz"
-        android:layout_marginTop="62dp"
-        fancy:fb_iconResource="@drawable/maps_64dp"
-        android:layout_below="@+id/checkSigorta"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_alignEnd="@+id/textView4" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
+    <RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="47dp"
+    android:id="@+id/relativeLayout"
+    android:layout_below="@+id/textView4"
+    android:layout_alignStart="@+id/textView4"
+    android:layout_alignEnd="@+id/textView4">
     <CheckBox
-        android:text="Muayene İstasyonları"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:id="@+id/checkMuayene"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="Muayene İstasyonları"
+        android:textSize="16sp"
+        android:layout_marginEnd="36dp"
+        android:layout_alignParentEnd="true" />
+
+
+    <ImageView
+        android:id="@+id/markerMuayene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fancy:srcCompat="@drawable/turuncumarker"
+        android:layout_toStartOf="@+id/checkMuayene"
+        android:layout_marginTop="21dp" />
 
     <CheckBox
-        android:text="Bakım İstasyonları"
+        android:id="@+id/checkSigorta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBakim"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/checkMuayene"
-        android:layout_alignStart="@+id/checkMuayene"
-        android:layout_alignEnd="@+id/checkMuayene" />
+        android:text="Sigorta Acenteleri"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_alignTop="@+id/markerSigorta"
+        android:layout_alignEnd="@+id/checkMuayene"
+        android:layout_toEndOf="@+id/markerSigorta" />
 
-    <TextView
-        android:text="Biraz ipucuna ihtiyacımız var.\n Haritada nereleri görüntülemek istersin?"
+    <ImageView
+        android:id="@+id/markerSigorta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:layout_marginTop="183dp"
-        android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        fancy:srcCompat="@drawable/kirmizimarker"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/markerMuayene"
+        android:layout_alignStart="@+id/markerMuayene" />
+
+
+    <CheckBox
+        android:id="@+id/checkBakim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bakım İstasyonları"
+        android:textSize="16sp"
+        android:layout_alignBottom="@+id/markerBakim"
+        android:layout_marginBottom="7dp"
+        android:layout_alignEnd="@+id/checkSigorta"
+        android:layout_toEndOf="@+id/markerSigorta" />
+
+    <ImageView
+    android:id="@+id/markerBakim"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    fancy:srcCompat="@drawable/mavimarker"
+    android:layout_marginTop="25dp"
+        android:layout_below="@+id/markerSigorta"
+        android:layout_toStartOf="@+id/checkBakim" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
