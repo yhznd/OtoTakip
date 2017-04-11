@@ -25,7 +25,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/oto_takip"
+        android:icon="@mipmap/ototakip_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -111,14 +111,14 @@
         -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/splashmain" />
+            android:resource="@mipmap/ototakip_launcher" />
         <!--
              Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/icon_arkasi" />
+            android:resource="@color/colorAccent" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

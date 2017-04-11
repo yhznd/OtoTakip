@@ -36,7 +36,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                fancy:srcCompat="@drawable/spbg" />
+                fancy:srcCompat="@drawable/otosplash" />
 
         </LinearLayout>
 
@@ -116,18 +116,11 @@
                 fancy:fb_text="GİRİŞ YAP"
                 fancy:fb_textColor="@color/beyaz" />
 
-            <TextView
-                android:id="@+id/textVeya"
+            <ImageView
+                android:id="@+id/ayirac"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="0.37"
-                android:contextClickable="true"
-                android:text="\n VEYA"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/beyaz"
-                android:textSize="16sp" />
+                android:src="@drawable/ayrac" />
 
             <com.facebook.login.widget.LoginButton
                 xmlns:facebook="http://schemas.android.com/apk/res-auto"

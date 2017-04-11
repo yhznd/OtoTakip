@@ -17,6 +17,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -75,6 +77,7 @@ public class Hesabim extends AppCompatActivity {
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which)
                             {
                                 final FirebaseUser current_user=firebaseAuth.getCurrentUser();
+                                //
                                 current_user.delete().addOnCompleteListener(new OnCompleteListener<Void>()
                                         {
                                             @Override

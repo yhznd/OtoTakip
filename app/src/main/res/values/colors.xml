@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#313B4C</color>
-    <color name="colorPrimaryDark">#313B4C</color>
-    <color name="colorAccent">#00958c</color>
+    <color name="colorPrimary">#0892A5</color>
+    <color name="colorPrimaryDark">#0892A5</color>
+    <color name="colorAccent">#313B4C</color>
     <color name="beyaz">#ffffff</color>
     <color name="sari">#ffae00</color>
     <color name="siyah">#000000</color>
@@ -23,5 +23,4 @@
     <color name="divide1">#547787</color>
     <color name="divide2">#989d9c</color>
     <color name="divide3">#b8c7bc</color>
-    <color name="yeni_ekran">#0892A5</color>
 </resources>
