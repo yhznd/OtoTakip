@@ -26,8 +26,8 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gifSoru"
-        android:layout_width="300px"
-        android:layout_height="250px"
+        android:layout_width="200px"
+        android:layout_height="150px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"

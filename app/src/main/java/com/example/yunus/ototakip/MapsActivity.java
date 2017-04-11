@@ -44,16 +44,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String serverKey = "AIzaSyDDKmbLMisjUnZT_CmYcQmLauwvOh-wpKA";
     Location sonKonum;
     CoordinatorLayout rootLayout;
-    Marker suAnKonumMarker,bakim,muayene,sigorta;
+    Marker suAnKonumMarker;
     LocationRequest yerIstek;
     private GoogleMap mMap;
     public LatLng suanKonumumuz;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Yerler");
     DatabaseReference ref_bakim = database.child("bakim_yerleri");
     DatabaseReference ref_muayene = database.child("muayene_yerleri");
     DatabaseReference ref_sigorta = database.child("sigorta_yerleri");
-
 
 
 
@@ -113,11 +112,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onChildAdded(DataSnapshot dataSnapshot, String s)
                 {
                     mMap.addMarker(new MarkerOptions().
-                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
-                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("boylam").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("enlem").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mavimarker))).showInfoWindow();
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mavimarker)));
                     Log.v("Firebase Bakim Data", "başarılı");
                 }
                 @Override
@@ -127,7 +126,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
                 @Override
-                public void onCancelled(DatabaseError databaseError) {}
+                public void onCancelled(DatabaseError databaseError) {
+                }
             });
 
 
@@ -140,11 +140,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onChildAdded(DataSnapshot dataSnapshot, String s)
                 {
                     mMap.addMarker(new MarkerOptions().
-                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
-                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("boylam").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("enlem").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.turuncumarker))).showInfoWindow();
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.turuncumarker)));
                     Log.v("Firebase Muayene Data", "başarılı");
                 }
                 @Override
@@ -165,11 +165,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onChildAdded(DataSnapshot dataSnapshot, String s)
                 {
                     mMap.addMarker(new MarkerOptions().
-                            position(new LatLng(Double.parseDouble(dataSnapshot.child("enlem").getValue().toString()),
-                                    Double.parseDouble(dataSnapshot.child("boylam").getValue().toString())))
+                            position(new LatLng(Double.parseDouble(dataSnapshot.child("boylam").getValue().toString()),
+                                    Double.parseDouble(dataSnapshot.child("enlem").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.kirmizimarker))).showInfoWindow();
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.kirmizimarker)));
 
                     Log.v("Firebase Sigorta Data", "başarılı");
                 }
@@ -302,7 +302,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.mormarker));
         suAnKonumMarker = mMap.addMarker(markerOptions);
         suAnKonumMarker.showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz,14));
 
 
         //stop location updates
