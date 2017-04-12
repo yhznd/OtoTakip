@@ -29,19 +29,41 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Hesabim extends AppCompatActivity {
 
-    public CircleImageView kullaniciHesapResmi;
-    public FancyButton sifreDegistir,hesapSil,hesapGuncelle;
+
+    public FancyButton hesapSil;
     public TextView kullanici,kullaniciMail;
     public FirebaseAuth firebaseAuth;
     public CircleImageView userImage;
+    public String facebookUserId = "";
+    public String photoURL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hesabim);
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()==null)
+        {
+            finish();
+            startActivity(new Intent(this,Giris.class));
+        }
         kullanici= (TextView) findViewById(R.id.kullaniciHesapAd);
         hesapSil= (FancyButton) findViewById(R.id.buttonHesapSil);
         kullaniciMail= (TextView) findViewById(R.id.kullaniciHesapMail);
-        userImage= (CircleImageView) findViewById(R.id.kullaniciHesapResmi);
+        kullaniciMail.setText(firebaseAuth.getCurrentUser().getEmail()); //mail alıyoruz
+        userImage= (CircleImageView) findViewById(R.id.kullaniciHesapResmi); //fotoğrafını alıyoruz
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        for(UserInfo profile : user.getProviderData())
+        {
+            // check if the provider id matches "facebook.com"
+            if(profile.getProviderId().equals(getString(R.string.facebook_provider_id)))
+            {
+                facebookUserId = profile.getUid();
+            }
+        }
+
+        photoURL = "https://graph.facebook.com/" + facebookUserId + "/picture?height=500";
+        Picasso.with(this).load(photoURL).error(R.drawable.kullanici_pp).into(userImage);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_hesabim);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,14 +72,7 @@ public class Hesabim extends AppCompatActivity {
             }
         });
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser()==null)
-        {
-            finish();
-            startActivity(new Intent(this,Giris.class));
-        }
 
-        kullaniciMail.setText(firebaseAuth.getCurrentUser().getEmail());
         hesapSil.setOnClickListener(new View.OnClickListener()
         {
             @Override

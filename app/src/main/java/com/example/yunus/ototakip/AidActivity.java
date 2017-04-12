@@ -24,7 +24,7 @@ public class AidActivity extends AppCompatActivity {
         if (savedInstanceState == null)
         {
             Bundle bundle = new Bundle();
-            bundle.putString("file_name", "sample3.pdf");
+            bundle.putString("file_name", "ilkyardimicinkilavuz.pdf");
             PdfRendererBasicFragment ff=new PdfRendererBasicFragment();
             ff.setArguments(bundle);
             getFragmentManager().beginTransaction()

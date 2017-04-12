@@ -1,6 +1,7 @@
 package com.example.yunus.ototakip;
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.location.Location;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -116,7 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Double.parseDouble(dataSnapshot.child("enlem").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mavimarker)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mine)));
                     Log.v("Firebase Bakim Data", "başarılı");
                 }
                 @Override
@@ -144,7 +146,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Double.parseDouble(dataSnapshot.child("enlem").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.turuncumarker)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.tools)));
+
                     Log.v("Firebase Muayene Data", "başarılı");
                 }
                 @Override
@@ -169,7 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Double.parseDouble(dataSnapshot.child("enlem").getValue().toString())))
                             .title(dataSnapshot.child("ad").getValue().toString())
                             .snippet(dataSnapshot.child("adres").getValue().toString())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.kirmizimarker)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.insuarance)));
 
                     Log.v("Firebase Sigorta Data", "başarılı");
                 }
@@ -299,10 +302,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(suanKonumumuz);
         markerOptions.title("Şu an buradasınız!");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.mormarker));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.konumun));
         suAnKonumMarker = mMap.addMarker(markerOptions);
         suAnKonumMarker.showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz,14));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(suanKonumumuz,10));
 
 
         //stop location updates

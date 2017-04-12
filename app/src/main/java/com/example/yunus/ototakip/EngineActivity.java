@@ -25,7 +25,7 @@ public class EngineActivity extends AppCompatActivity {
         if (savedInstanceState == null)
         {
             Bundle bundle = new Bundle();
-            bundle.putString("file_name", "sample.pdf");
+            bundle.putString("file_name", "motoricinkilavuz.pdf");
             PdfRendererBasicFragment ff=new PdfRendererBasicFragment();
             ff.setArguments(bundle);
             getFragmentManager().beginTransaction()

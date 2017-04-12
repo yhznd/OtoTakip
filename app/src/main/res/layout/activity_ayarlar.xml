@@ -71,13 +71,13 @@
 
     <TextView
         android:text="Hatırlatma Ayarları"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAyarlar"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
         android:textStyle="normal|bold"
-        android:layout_marginStart="64dp"
+        android:textAlignment="center"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/appBarAyarlar"
          />

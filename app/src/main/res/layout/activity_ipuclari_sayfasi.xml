@@ -33,13 +33,14 @@
 
     <TextView
         android:id="@+id/textViewIpuclari"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/appBarIpuclari"
-        android:layout_marginStart="64dp"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:text="İpuçları"
+        android:textAlignment="center"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
         android:textStyle="normal|bold" />
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar_ipuclari">
 
     <LinearLayout
@@ -57,15 +59,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/divide1" >
+        android:background="@color/divide1"
+        android:orientation="horizontal">
+
 
         <ImageView
             android:id="@+id/traffic"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.9"
             android:paddingStart="30dp"
-            android:src="@drawable/divide_traffic" />
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_traffic_24dp" />
+
+        <TextView
+            android:id="@+id/textTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="TRAFİK"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="26sp" />
+
 
         <ImageView
             android:id="@+id/go_Traffic"
@@ -85,10 +101,22 @@
 
         <ImageView
             android:id="@+id/aid"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.9"
-            android:src="@drawable/divide_aid" />
+            android:paddingStart="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_healing_24dp" />
+
+        <TextView
+            android:id="@+id/textAid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="İLKYARDIM"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="26sp" />
 
         <ImageView
             android:id="@+id/go_Aid"
@@ -106,13 +134,25 @@
             android:layout_weight="1"
             android:background="@color/divide3">
 
+
             <ImageView
                 android:id="@+id/engine"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                android:src="@drawable/divide_engine" />
+                android:paddingStart="30dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_build_black_24dp" />
 
+            <TextView
+                android:id="@+id/textEngine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="MOTOR"
+                android:textAlignment="center"
+                android:textColor="@color/beyaz"
+                android:textSize="26sp" />
             <ImageView
                 android:id="@+id/go_Engine"
                 android:layout_width="wrap_content"

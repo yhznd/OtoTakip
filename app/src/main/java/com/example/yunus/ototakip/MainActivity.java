@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("");
         setContentView(R.layout.activity_main);
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()==null)
