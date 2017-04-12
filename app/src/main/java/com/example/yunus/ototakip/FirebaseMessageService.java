@@ -54,9 +54,11 @@ public class FirebaseMessageService extends FirebaseMessagingService
         notificationBuilder.setContentIntent(pendingIntent);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
-            notificationBuilder.setSmallIcon(R.drawable.oto_takip_saydam);
-        } else {
-            notificationBuilder.setSmallIcon(R.mipmap.oto_takip);
+            notificationBuilder.setSmallIcon(R.drawable.ototakip_launcher_transparent);
+        }
+        else
+        {
+            notificationBuilder.setSmallIcon(R.mipmap.ototakip_launcher);
         }
 
         NotificationManager notificationManager =

@@ -99,9 +99,7 @@ public class AppRating
 
                     }
                 })
-                .setIcon(R.drawable.appicon)
-                .setHeaderColor(R.color.icon_arkasi)
-                .withIconAnimation(true)
+                .setHeaderDrawable(R.drawable.appratebanner)
                 .setPositiveText("EVET, ŞİMDİ DEĞERLENDİR")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
