@@ -136,43 +136,43 @@
         </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/lay4"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.24"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        <LinearLayout
+            android:id="@+id/lay4"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.24"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <TextView
-            android:id="@+id/textViewSifreUnuttum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:contextClickable="true"
-            android:layout_gravity="bottom"
-            android:text="Şifreni mi unuttun?"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/beyaz"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/textViewSifreUnuttum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:contextClickable="true"
+                android:layout_gravity="bottom"
+                android:text="Şifreni mi unuttun?"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/beyaz"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textViewSignUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contextClickable="true"
-            android:layout_gravity="bottom"
-            android:layout_weight="0.5"
-            android:text="Hesabınız yok mu? Kaydolun!"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/beyaz"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/textViewSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contextClickable="true"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.5"
+                android:text="Hesabınız yok mu? Kaydolun!"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/beyaz"
+                android:textSize="16sp" />
 
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 </RelativeLayout>

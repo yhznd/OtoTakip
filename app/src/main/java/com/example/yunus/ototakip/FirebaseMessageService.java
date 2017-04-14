@@ -58,7 +58,7 @@ public class FirebaseMessageService extends FirebaseMessagingService
         }
         else
         {
-            notificationBuilder.setSmallIcon(R.mipmap.ototakip_launcher);
+            notificationBuilder.setSmallIcon(R.drawable.otosplash);
         }
 
         NotificationManager notificationManager =
