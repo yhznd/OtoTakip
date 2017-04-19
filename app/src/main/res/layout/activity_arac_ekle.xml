@@ -36,8 +36,6 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_below="@+id/imageView2"
         android:fontFamily="sans-serif"
         android:text="Aracınıza ait birkaç bilgiyi topluyoruz!"
         android:textAlignment="center"
@@ -117,23 +115,6 @@
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/buttonGuncelle">
 
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/buttonSil"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="26dp"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/myCoordinatorLayout"
-            fancy:fb_borderColor="@color/sari"
-            fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="@color/sari"
-            fancy:fb_focusColor="@color/sari"
-            fancy:fb_radius="10dp"
-            fancy:fb_text="ARACI SİL"
-            fancy:fb_textColor="@color/beyaz"
-            tools:layout_editor_absoluteX="226dp"
-            tools:layout_editor_absoluteY="641dp"></mehdi.sakout.fancybuttons.FancyButton>
     </mehdi.sakout.fancybuttons.FancyButton>
 
     <mehdi.sakout.fancybuttons.FancyButton
