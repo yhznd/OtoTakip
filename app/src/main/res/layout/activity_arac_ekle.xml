@@ -28,18 +28,24 @@
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:titleTextColor="@color/beyaz"
         app:subtitleTextColor="@color/beyaz"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignBottom="@+id/appBarAracEkleLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
     <TextView
-        android:text="Aracınıza ait birkaç bilgiyi topluyoruz!"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textStyle="normal|bold"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_below="@+id/imageView2"
         android:fontFamily="sans-serif"
+        android:text="Aracınıza ait birkaç bilgiyi topluyoruz!"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:layout_below="@+id/imageView2"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="47dp"
+        android:layout_marginTop="10dp" />
 
     <View
         android:id="@+id/cizgi"
@@ -52,112 +58,36 @@
         android:background="@android:color/black" />
 
     <EditText
+        android:id="@+id/editTextPlaka"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:text="Plaka"
-        android:ems="10"
-        android:drawablePadding="5dp"
-        android:id="@+id/editText"
+        android:layout_alignStart="@+id/buttonSil"
+        android:layout_below="@+id/cizgi"
+        android:layout_marginTop="58dp"
         android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_plaka"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Plaka"
         android:inputType="text"
-        android:hint="Model"
-        tools:text="textPlaka"
-        tools:layout_editor_absoluteY="205dp"
         tools:layout_editor_absoluteX="56dp"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/editText3" />
+        tools:layout_editor_absoluteY="205dp" />
 
     <EditText
+        android:id="@+id/editTextModel"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:text="Kasko Tarihi"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:drawablePadding="5dp"
-        android:background="@color/beyaz"
-        android:drawableLeft="@drawable/ic_calendar_24dp"
-        android:hint="Model"
-        android:inputType="text"
-        tools:text="textKaskoTarihi"
-        tools:layout_editor_absoluteY="465dp"
-        tools:layout_editor_absoluteX="56dp"
-        android:layout_below="@+id/editText3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp" />
-
-    <EditText
-        android:text="Emisyon Tarihi"
-        android:ems="10"
-        android:id="@+id/editText4"
-        android:background="@color/beyaz"
-        android:drawableLeft="@drawable/ic_calendar_24dp"
-        android:inputType="text"
-        android:hint="Model"
-        android:drawablePadding="5dp"
-        tools:text="textEmisyonTarihi"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        tools:layout_editor_absoluteY="332dp"
-        tools:layout_editor_absoluteX="56dp"
-        android:layout_below="@+id/editText5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
-
-    <EditText
-        android:layout_height="40dp"
-        android:text="Muayene Tarihi"
-        android:ems="10"
-        android:drawablePadding="5dp"
-        android:id="@+id/editText6"
-        android:background="@color/beyaz"
-        android:drawableLeft="@drawable/ic_calendar_24dp"
-        android:inputType="text"
-        android:hint="Model"
-        tools:text="textMuayeneTarihi"
-        android:layout_width="300dp"
-        tools:layout_editor_absoluteY="402dp"
-        tools:layout_editor_absoluteX="56dp"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_marginTop="18dp" />
-
-    <EditText
-        android:layout_width="300dp"
-        android:text="Sigorta Tarihi"
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:id="@+id/editText5"
-        android:background="@color/beyaz"
-        android:drawableLeft="@drawable/ic_calendar_24dp"
-        android:inputType="text"
-        android:hint="Model"
-        tools:text="textSigortaTarihi"
-        android:layout_height="40dp"
-        tools:layout_editor_absoluteY="536dp"
-        tools:layout_editor_absoluteX="53dp"
-        android:layout_below="@+id/editText3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="133dp" />
-
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:text="Model"
-        android:ems="10"
-        android:drawablePadding="5dp"
-        android:id="@+id/editText3"
+        android:layout_marginTop="20dp"
         android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_plaka"
-        android:inputType="text"
+        android:drawablePadding="5dp"
+        android:ems="10"
         android:hint="Model"
-        tools:text="textModel"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="268dp"
-        tools:layout_editor_absoluteX="56dp"
-        android:layout_marginTop="17dp"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText2" />
+        android:layout_below="@+id/editTextPlaka"
+        android:layout_alignStart="@+id/editTextPlaka" />
 
     <ImageView
         android:layout_width="82dp"
@@ -183,9 +113,27 @@
         fancy:fb_textColor="@color/beyaz"
         tools:layout_editor_absoluteY="641dp"
         tools:layout_editor_absoluteX="226dp"
-        android:layout_marginBottom="41dp"
-        android:layout_above="@+id/myCoordinatorLayout"
-        android:layout_alignStart="@+id/editText4">
+        android:layout_marginBottom="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/buttonGuncelle">
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/buttonSil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="26dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/myCoordinatorLayout"
+            fancy:fb_borderColor="@color/sari"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_defaultColor="@color/sari"
+            fancy:fb_focusColor="@color/sari"
+            fancy:fb_radius="10dp"
+            fancy:fb_text="ARACI SİL"
+            fancy:fb_textColor="@color/beyaz"
+            tools:layout_editor_absoluteX="226dp"
+            tools:layout_editor_absoluteY="641dp"></mehdi.sakout.fancybuttons.FancyButton>
     </mehdi.sakout.fancybuttons.FancyButton>
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -202,7 +150,21 @@
         tools:layout_editor_absoluteY="641dp"
         tools:layout_editor_absoluteX="86dp"
         android:layout_alignTop="@+id/buttonSil"
-        android:layout_alignEnd="@+id/editText4" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Araç Ekle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewAracEkle"
+        android:textColor="@color/beyaz"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        android:layout_alignBottom="@+id/appBarAracEkleLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_height="50dp"
@@ -211,4 +173,62 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
     </android.support.design.widget.CoordinatorLayout>
+
+    <EditText
+        android:id="@+id/editTextKaskoTarihi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Kasko Tarihi"
+        android:inputType="date"
+        android:layout_below="@+id/editTextModel"
+        android:layout_alignStart="@+id/editTextModel"
+        android:layout_alignEnd="@+id/editTextModel" />
+
+    <EditText
+        android:id="@+id/editTextEmisyonTarihi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextKaskoTarihi"
+        android:layout_alignStart="@+id/editTextKaskoTarihi"
+        android:layout_below="@+id/editTextKaskoTarihi"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="Emisyon Tarihi"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/editTextSigortaTarihi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextEmisyonTarihi"
+        android:layout_alignStart="@+id/editTextEmisyonTarihi"
+        android:layout_below="@+id/editTextEmisyonTarihi"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Sigorta Tarihi"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/editTextMuayeneTarihi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextSigortaTarihi"
+        android:layout_alignStart="@+id/editTextSigortaTarihi"
+        android:layout_below="@+id/editTextSigortaTarihi"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Muayene Tarihi"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/buttonAracKaydet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextMuayeneTarihi"
+        android:layout_alignTop="@+id/buttonGuncelle"
+        android:background="@color/md_styled_accent"
+        android:text="KAYDET" />
+
 </RelativeLayout>

@@ -26,7 +26,7 @@ public class TrafficActivity extends AppCompatActivity {
         if (savedInstanceState == null)
         {
             Bundle bundle = new Bundle();
-            bundle.putString("file_name", "sample2.pdf");
+            bundle.putString("file_name", "trafikicinkilavuz.pdf");
             PdfRendererBasicFragment ff=new PdfRendererBasicFragment();
             ff.setArguments(bundle);
             getFragmentManager().beginTransaction()
