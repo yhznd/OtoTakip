@@ -39,7 +39,7 @@
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@android:color/holo_orange_light"
         fancy:fb_focusColor="@android:color/holo_orange_light"
-        fancy:fb_radius="30dp"
+        fancy:fb_radius="6dp"
         fancy:fb_text="HARİTAYA YÖNLENDİR"
         fancy:fb_textColor="@color/beyaz"
         android:layout_marginTop="62dp"
@@ -74,9 +74,8 @@
         android:id="@+id/textView4"
         android:layout_marginTop="183dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/siyah"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
+    </RelativeLayout>
