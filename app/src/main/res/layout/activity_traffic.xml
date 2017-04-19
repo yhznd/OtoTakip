@@ -30,16 +30,25 @@
 
     <TextView
         android:text="Trafik"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewTrafik"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
+        android:textAlignment="center"
         android:textStyle="normal|bold"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/appBarTraffic"
         android:layout_alignParentStart="true" />
+
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TrafficActivity"
+        tools:ignore="MergeRootFrame"
+        android:layout_below="@+id/toolbar_traffic" />
 </RelativeLayout>
 
 

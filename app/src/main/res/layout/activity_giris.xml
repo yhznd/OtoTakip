@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_giris"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimary"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context="com.example.yunus.ototakip.Giris">
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/lay1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                fancy:srcCompat="@drawable/otosplash" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary" >
+
+            <!-- Email Label -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:textColorHint="@color/beyaz">
+
+                <EditText
+                    android:id="@+id/editTextEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="7dp"
+                    android:fontFamily="sans-serif"
+                    android:hint="E-posta"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/beyaz"
+                    android:textColorHint="@color/beyaz" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password Label -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="36dp"
+                android:textColorHint="@color/beyaz">
+
+                <EditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_key_black_24dp"
+                    android:drawablePadding="7dp"
+                    android:fontFamily="sans-serif"
+                    android:hint="Şifre"
+                    android:inputType="textPassword"
+                    android:textColor="@color/beyaz"
+                    android:textColorHint="@color/beyaz" />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay3"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/buttonSignin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/sari"
+                fancy:fb_borderColor="@color/sari"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_textSize="15sp"
+                fancy:fb_defaultColor="@color/sari"
+                fancy:fb_focusColor="@color/sari"
+                fancy:fb_radius="6dp"
+                fancy:fb_text="GİRİŞ YAP"
+                fancy:fb_textColor="@color/beyaz" />
+
+            <ImageView
+                android:id="@+id/ayirac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ayrac" />
+
+            <com.facebook.login.widget.LoginButton
+                xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/login_button"
+                facebook:com_facebook_login_text="Facebook ile bağlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="13dp"
+                android:paddingTop="13dp"
+                android:textSize="15sp">
+            </com.facebook.login.widget.LoginButton>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lay4"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.24"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textViewSifreUnuttum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:contextClickable="true"
+                android:layout_gravity="bottom"
+                android:text="Şifreni mi unuttun?"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/beyaz"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contextClickable="true"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.5"
+                android:text="Hesabınız yok mu? Kaydolun!"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/beyaz"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

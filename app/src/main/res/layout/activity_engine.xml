@@ -30,21 +30,22 @@
 
     <TextView
         android:text="Motor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewEngine"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
+        android:textAlignment="center"
         android:textStyle="normal|bold"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/appBarLayoutEngine"
         android:layout_alignParentStart="true" />
 
-    <ExpandableListView
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/engineExpList"
-        android:layout_below="@+id/toolbar_engine"
-        android:layout_alignParentStart="true" />
+        tools:context=".TrafficActivity"
+        tools:ignore="MergeRootFrame"
+        android:layout_below="@+id/toolbar_engine" />
 </RelativeLayout>

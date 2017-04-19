@@ -31,13 +31,6 @@ public class AraclarimFragment extends Fragment {
                 startActivity(new Intent(getActivity(),AracEkle.class));
             }
         });
-        button= (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(),InternetCon.class));
-            }
-        });
 
         return view;
 

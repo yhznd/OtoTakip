@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,10 @@ import android.widget.TextView;
 public class IpuclariSayfasi extends AppCompatActivity  {
 
     public ImageView ipucu1, ipucu2, ipucu3;
+    public static final String trafic_dosya_adi = "sample3.pdf";
+    public static final String aid_dosya_adi = "sample2.pdf";
+    public static final String engine_dosya_adi = "sample.pdf";
+
 
 
     @Override
@@ -37,9 +42,9 @@ public class IpuclariSayfasi extends AppCompatActivity  {
             }
         });
 
-        ipucu1 = (ImageView) findViewById(R.id.imageTraffic);
-        ipucu2 = (ImageView) findViewById(R.id.imageAid);
-        ipucu3 = (ImageView) findViewById(R.id.imageEngine);
+        ipucu1 = (ImageView) findViewById(R.id.go_Traffic);
+        ipucu2 = (ImageView) findViewById(R.id.go_Aid);
+        ipucu3 = (ImageView) findViewById(R.id.go_Engine);
 
         ipucu1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,14 +55,17 @@ public class IpuclariSayfasi extends AppCompatActivity  {
 
         ipucu2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 startActivity(new Intent(IpuclariSayfasi.this,AidActivity.class));
             }
         });
 
         ipucu3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+
                 startActivity(new Intent(IpuclariSayfasi.this,EngineActivity.class));
             }
         });

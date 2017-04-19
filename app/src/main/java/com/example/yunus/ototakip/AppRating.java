@@ -73,11 +73,10 @@ public class AppRating
 
 
         new MaterialStyledDialog.Builder(mContext)
-                .setTitle("Bizi beğendiniz mi?")
-                .setDescription("O halde mağazadan puan vermeye ve yorumlarınızı bizimle paylaşmaya ne dersiniz?" +
-                        " Değerlendirmeleriniz bizim için çok değerli!")
+                .setTitle("Oto Takip uygulamasını sevdiniz mi?")
+                .setDescription("Google Play'de yorum yazarak Oto Takip uygulamasını başkalarına da önerin!")
                 .setCancelable(false)
-                .setNegativeText("Hayır, bunu bir daha gösterme")
+                .setNegativeText("HAYIR, BUNU BİR DAHA GÖSTERME")
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -88,7 +87,7 @@ public class AppRating
                         }
                     }
                 })
-                .setNeutralText("Belki Daha Sonra")
+                .setNeutralText("BELKİ DAHA SONRA")
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -100,10 +99,8 @@ public class AppRating
 
                     }
                 })
-                .setIcon(R.drawable.appicon)
-                .setHeaderColor(R.color.icon_arkasi)
-                .withIconAnimation(true)
-                .setPositiveText("Puan Ver")
+                .setHeaderDrawable(R.drawable.appratebanner)
+                .setPositiveText("EVET, ŞİMDİ DEĞERLENDİR")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
