@@ -25,12 +25,10 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Yakinimdakiler extends Fragment {
 
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
-    private View view;
+
     public Yakinimdakiler() {}
     public FancyButton haritayaAktar;
-    public CheckBox muayene,bakim,sigorta;
-    private final static int PERMISSION_REQUEST_CODE=200;
+    public static CheckBox muayene,bakim,sigorta;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

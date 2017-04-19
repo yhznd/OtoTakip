@@ -5,14 +5,17 @@
     android:id="@+id/activity_ipuclari_sayfasi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/arkaplan_ipuc"
     tools:context="com.example.yunus.ototakip.IpuclariSayfasi">
 
+
+
+
+
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarIpuclari"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appBarIpuclari">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
     </android.support.design.widget.AppBarLayout>
 
@@ -20,70 +23,145 @@
         android:id="@+id/toolbar_ipuclari"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/back_24dp"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="@color/beyaz"
-        app:subtitleTextColor="@color/beyaz"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/back_24dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:subtitleTextColor="@color/beyaz"
+        app:titleTextColor="@color/beyaz" />
 
     <TextView
-        android:text="İpuçları"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textViewIpuclari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appBarIpuclari"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="İpuçları"
+        android:textAlignment="center"
         android:textColor="@color/beyaz"
         android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/appBarIpuclari"
+        android:textStyle="normal|bold" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_alignParentStart="true"
-        />
+        android:layout_below="@+id/toolbar_ipuclari">
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iceriklerLayout"
-        android:orientation="horizontal"
-        android:layout_marginBottom="21dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+    <LinearLayout
+        android:id="@+id/lay1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/divide1"
+        android:orientation="horizontal">
 
-        <TableRow
+
+        <ImageView
+            android:id="@+id/traffic"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:paddingStart="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_traffic_24dp" />
+
+        <TextView
+            android:id="@+id/textTraffic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="TRAFİK"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="26sp" />
+
+
+        <ImageView
+            android:id="@+id/go_Traffic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@color/divide2" >
+
+        <ImageView
+            android:id="@+id/aid"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:paddingStart="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_healing_24dp" />
+
+        <TextView
+            android:id="@+id/textAid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="İLKYARDIM"
+            android:textAlignment="center"
+            android:textColor="@color/beyaz"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:id="@+id/go_Aid"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay3"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:background="@color/divide3">
+
 
             <ImageView
+                android:id="@+id/engine"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/traffic"
-                android:id="@+id/imageTraffic"
-                android:layout_width="match_parent" />
-        </TableRow>
+                android:paddingStart="30dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_build_black_24dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <ImageView
+            <TextView
+                android:id="@+id/textEngine"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/aid"
-                android:id="@+id/imageAid" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="MOTOR"
+                android:textAlignment="center"
+                android:textColor="@color/beyaz"
+                android:textSize="26sp" />
             <ImageView
+                android:id="@+id/go_Engine"
                 android:layout_width="wrap_content"
-                app:srcCompat="@drawable/engine"
-                android:id="@+id/imageEngine"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0.1"
+                app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+        </LinearLayout>
+</LinearLayout>
 
-        </TableRow>
-
-    </TableLayout>
 </RelativeLayout>
+

@@ -37,7 +37,7 @@ public class MyIntro extends AppIntro {
     public void onSkipPressed()
     {
         finish();
-        startActivity(new Intent(this,SplashScreen.class));
+        startActivity(new Intent(this,Giris.class));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class MyIntro extends AppIntro {
     public void onDonePressed()
     {
         finish();
-        startActivity(new Intent(this,SplashScreen.class));
+        startActivity(new Intent(this,Giris.class));
     }
 
     @Override

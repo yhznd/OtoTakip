@@ -20,7 +20,7 @@ public class  CustomPageAdapter extends PagerAdapter {
 
 
     String bilgiler[] = {"34 YNS 54","54 E 2554"};
-    String tipler[] = {"Muayene Tarihi","Sigorta Tarihi"};
+    String tipler[] = {"Bakim Tarihi","Sigorta Tarihi"};
     int yuzdeler[]={90,12};
     private Context mContext;
     public CustomPageAdapter(Context context)
