@@ -7,24 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.yunus.ototakip.YaklasanlarFragment">
 
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="wrap_content"
         android:layout_height="545dp"
-        android:layout_marginTop="89dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-        <com.itsronald.widget.ViewPagerIndicator
-            android:id="@+id/view_pager_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:selectedDotColor="@color/acik_gri"
-            app:unselectedDotColor="@color/colorAccent"
-            app:dotRadius="5dp"
-            app:dotPadding="10dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:gravity="center_vertical"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
     </android.support.v4.view.ViewPager>
 
 </RelativeLayout>
