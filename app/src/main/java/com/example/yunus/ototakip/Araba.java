@@ -18,16 +18,16 @@ public class Araba {
     private String editTextEmisyonTarihi;
 
 
+    public Araba(String userMail,String editTextModel,String editTextKaskoTarihi, String editTextMuayeneTarihi, String editTextSigortaTarihi,String editTextEmisyonTarihi )
+    {
 
-    public Araba(String userMail, String userId, String editTextModel, String editTextKaskoTarihi, String editTextMuayeneTarihi, String editTextSigortaTarihi, String editTextEmisyonTarihi) {
-        this.userId = userId;
         this.userMail = userMail;
-        this.editTextPlaka = editTextPlaka;
         this.editTextModel = editTextModel;
         this.editTextKaskoTarihi = editTextKaskoTarihi;
         this.editTextMuayeneTarihi = editTextMuayeneTarihi;
         this.editTextSigortaTarihi = editTextSigortaTarihi;
         this.editTextEmisyonTarihi = editTextEmisyonTarihi;
+
     }
 
     public Araba()

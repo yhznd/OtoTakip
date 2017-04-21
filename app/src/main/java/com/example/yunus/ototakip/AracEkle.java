@@ -63,6 +63,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         firebaseAuth=FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
+
         userId=firebaseAuth.getCurrentUser().getUid();
         userMail=firebaseAuth.getCurrentUser().getEmail();
 
@@ -113,7 +114,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                             @Override
                             public void onClick(View v)
                             {
-                               //guncelleye basıldığında olacak olan olay
+                                //guncelleye basıldığında olacak olan olay
                             }
                         } )
                         .show();
@@ -183,7 +184,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-   @Override
+    @Override
     public void onClick(View view)
     {
         if(view == editTextKaskoTarihi)
@@ -220,14 +221,8 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         String aracSigortaTrhi=editTextEmisyonTarihi.getText().toString();
 
 
-        araba =new Araba(userMail,userId,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
-
-        //araba =new Araba(userMail,userId,"astra","kasko","trafik","muayene","sigorta");
-
-        //String aracPlakasi = "34U8269";
-
-        reference=database.getReference("Arabalar").child(aracPlakasi);
-
+        araba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
+        reference=database.getReference("Arabalar").child(userId).child(aracPlakasi);
         reference.setValue(araba);
 
     }

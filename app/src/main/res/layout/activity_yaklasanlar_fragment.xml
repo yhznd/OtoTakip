@@ -11,10 +11,10 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="wrap_content"
-        android:layout_height="545dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
-    </android.support.v4.view.ViewPager>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="90dp"></android.support.v4.view.ViewPager>
 
 </RelativeLayout>

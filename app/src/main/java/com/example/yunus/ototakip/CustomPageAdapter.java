@@ -4,6 +4,7 @@ package com.example.yunus.ototakip;
  * Created by Yunus on 15.02.2017.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
@@ -24,18 +25,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class CustomPageAdapter extends PagerAdapter implements ValueEventListener {
 
-    Context mContext;
     private Context context;
     private HashMap<String, Araba> arabalar;
     private DatabaseReference databaseReference;
     private String userId;
     private LayoutInflater inflater;
     private List<String> arabaPlakalari;
+    private long gunFarki;
 
 
     public CustomPageAdapter(@NonNull Context context,
@@ -43,6 +50,7 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
                         final DatabaseReference databaseReference,
                         final String userId) {
 
+        super();
         this.context = context;
         this.arabaPlakalari = arabaPlakalar;
         arabalar = new HashMap<>();
@@ -106,31 +114,51 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
         TextView emisyonTarihiTextView;
         TextView sigortaTarihiTextView;
         TextView kaskoTarihiTextView;
+        TextView plakaTextView;
+        TextView emisyonFark,sigortaFark,muayeneFark,kaskoFark;
+        inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View viewLayout = LayoutInflater.from(context).inflate(R.layout.list_item_custom, container, false);
+        View viewLayout = inflater.inflate(R.layout.list_item_custom, null);
         muayeneTarihiTextView = (TextView) viewLayout.findViewById(R.id.muayeneTarihiTextView);
         kaskoTarihiTextView = (TextView) viewLayout.findViewById(R.id.kaskoTarihiTextView);
         emisyonTarihiTextView = (TextView) viewLayout.findViewById(R.id.emisyonTarihiTextView);
         sigortaTarihiTextView = (TextView) viewLayout.findViewById(R.id.sigortaTarihiTextView);
+        plakaTextView = (TextView) viewLayout.findViewById(R.id.plakaTextView);
+        emisyonFark= (TextView) viewLayout.findViewById(R.id.emisyonFark);
+        sigortaFark= (TextView) viewLayout.findViewById(R.id.sigortaFark);
+        muayeneFark= (TextView) viewLayout.findViewById(R.id.muayeneFark);
+        kaskoFark= (TextView) viewLayout.findViewById(R.id.kaskoFark);
 
-        muayeneTarihiTextView.setText(arabaBilgisi.getEditTextEmisyonTarihi());
+        muayeneTarihiTextView.setText(arabaBilgisi.getEditTextMuayeneTarihi());
         kaskoTarihiTextView.setText(arabaBilgisi.getEditTextKaskoTarihi());
         sigortaTarihiTextView.setText(arabaBilgisi.getEditTextSigortaTarihi());
         emisyonTarihiTextView.setText(arabaBilgisi.getEditTextEmisyonTarihi());
-        container.addView(viewLayout);
+        plakaTextView.setText(arabaBilgisi.getEditTextPlaka()+" plakalı aracınızın");
+
+        emisyonFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextEmisyonTarihi())));
+        sigortaFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextSigortaTarihi())));
+        muayeneFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextMuayeneTarihi())));
+        kaskoFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextKaskoTarihi())));
+
+
+        container.addView(viewLayout,0);
         return viewLayout;
     }
 
 
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
+
         return arabalar.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return false;
+    public boolean isViewFromObject(View view, Object object)
+    {
+        return view == object;
     }
 
     @Override
@@ -153,6 +181,34 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
 
     }
 
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object)
+    {
+        ((ViewPager) container).removeView((View) object);
+    }
+
+    public long gunFarkiniGetir(String gelenTarih)
+    {
+        Calendar takvim = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try
+        {
+
+            Date date1 = sdf.parse(gelenTarih);
+            Date date2 = sdf.parse(sdf.format(takvim.getTime()));
+            if(date1.after(date2))
+                gunFarki = (date1.getTime() - date2.getTime())/86400000;
+            else
+                gunFarki=0;
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        Log.d("geldi", String.valueOf(gunFarki));
+        return gunFarki;
+    }
 
 
 }

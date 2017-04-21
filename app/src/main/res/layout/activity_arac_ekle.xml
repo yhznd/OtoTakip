@@ -43,21 +43,10 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true" />
 
-    <View
-        android:id="@+id/cizgi"
-        android:layout_width="360dp"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/textView3"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/appBarAracEkleLayout"
-        android:background="@android:color/black" />
-
     <EditText
         android:id="@+id/editTextPlaka"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="71dp"
         android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_plaka"
         android:drawablePadding="5dp"
@@ -66,8 +55,8 @@
         android:inputType="text"
         tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="205dp"
-        android:layout_below="@+id/cizgi"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_below="@+id/imageView2"
+        android:layout_alignStart="@+id/textView3" />
 
     <EditText
         android:id="@+id/editTextModel"
