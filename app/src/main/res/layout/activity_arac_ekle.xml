@@ -41,27 +41,12 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:layout_below="@+id/imageView2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="47dp"
-        android:layout_marginTop="10dp" />
-
-    <View
-        android:id="@+id/cizgi"
-        android:layout_width="360dp"
-        android:layout_height="1dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/textView3"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/appBarAracEkleLayout"
-        android:background="@android:color/black" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/editTextPlaka"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_alignStart="@+id/buttonSil"
-        android:layout_below="@+id/cizgi"
-        android:layout_marginTop="58dp"
         android:background="@color/beyaz"
         android:drawableLeft="@drawable/ic_plaka"
         android:drawablePadding="5dp"
@@ -69,7 +54,9 @@
         android:hint="Plaka"
         android:inputType="text"
         tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="205dp" />
+        tools:layout_editor_absoluteY="205dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignStart="@+id/textView3" />
 
     <EditText
         android:id="@+id/editTextModel"
@@ -109,11 +96,12 @@
         fancy:fb_radius="10dp"
         fancy:fb_text="ARACI SİL"
         fancy:fb_textColor="@color/beyaz"
-        tools:layout_editor_absoluteY="641dp"
         tools:layout_editor_absoluteX="226dp"
-        android:layout_marginBottom="22dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/buttonGuncelle">
+        tools:layout_editor_absoluteY="641dp"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/editTextMuayeneTarihi"
+        android:layout_toStartOf="@+id/buttonGuncelle"
+        android:layout_marginEnd="28dp">
 
     </mehdi.sakout.fancybuttons.FancyButton>
 
@@ -128,8 +116,8 @@
         fancy:fb_radius="10dp"
         fancy:fb_text="GÜNCELLE"
         fancy:fb_textColor="@color/beyaz"
-        tools:layout_editor_absoluteY="641dp"
         tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="641dp"
         android:layout_alignTop="@+id/buttonSil"
         android:layout_centerHorizontal="true" />
 
@@ -203,13 +191,25 @@
         android:hint="Muayene Tarihi"
         android:inputType="date" />
 
-    <Button
+
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/buttonAracKaydet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTextMuayeneTarihi"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        fancy:fb_borderColor="@color/sari"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/sari"
+        fancy:fb_focusColor="@color/sari"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="KAYDET"
+        fancy:fb_textColor="@color/beyaz"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="641dp"
         android:layout_alignTop="@+id/buttonGuncelle"
-        android:background="@color/md_styled_accent"
-        android:text="KAYDET" />
+        android:layout_toEndOf="@+id/buttonGuncelle"
+        android:layout_marginStart="33dp" />
+
+
+
 
 </RelativeLayout>
