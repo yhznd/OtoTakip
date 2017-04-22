@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public String sistemTarihiniGetir()
+    public static String sistemTarihiniGetir()
     {
         Calendar takvim = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy E", new Locale("tr"));
