@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_yaklasanlar_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yunus.ototakip.YaklasanlarFragment">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="545dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignParentBottom="true">
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/divide2"
+            android:layout_weight="0.14"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/plakaTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Plaka"
+                android:textColor="@color/beyaz"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/divide1">
+
+                <TextView
+                    android:id="@+id/muayeneTarihiTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Muayene Tarihi"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="23dp"
+                    android:layout_above="@+id/muayeneFark"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="75dp"
+                    android:gravity="center"
+                    android:text="GÜN KALDI"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/muayeneFark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:layout_above="@+id/textView"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/divide1">
+
+                <TextView
+                    android:id="@+id/sigortaTarihiTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="22dp"
+                    android:gravity="center"
+                    android:text="Sigorta Tarihi"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_above="@+id/sigortaFark"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="75dp"
+                    android:gravity="center"
+                    android:text="GÜN KALDI"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sigortaFark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:layout_above="@+id/textView8"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/divide1">
+
+                <TextView
+                    android:id="@+id/kaskoTarihiTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Kasko Tarihi"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="25dp"
+                    android:layout_above="@+id/kaskoFark"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="75dp"
+                    android:gravity="center"
+                    android:text="GÜN KALDI"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/kaskoFark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:layout_above="@+id/textView10"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/divide1">
+
+                <TextView
+                    android:id="@+id/emisyonTarihiTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Emisyon Tarihi"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="25dp"
+                    android:layout_above="@+id/emisyonFark"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="75dp"
+                    android:gravity="center"
+                    android:text="GÜN KALDI"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/emisyonFark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/beyaz"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:layout_above="@+id/textView13"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
