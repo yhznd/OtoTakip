@@ -2,22 +2,20 @@ package com.example.yunus.ototakip;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,11 +23,10 @@ import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class AracEkle extends AppCompatActivity implements View.OnClickListener{
-
+public class AracListele extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextPlaka;
-    private MaterialSpinner editTextModel;
+    private EditText editTextModel;
     private EditText editTextKaskoTarihi;
     private EditText editTextMuayeneTarihi;
     private EditText editTextSigortaTarihi;
@@ -50,7 +47,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
     DatabaseReference reference;
-    FloatingActionButton buttonAracKaydet;
+    FloatingActionButton buttonAracGuncelle,buttonAracSil;
     private DatePickerDialog kaskoTarihiDialog;
     private DatePickerDialog sigortaTarihiDialog;
     private DatePickerDialog muayeneTarihiDialog;
@@ -60,7 +57,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arac_ekle);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aracekle);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aracgoruntule);
 
         firebaseAuth=FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -72,13 +69,12 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AracEkle.this, MainActivity.class));
+                startActivity(new Intent(AracListele.this, MainActivity.class));
             }
         });
 
         editTextPlaka=(EditText)findViewById(R.id.editTextPlaka);
-        editTextModel=(MaterialSpinner) findViewById(R.id.editTextModel);
-        editTextModel.setItems("Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
+        editTextModel=(EditText)findViewById(R.id.editTextModel);
         editTextKaskoTarihi=(EditText)findViewById(R.id.editTextKaskoTarihi);
         editTextKaskoTarihi.setInputType(InputType.TYPE_NULL);
         editTextKaskoTarihi.setOnClickListener((View.OnClickListener) this);
@@ -91,19 +87,12 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         editTextEmisyonTarihi=(EditText)findViewById(R.id.editTextEmisyonTarihi);
         editTextEmisyonTarihi.setInputType(InputType.TYPE_NULL);
         editTextEmisyonTarihi.setOnClickListener((View.OnClickListener) this);
-        buttonAracKaydet=(FloatingActionButton) findViewById(R.id.buttonAracKaydet);
+        buttonAracGuncelle=(FloatingActionButton) findViewById(R.id.editActionButton);
+        buttonAracSil=(FloatingActionButton) findViewById(R.id.deleteActionButton);
 
 
 
-        buttonAracKaydet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                aracKaydet();
-                CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
-                Snackbar.make(rootLayout, "Araç eklendi!", Snackbar.LENGTH_LONG).show();
-                startActivity(new Intent(AracEkle.this,MainActivity.class));
-            }
-        });
+
 
         Calendar newCalendar = Calendar.getInstance();
         kaskoTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -178,23 +167,17 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
 
 
-    private void aracKaydet(){
+    private void aracGuncelle(){
 
         String aracPlakasi=editTextPlaka.getText().toString();
-        int indis=editTextModel.getSelectedIndex();
-        String aracModeli=editTextModel.getItems().get(indis).toString();
+        String aracModeli=editTextModel.getText().toString();
         String aracKaskoTrhi=editTextKaskoTarihi.getText().toString();
         String aracTrafikTrhi=editTextMuayeneTarihi.getText().toString();
         String aracMuayeneTrhi=editTextSigortaTarihi.getText().toString();
         String aracSigortaTrhi=editTextEmisyonTarihi.getText().toString();
 
 
-        araba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
-        reference=database.getReference("Arabalar").child(userId).child(aracPlakasi);
-        reference.setValue(araba);
+
 
     }
-
-
-
 }

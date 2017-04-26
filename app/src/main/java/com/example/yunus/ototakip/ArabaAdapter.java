@@ -110,7 +110,8 @@ public class ArabaAdapter extends ArrayAdapter<String> implements ValueEventList
         String plaka = dataSnapshot.getKey();
         araba.setEditTextPlaka(plaka);
         arabalar.put(plaka, araba);
-        if(!arabaPlakalari.contains(plaka)){
+        if(!arabaPlakalari.contains(plaka))
+        {
             arabaPlakalari.add(plaka);
         }
 
