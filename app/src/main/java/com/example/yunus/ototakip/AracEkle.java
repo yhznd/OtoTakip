@@ -230,3 +230,6 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
 
 }
+
+
+}

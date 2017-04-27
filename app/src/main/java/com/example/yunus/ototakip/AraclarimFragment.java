@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,8 +25,8 @@ public class AraclarimFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     DatabaseReference dref;
     ListView listview;
-    ArrayList<String> list=new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<Araba> list=new ArrayList<>();
+    ArrayAdapter<Araba> adapter;
     public AraclarimFragment() {}
 
     @Override
@@ -35,10 +37,42 @@ public class AraclarimFragment extends Fragment {
         firebaseAuth=FirebaseAuth.getInstance();
         userId=firebaseAuth.getCurrentUser().getUid().toString();
         listview=(ListView)view.findViewById(R.id.listview);
-
-        dref = FirebaseDatabase.getInstance().getReference();
-        adapter=new ArabaAdapter(getActivity(), new ArrayList<String>(),  dref, userId);
+        adapter=new ArrayAdapter<Araba>(getActivity(),R.layout.support_simple_spinner_dropdown_item,list);
         listview.setAdapter(adapter);
+
+       dref= FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId);
+
+
+        dref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Araba araba=dataSnapshot.getValue(Araba.class);
+                araba.setEditTextPlaka(dataSnapshot.getKey());
+                list.add(araba);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
