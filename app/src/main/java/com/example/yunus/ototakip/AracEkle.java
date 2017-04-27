@@ -7,6 +7,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,7 +23,7 @@ import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class AracEkle extends AppCompatActivity {
+public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
 
     private EditText editTextPlaka;
@@ -34,8 +35,7 @@ public class AracEkle extends AppCompatActivity {
 
     Calendar myCalendar = Calendar.getInstance();
     String myFormat = "dd/MM/yyyy"; //In which you need put here
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
     String userId;
     String userMail;
     String aracPlakasi;
@@ -44,15 +44,15 @@ public class AracEkle extends AppCompatActivity {
     String aracTrafikTrhi;
     String aracMuayeneTrhi;
     String aracSigortaTrhi;
-
-
     Araba araba;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
     DatabaseReference reference;
-
-    FancyButton guncelle,sil;
-    Button buttonAracKaydet;
+    FancyButton guncelle,sil,buttonAracKaydet;
+    private DatePickerDialog kaskoTarihiDialog;
+    private DatePickerDialog sigortaTarihiDialog;
+    private DatePickerDialog muayeneTarihiDialog;
+    private DatePickerDialog emisyonTarihiDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class AracEkle extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
 
         userId=firebaseAuth.getCurrentUser().getUid();
         userMail=firebaseAuth.getCurrentUser().getEmail();
@@ -76,10 +77,18 @@ public class AracEkle extends AppCompatActivity {
         editTextPlaka=(EditText)findViewById(R.id.editTextPlaka);
         editTextModel=(EditText)findViewById(R.id.editTextModel);
         editTextKaskoTarihi=(EditText)findViewById(R.id.editTextKaskoTarihi);
+        editTextKaskoTarihi.setInputType(InputType.TYPE_NULL);
+        editTextKaskoTarihi.setOnClickListener((View.OnClickListener) this);
         editTextMuayeneTarihi=(EditText)findViewById(R.id.editTextMuayeneTarihi);
+        editTextMuayeneTarihi.setInputType(InputType.TYPE_NULL);
+        editTextMuayeneTarihi.setOnClickListener((View.OnClickListener) this);
         editTextSigortaTarihi=(EditText)findViewById(R.id.editTextSigortaTarihi);
+        editTextSigortaTarihi.setInputType(InputType.TYPE_NULL);
+        editTextSigortaTarihi.setOnClickListener((View.OnClickListener) this);
         editTextEmisyonTarihi=(EditText)findViewById(R.id.editTextEmisyonTarihi);
-        buttonAracKaydet=(Button) findViewById(R.id.buttonAracKaydet);
+        editTextEmisyonTarihi.setInputType(InputType.TYPE_NULL);
+        editTextEmisyonTarihi.setOnClickListener((View.OnClickListener) this);
+        buttonAracKaydet=(FancyButton) findViewById(R.id.buttonAracKaydet);
 
 
 
@@ -105,7 +114,7 @@ public class AracEkle extends AppCompatActivity {
                             @Override
                             public void onClick(View v)
                             {
-                               //guncelleye basıldığında olacak olan olay
+                                //guncelleye basıldığında olacak olan olay
                             }
                         } )
                         .show();
@@ -129,143 +138,79 @@ public class AracEkle extends AppCompatActivity {
             }
         });
 
+        Calendar newCalendar = Calendar.getInstance();
+        kaskoTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                editTextKaskoTarihi.setText(sdf.format(myCalendar.getTime()));
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                editTextKaskoTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        };
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        editTextKaskoTarihi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                new DatePickerDialog(AracEkle.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        sigortaTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
-        editTextKaskoTarihi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(AracEkle.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        final DatePickerDialog.OnDateSetListener date1 = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                editTextMuayeneTarihi.setText(sdf.format(myCalendar.getTime()));
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                editTextSigortaTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        };
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        editTextMuayeneTarihi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                new DatePickerDialog(AracEkle.this, date1, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        muayeneTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
-        editTextMuayeneTarihi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(AracEkle.this, date1, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                editTextSigortaTarihi.setText(sdf.format(myCalendar.getTime()));
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                editTextMuayeneTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        };
-
-        editTextSigortaTarihi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                new DatePickerDialog(AracEkle.this, date2, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        editTextSigortaTarihi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(AracEkle.this, date2, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
 
-        final DatePickerDialog.OnDateSetListener date3 = new DatePickerDialog.OnDateSetListener() {
+        emisyonTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                editTextEmisyonTarihi.setText(sdf.format(myCalendar.getTime()));
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                editTextEmisyonTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        };
-
-        editTextEmisyonTarihi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                new DatePickerDialog(AracEkle.this, date3, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        editTextEmisyonTarihi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(AracEkle.this, date3, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
 
 
     }
+
+    @Override
+    public void onClick(View view)
+    {
+        if(view == editTextKaskoTarihi)
+        {
+            kaskoTarihiDialog.show();
+        }
+        else if(view == editTextEmisyonTarihi)
+        {
+            emisyonTarihiDialog.show();
+        }
+
+        else if(view == editTextMuayeneTarihi)
+        {
+            muayeneTarihiDialog.show();
+        }
+
+        else if(view == editTextSigortaTarihi)
+        {
+            sigortaTarihiDialog.show();
+        }
+    }
+
+
+
+
+
     private void Kaydet(){
 
         String aracPlakasi=editTextPlaka.getText().toString();
@@ -276,16 +221,15 @@ public class AracEkle extends AppCompatActivity {
         String aracSigortaTrhi=editTextEmisyonTarihi.getText().toString();
 
 
-        araba =new Araba(userMail,userId,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
-
-        //araba =new Araba(userMail,userId,"astra","kasko","trafik","muayene","sigorta");
-
-        //String aracPlakasi = "34U8269";
-
-        reference=database.getReference("Arabalar").child(aracPlakasi);
-
+        araba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
+        reference=database.getReference("Arabalar").child(userId).child(aracPlakasi);
         reference.setValue(araba);
 
     }
+
+
+
+}
+
 
 }
