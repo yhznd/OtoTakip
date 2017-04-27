@@ -36,6 +36,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+<<<<<<< HEAD
+>>>>>>> yunus
+=======
+>>>>>>> master
 >>>>>>> master
 
 public class CustomPageAdapter extends PagerAdapter implements ValueEventListener {
