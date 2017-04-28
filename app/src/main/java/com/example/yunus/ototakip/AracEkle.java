@@ -8,14 +8,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,8 +51,10 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     Araba araba;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
+
     DatabaseReference reference;
     FancyButton guncelle,sil,buttonAracKaydet;
+    Button btnSetEvent;
     private DatePickerDialog kaskoTarihiDialog;
     private DatePickerDialog sigortaTarihiDialog;
     private DatePickerDialog muayeneTarihiDialog;
@@ -99,6 +105,51 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
+   /*     btnSetEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Date d1 = new Date(1472570400);//Tue, 30 Aug 2016 15:20:00 GMT
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTime(d1);
+
+                Date d2 = new Date(1472574000);//Tue, 30 Aug 2016 16:20:00 GMT
+                Calendar cal2 = Calendar.getInstance();
+                cal2.setTime(d2);
+
+
+                Uri EVENTS_URI = Uri.parse("content://com.android.calendar/events");
+                ContentResolver cr = getContentResolver();
+
+                // event insert
+                ContentValues values = new ContentValues();
+                values.put("calendar_id", 1);
+                values.put("title", "Reminder Title");
+                values.put("allDay", 0);
+                values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+
+                values.put("dtstart", cal1.getTimeInMillis() ); // event starts at Tue, 30 Aug 2016 15:20:00
+                values.put("dtend", cal2.getTimeInMillis()); // ends at Tue, 30 Aug 2016 16:20:00 GMT
+
+                System.out.println("ALARM TIMES START : " + cal1.getTimeInMillis());
+                System.out.println("ALARM TIMES END : "+cal2.getTimeInMillis());
+
+                values.put("description", "Reminder description");
+                values.put("hasAlarm", 1);
+                Uri event = cr.insert(EVENTS_URI, values);
+
+                // reminder insert
+                Uri REMINDERS_URI = Uri.parse("content://com.android.calendar/reminders");
+                values = new ContentValues();
+                values.put( "event_id", Long.parseLong(event.getLastPathSegment()));
+
+                values.put( "method", 1);
+                values.put( "minutes", 1); //Notify before the exact time
+                cr.insert( REMINDERS_URI, values );
+            }
+        });
+
+*/
+
 
         guncelle= (FancyButton) findViewById(R.id.buttonGuncelle);
         sil= (FancyButton) findViewById(R.id.buttonSil);
@@ -124,7 +175,8 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         sil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
+                Sil();
+                /*CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
                 Snackbar.make(rootLayout, "Araç silindi!", Snackbar.LENGTH_LONG)
                         .setAction("TAMAM", new View.OnClickListener() {
                             @Override
@@ -132,9 +184,13 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                             {
                                 //boş bırakıldığında dismiss oluyor
                                 //sil basıldığında olacak olan olay
+
+                                Sil();
+
                             }
                         } )
                         .show();
+                        */
             }
         });
 
@@ -213,7 +269,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
     private void Kaydet(){
 
-        String aracPlakasi=editTextPlaka.getText().toString();
+        String aracPlakasi=editTextPlaka.getText().toString().toUpperCase();
         String aracModeli=editTextModel.getText().toString();
         String aracKaskoTrhi=editTextKaskoTarihi.getText().toString();
         String aracTrafikTrhi=editTextMuayeneTarihi.getText().toString();
@@ -228,8 +284,23 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     }
 
 
+    private void Sil() {
 
-}
+
+        String aracPlakasi=editTextPlaka.getText().toString();
+        database.getReference("Arabalar").child(userId).child(aracPlakasi).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("AracEkle", dataSnapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
 }
