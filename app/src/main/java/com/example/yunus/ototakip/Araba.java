@@ -1,8 +1,5 @@
 package com.example.yunus.ototakip;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Eren Özhan on 9.4.2017.
  */
@@ -17,7 +14,7 @@ public class Araba {
     private String editTextSigortaTarihi;
     private String editTextEmisyonTarihi;
 
-    public Araba(){}
+    //public Araba(){}
 
 
 
