@@ -108,44 +108,15 @@
             android:weightSum="1">
 
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/buttonSifreDegistir"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="34dp"
-                android:layout_weight="0.02"
-                fancy:fb_borderColor="@color/colorPrimary"
-                fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/colorPrimary"
-                fancy:fb_focusColor="@color/colorPrimary"
-                fancy:fb_radius="6dp"
-                fancy:fb_text="Şifre Değiştir"
-                fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>
-
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/buttonHesapGuncelle"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="23dp"
-                fancy:fb_borderColor="@color/colorPrimary"
-                fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/colorPrimary"
-                fancy:fb_focusColor="@color/colorPrimary"
-                fancy:fb_radius="6dp"
-                fancy:fb_text="Bilgilerimi Güncelle"
-                fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>
-
-            <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/buttonHesapSil"
                 android:layout_width="300dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
-                fancy:fb_borderColor="@color/colorPrimary"
+                fancy:fb_borderColor="@color/sari"
                 fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/colorPrimary"
-                fancy:fb_focusColor="@color/colorPrimary"
+                fancy:fb_defaultColor="@color/sari"
+                fancy:fb_focusColor="@color/sari"
                 fancy:fb_radius="6dp"
                 fancy:fb_text="Hesabı Sil"
                 fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>

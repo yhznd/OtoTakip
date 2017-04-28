@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class Hesabim extends AppCompatActivity {
     public CircleImageView userImage;
     public String facebookUserId = "";
     public String photoURL;
+    private String sifre = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class Hesabim extends AppCompatActivity {
         kullaniciMail= (TextView) findViewById(R.id.kullaniciHesapMail);
         kullaniciMail.setText(firebaseAuth.getCurrentUser().getEmail()); //mail alıyoruz
         userImage= (CircleImageView) findViewById(R.id.kullaniciHesapResmi); //fotoğrafını alıyoruz
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         for(UserInfo profile : user.getProviderData())
         {
             // check if the provider id matches "facebook.com"
@@ -73,64 +75,65 @@ public class Hesabim extends AppCompatActivity {
         });
 
 
-        hesapSil.setOnClickListener(new View.OnClickListener()
-        {
+
+        hesapSil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                new MaterialStyledDialog.Builder(Hesabim.this)
-                        .setTitle("Sizi özleyeceğiz!")
-                        .setDescription("Hesabınız kalıcı olarak silinecek. Devam etmek istiyor musunuz?")
-                        .setPositiveText("EVET, SİL")
-                        .setNegativeText("HAYIR")
-                        .setCancelable(false)
-                        .setHeaderDrawable(R.drawable.banner)
-                        .onPositive(new MaterialDialog.SingleButtonCallback()
-                        {
 
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which)
+                    final MaterialDialog sifreIste =new  MaterialDialog.Builder(Hesabim.this)
+                    .title("Sizi özleyeceğiz!")
+                    .content("Hesabını silmek için şifreni tekrar doğrulamalısın:")
+                    .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                    .input("Şifreni gir",sifre, new MaterialDialog.InputCallback() {
+
+                        @Override
+                        public void onInput(MaterialDialog dialog, CharSequence input) {
+                            final StringBuilder sb = new StringBuilder(input.length());
+                            sb.append(input); //stringi sb.toString ile alıyorum
+                            if (sb.toString()!= null && !sb.toString().isEmpty())
                             {
-                                final FirebaseUser current_user=firebaseAuth.getCurrentUser();
-                                //
-                                current_user.delete().addOnCompleteListener(new OnCompleteListener<Void>()
-                                        {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful())
-                                                {
-                                                    Log.d("Hesabim", "Kullanıcı hesabı silindi.");
-                                                    Toast.makeText(Hesabim.this,"Hesabınız silindi!",Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(Hesabim.this, Giris.class));
-                                                    finish();
+                                final FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                                AuthCredential credential = EmailAuthProvider.getCredential(current_user.getEmail(), sb.toString());
+                                current_user.reauthenticate(credential)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Log.d("FirebaseUser", "Kullanici yeniden girdi");
+                                            current_user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d("Hesabim", "Kullanıcı hesabı silindi.");
+                                                        Toast.makeText(Hesabim.this, "Hesabınız silindi!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(Hesabim.this, Giris.class));
+                                                        finish();
+                                                    } else {
+                                                        Log.d("Hesabim", "Kullanıcı hesabı silinemedi.");
+                                                        Toast.makeText(Hesabim.this, "Yanlış şifre girdiniz." +
+                                                                "Hesap silme işlemi gerçekleştirilemedi.", Toast.LENGTH_SHORT).show();
+                                                    }
                                                 }
-
-                                                else
-                                                {
-                                                    Log.d("Hesabim", "Kullanıcı hesabı silinemedi.");
-                                                    Toast.makeText(Hesabim.this,"Hesap silme işlemi başarısız oldu." +
-                                                            "Lütfen daha sonra tekrar deneyin!",Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                            });
+                                        }
+                                    });
                             }
-                        })
-
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which)
+                            else
                             {
-                                // TODO
-                                dialog.dismiss();
+                                Toast.makeText(Hesabim.this, "Şifre alanı boş olamaz.", Toast.LENGTH_LONG).show();
+
 
                             }
-                        })
-                        .show();
-
+                    }
+                    }).show();
 
             }
         });
+
         }
+
+
+
 
 
 

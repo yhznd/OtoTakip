@@ -8,25 +8,25 @@
     tools:context="com.example.yunus.ototakip.AracListele">
 
     <android.support.design.widget.AppBarLayout
-    android:layout_width="0dp"
-    android:layout_height="49dp"
-    android:theme="@style/AppTheme.AppBarOverlay"
-    android:id="@+id/appBarAracGoruntuleLayout">
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarAracGoruntuleLayout">
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_aracgoruntule"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/back_24dp"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/beyaz"
-            app:subtitleTextColor="@color/beyaz"
-            android:layout_alignBottom="@+id/appBarAracGoruntuleLayout"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+        android:id="@+id/toolbar_aracgoruntule"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/back_24dp"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/beyaz"
+        app:subtitleTextColor="@color/beyaz"
+        android:layout_alignBottom="@+id/appBarAracGoruntuleLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:id="@+id/textView3"
