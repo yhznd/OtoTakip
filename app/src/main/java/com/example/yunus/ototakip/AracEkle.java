@@ -9,12 +9,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -49,6 +52,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     Araba araba;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
+
     DatabaseReference reference;
     FloatingActionButton buttonAracKaydet;
     private DatePickerDialog kaskoTarihiDialog;
@@ -195,6 +199,24 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+
+    private void Sil() {
+
+
+        String aracPlakasi=editTextPlaka.getText().toString();
+        database.getReference("Arabalar").child(userId).child(aracPlakasi).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("AracEkle", dataSnapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
 }
