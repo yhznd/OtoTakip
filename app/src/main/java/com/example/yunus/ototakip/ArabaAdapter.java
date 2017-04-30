@@ -3,6 +3,7 @@ package com.example.yunus.ototakip;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -105,16 +107,28 @@ public class ArabaAdapter extends ArrayAdapter<String> implements ValueEventList
     }
 
     @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
+    public void onDataChange(DataSnapshot dataSnapshot)
+    {
+
         Araba araba = dataSnapshot.getValue(Araba.class);
         String plaka = dataSnapshot.getKey();
-        araba.setEditTextPlaka(plaka);
-        arabalar.put(plaka, araba);
-        if(!arabaPlakalari.contains(plaka))
+        try
         {
-            arabaPlakalari.add(plaka);
-        }
 
+            if(plaka!=null)
+            {
+                araba.setEditTextPlaka(plaka);
+                arabalar.put(plaka, araba);
+                if(!arabaPlakalari.contains(plaka))
+                {
+                    arabaPlakalari.add(plaka);
+                }
+            }
+        }
+        catch (NullPointerException e)
+        {
+          Log.d("Hata","Hata döndü"+e.toString());
+        }
         notifyDataSetChanged();
     }
 
@@ -127,7 +141,8 @@ public class ArabaAdapter extends ArrayAdapter<String> implements ValueEventList
 
         public TextView plakaTextView;
 
-        public ViewHolder(View parentView){
+        public ViewHolder(View parentView)
+        {
             plakaTextView = (TextView) parentView.findViewById(R.id.plakaTextView);
 
         }

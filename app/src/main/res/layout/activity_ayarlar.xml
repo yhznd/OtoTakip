@@ -83,4 +83,25 @@
         android:layout_below="@+id/appBarAyarlar"
          />
 
+    <TextView
+        android:id="@+id/textViewSaatAyari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Şu saatte hatırlat:"
+        android:textSize="16sp"
+        android:layout_below="@+id/spinnerTarihAraliklari"
+        android:layout_alignStart="@+id/textViewBildirimTrh" />
+
+    <EditText
+        android:id="@+id/saatSecimi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/toggleButton"
+        android:ems="10"
+        android:onClick="selectTimeToDisplay"
+        android:textAlignment="viewStart"
+        android:layout_alignBottom="@+id/textViewSaatAyari"
+        android:layout_alignEnd="@+id/toggleButton" />
+
 </RelativeLayout>

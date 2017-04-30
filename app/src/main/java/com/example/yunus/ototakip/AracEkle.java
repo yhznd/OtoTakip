@@ -37,18 +37,11 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     private EditText editTextMuayeneTarihi;
     private EditText editTextSigortaTarihi;
     private EditText editTextEmisyonTarihi;
-
     Calendar myCalendar = Calendar.getInstance();
     String myFormat = "dd/MM/yyyy"; //In which you need put here
     SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
     String userId;
     String userMail;
-    String aracPlakasi;
-    String aracModeli;
-    String aracKaskoTarhi;
-    String aracTrafikTrhi;
-    String aracMuayeneTrhi;
-    String aracSigortaTrhi;
     Araba araba;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
@@ -82,18 +75,18 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
         editTextPlaka=(EditText)findViewById(R.id.editTextPlaka);
         editTextModel=(MaterialSpinner) findViewById(R.id.editTextModel);
-        editTextModel.setItems("Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
+        editTextModel.setItems("Araç modelinizi seçiniz:","Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
         editTextKaskoTarihi=(EditText)findViewById(R.id.editTextKaskoTarihi);
-        editTextKaskoTarihi.setInputType(InputType.TYPE_NULL);
+        editTextKaskoTarihi.setInputType(0);
         editTextKaskoTarihi.setOnClickListener((View.OnClickListener) this);
         editTextMuayeneTarihi=(EditText)findViewById(R.id.editTextMuayeneTarihi);
-        editTextMuayeneTarihi.setInputType(InputType.TYPE_NULL);
+        editTextMuayeneTarihi.setInputType(0);
         editTextMuayeneTarihi.setOnClickListener((View.OnClickListener) this);
         editTextSigortaTarihi=(EditText)findViewById(R.id.editTextSigortaTarihi);
-        editTextSigortaTarihi.setInputType(InputType.TYPE_NULL);
+        editTextSigortaTarihi.setInputType(0);
         editTextSigortaTarihi.setOnClickListener((View.OnClickListener) this);
         editTextEmisyonTarihi=(EditText)findViewById(R.id.editTextEmisyonTarihi);
-        editTextEmisyonTarihi.setInputType(InputType.TYPE_NULL);
+        editTextEmisyonTarihi.setInputType(0);
         editTextEmisyonTarihi.setOnClickListener((View.OnClickListener) this);
         buttonAracKaydet=(FloatingActionButton) findViewById(R.id.buttonAracKaydet);
 
@@ -200,23 +193,6 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-    private void Sil() {
-
-
-        String aracPlakasi=editTextPlaka.getText().toString();
-        database.getReference("Arabalar").child(userId).child(aracPlakasi).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("AracEkle", dataSnapshot.toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
 
 }

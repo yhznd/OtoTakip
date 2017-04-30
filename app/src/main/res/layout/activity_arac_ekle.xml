@@ -11,22 +11,7 @@
     tools:layout_editor_absoluteY="25dp"
     tools:layout_editor_absoluteX="0dp">
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/buttonAracKaydet"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_alignTop="@+id/buttonGuncelle"
-        android:layout_marginStart="33dp"
-        android:layout_toEndOf="@+id/buttonGuncelle"
-        fancy:fb_borderColor="@color/sari"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="@color/sari"
-        fancy:fb_focusColor="@color/sari"
-        fancy:fb_radius="10dp"
-        fancy:fb_text="KAYDET"
-        fancy:fb_textColor="@color/beyaz"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="641dp" />
+
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="0dp"
@@ -70,6 +55,7 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Plaka"
+        android:maxLength="7"
         android:inputType="text"
         tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="205dp"
@@ -176,20 +162,12 @@
         android:id="@+id/buttonAracKaydet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTextMuayeneTarihi"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="18dp"
         android:clickable="true"
         app:backgroundTint="@color/colorPrimaryDark"
-        fancy:fabSize="mini"
-        fancy:srcCompat="@drawable/ic_done_black_24dp" />
-
-    <Button
-        android:id="@+id/btnSetEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/myCoordinatorLayout"
-        android:layout_toStartOf="@+id/buttonAracKaydet"
-        android:text="Button" />
+        fancy:fabSize="normal"
+        fancy:srcCompat="@drawable/ic_done_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

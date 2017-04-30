@@ -146,7 +146,9 @@
         <service android:name=".Services.ReminderService" android:exported="false"/>
 
 
-        <activity android:name=".AracListele"></activity>
+        <activity android:name=".AracListele"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
