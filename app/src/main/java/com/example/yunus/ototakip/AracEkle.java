@@ -66,6 +66,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_arac_ekle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aracekle);
 
+
         firebaseAuth=FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
@@ -284,6 +285,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     }
 
 
+<<<<<<< Updated upstream
     private void Sil() {
 
 
@@ -304,3 +306,6 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
 
 }
+=======
+}
+>>>>>>> Stashed changes
