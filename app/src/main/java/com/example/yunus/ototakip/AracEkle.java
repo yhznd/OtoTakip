@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,30 +33,22 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
 
     private EditText editTextPlaka;
-    private EditText editTextModel;
+    private MaterialSpinner editTextModel;
     private EditText editTextKaskoTarihi;
     private EditText editTextMuayeneTarihi;
     private EditText editTextSigortaTarihi;
     private EditText editTextEmisyonTarihi;
-
     Calendar myCalendar = Calendar.getInstance();
     String myFormat = "dd/MM/yyyy"; //In which you need put here
     SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
     String userId;
     String userMail;
-    String aracPlakasi;
-    String aracModeli;
-    String aracKaskoTarhi;
-    String aracTrafikTrhi;
-    String aracMuayeneTrhi;
-    String aracSigortaTrhi;
     Araba araba;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
 
     DatabaseReference reference;
-    FancyButton guncelle,sil,buttonAracKaydet;
-    Button btnSetEvent;
+    FloatingActionButton buttonAracKaydet;
     private DatePickerDialog kaskoTarihiDialog;
     private DatePickerDialog sigortaTarihiDialog;
     private DatePickerDialog muayeneTarihiDialog;
@@ -81,116 +75,31 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         });
 
         editTextPlaka=(EditText)findViewById(R.id.editTextPlaka);
-        editTextModel=(EditText)findViewById(R.id.editTextModel);
+        editTextModel=(MaterialSpinner) findViewById(R.id.editTextModel);
+        editTextModel.setItems("Araç modelinizi seçiniz:","Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
         editTextKaskoTarihi=(EditText)findViewById(R.id.editTextKaskoTarihi);
-        editTextKaskoTarihi.setInputType(InputType.TYPE_NULL);
+        editTextKaskoTarihi.setInputType(0);
         editTextKaskoTarihi.setOnClickListener((View.OnClickListener) this);
         editTextMuayeneTarihi=(EditText)findViewById(R.id.editTextMuayeneTarihi);
-        editTextMuayeneTarihi.setInputType(InputType.TYPE_NULL);
+        editTextMuayeneTarihi.setInputType(0);
         editTextMuayeneTarihi.setOnClickListener((View.OnClickListener) this);
         editTextSigortaTarihi=(EditText)findViewById(R.id.editTextSigortaTarihi);
-        editTextSigortaTarihi.setInputType(InputType.TYPE_NULL);
+        editTextSigortaTarihi.setInputType(0);
         editTextSigortaTarihi.setOnClickListener((View.OnClickListener) this);
         editTextEmisyonTarihi=(EditText)findViewById(R.id.editTextEmisyonTarihi);
-        editTextEmisyonTarihi.setInputType(InputType.TYPE_NULL);
+        editTextEmisyonTarihi.setInputType(0);
         editTextEmisyonTarihi.setOnClickListener((View.OnClickListener) this);
-        buttonAracKaydet=(FancyButton) findViewById(R.id.buttonAracKaydet);
+        buttonAracKaydet=(FloatingActionButton) findViewById(R.id.buttonAracKaydet);
 
 
 
         buttonAracKaydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Kaydet();
-            }
-        });
-
-   /*     btnSetEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Date d1 = new Date(1472570400);//Tue, 30 Aug 2016 15:20:00 GMT
-                Calendar cal1 = Calendar.getInstance();
-                cal1.setTime(d1);
-
-                Date d2 = new Date(1472574000);//Tue, 30 Aug 2016 16:20:00 GMT
-                Calendar cal2 = Calendar.getInstance();
-                cal2.setTime(d2);
-
-
-                Uri EVENTS_URI = Uri.parse("content://com.android.calendar/events");
-                ContentResolver cr = getContentResolver();
-
-                // event insert
-                ContentValues values = new ContentValues();
-                values.put("calendar_id", 1);
-                values.put("title", "Reminder Title");
-                values.put("allDay", 0);
-                values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-
-                values.put("dtstart", cal1.getTimeInMillis() ); // event starts at Tue, 30 Aug 2016 15:20:00
-                values.put("dtend", cal2.getTimeInMillis()); // ends at Tue, 30 Aug 2016 16:20:00 GMT
-
-                System.out.println("ALARM TIMES START : " + cal1.getTimeInMillis());
-                System.out.println("ALARM TIMES END : "+cal2.getTimeInMillis());
-
-                values.put("description", "Reminder description");
-                values.put("hasAlarm", 1);
-                Uri event = cr.insert(EVENTS_URI, values);
-
-                // reminder insert
-                Uri REMINDERS_URI = Uri.parse("content://com.android.calendar/reminders");
-                values = new ContentValues();
-                values.put( "event_id", Long.parseLong(event.getLastPathSegment()));
-
-                values.put( "method", 1);
-                values.put( "minutes", 1); //Notify before the exact time
-                cr.insert( REMINDERS_URI, values );
-            }
-        });
-
-*/
-
-
-        guncelle= (FancyButton) findViewById(R.id.buttonGuncelle);
-        sil= (FancyButton) findViewById(R.id.buttonSil);
-
-
-
-        guncelle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                aracKaydet();
                 CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
-                Snackbar.make(rootLayout, "Araç güncellendi!", Snackbar.LENGTH_LONG)
-                        .setAction("TAMAM", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                //guncelleye basıldığında olacak olan olay
-                            }
-                        } )
-                        .show();
-            }
-        });
-
-        sil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Sil();
-                /*CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
-                Snackbar.make(rootLayout, "Araç silindi!", Snackbar.LENGTH_LONG)
-                        .setAction("TAMAM", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                //boş bırakıldığında dismiss oluyor
-                                //sil basıldığında olacak olan olay
-
-                                Sil();
-
-                            }
-                        } )
-                        .show();
-                        */
+                Snackbar.make(rootLayout, "Araç eklendi!", Snackbar.LENGTH_LONG).show();
+                startActivity(new Intent(AracEkle.this,MainActivity.class));
             }
         });
 
@@ -267,10 +176,11 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
 
 
 
-    private void Kaydet(){
+    private void aracKaydet(){
 
-        String aracPlakasi=editTextPlaka.getText().toString().toUpperCase();
-        String aracModeli=editTextModel.getText().toString();
+        String aracPlakasi=editTextPlaka.getText().toString();
+        int indis=editTextModel.getSelectedIndex();
+        String aracModeli=editTextModel.getItems().get(indis).toString();
         String aracKaskoTrhi=editTextKaskoTarihi.getText().toString();
         String aracTrafikTrhi=editTextMuayeneTarihi.getText().toString();
         String aracMuayeneTrhi=editTextSigortaTarihi.getText().toString();
@@ -280,27 +190,11 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         araba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
         reference=database.getReference("Arabalar").child(userId).child(aracPlakasi);
         reference.setValue(araba);
+        Toast.makeText(AracEkle.this,"Araç başarıyla eklendi!",Toast.LENGTH_LONG).show();
 
     }
 
 
-    private void Sil() {
-
-
-        String aracPlakasi=editTextPlaka.getText().toString();
-        database.getReference("Arabalar").child(userId).child(aracPlakasi).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("AracEkle", dataSnapshot.toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
 
 }

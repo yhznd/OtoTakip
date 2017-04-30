@@ -4,21 +4,16 @@ package com.example.yunus.ototakip;
  * Created by Yunus on 15.02.2017.
  */
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,10 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
-public class CustomPageAdapter extends PagerAdapter implements ValueEventListener {
+public class YaklasanlarAdapter extends PagerAdapter implements ValueEventListener {
 
     private Context context;
     private HashMap<String, Araba> arabalar;
@@ -45,10 +38,10 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
     private long gunFarki;
 
 
-    public CustomPageAdapter(@NonNull Context context,
-                        @NonNull List<String> arabaPlakalar,
-                        final DatabaseReference databaseReference,
-                        final String userId) {
+    public YaklasanlarAdapter(@NonNull Context context,
+                              @NonNull List<String> arabaPlakalar,
+                              final DatabaseReference databaseReference,
+                              final String userId) {
 
         super();
         this.context = context;
@@ -65,7 +58,7 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
                         if(arabalar.get(plaka) == null){
                             databaseReference.child("Arabalar")
                                     .child(userId)
-                                    .child(plaka).addValueEventListener(CustomPageAdapter.this);
+                                    .child(plaka).addValueEventListener(YaklasanlarAdapter.this);
                         }
 
                         notifyDataSetChanged();
@@ -85,7 +78,7 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
                             databaseReference.child("Arabalar")
                                     .child(userId)
                                     .child(plaka)
-                                    .removeEventListener(CustomPageAdapter.this);
+                                    .removeEventListener(YaklasanlarAdapter.this);
                         }
 
                         notifyDataSetChanged();
