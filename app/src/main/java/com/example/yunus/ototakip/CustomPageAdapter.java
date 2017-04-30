@@ -25,9 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-<<<<<<< HEAD
-public class  CustomPageAdapter extends PagerAdapter {
-=======
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,11 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-<<<<<<< HEAD
->>>>>>> yunus
-=======
->>>>>>> master
->>>>>>> master
 
 public class CustomPageAdapter extends PagerAdapter implements ValueEventListener {
 
@@ -54,9 +46,9 @@ public class CustomPageAdapter extends PagerAdapter implements ValueEventListene
 
 
     public CustomPageAdapter(@NonNull Context context,
-                        @NonNull List<String> arabaPlakalar,
-                        final DatabaseReference databaseReference,
-                        final String userId) {
+                             @NonNull List<String> arabaPlakalar,
+                             final DatabaseReference databaseReference,
+                             final String userId) {
 
         super();
         this.context = context;
