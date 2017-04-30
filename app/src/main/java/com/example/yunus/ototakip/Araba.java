@@ -1,8 +1,5 @@
 package com.example.yunus.ototakip;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Eren Özhan on 9.4.2017.
  */
@@ -17,11 +14,14 @@ public class Araba {
     private String editTextSigortaTarihi;
     private String editTextEmisyonTarihi;
 
+    //public Araba(){}
 
-    public Araba(String userMail,String editTextModel,String editTextKaskoTarihi, String editTextMuayeneTarihi, String editTextSigortaTarihi,String editTextEmisyonTarihi )
-    {
 
-        this.userMail = userMail;
+
+    public Araba(String userMail,String editTextModel,String editTextKaskoTarihi, String editTextMuayeneTarihi, String editTextSigortaTarihi,String editTextEmisyonTarihi ) {
+        this.userId=userId;
+        this.userMail=userMail;
+        this.editTextPlaka = editTextPlaka;
         this.editTextModel = editTextModel;
         this.editTextKaskoTarihi = editTextKaskoTarihi;
         this.editTextMuayeneTarihi = editTextMuayeneTarihi;
@@ -97,6 +97,5 @@ public class Araba {
     public void setUserMail(String userMail) {
         this.userMail = userMail;
     }
-
 
 }
