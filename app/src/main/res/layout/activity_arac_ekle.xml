@@ -67,15 +67,15 @@
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/editTextModel"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="56dp"
-        android:hint="Araç markanınızı seçin"
-        tools:layout_editor_absoluteY="268dp"
-        android:layout_below="@+id/editTextPlaka"
+        android:layout_height="45dp"
+        android:layout_alignEnd="@+id/editTextPlaka"
         android:layout_alignStart="@+id/editTextPlaka"
+        android:layout_below="@+id/editTextPlaka"
+        android:layout_marginTop="20dp"
+        android:hint="Araç markanınızı seçin"
         android:textSize="14sp"
-        android:layout_alignEnd="@+id/editTextPlaka" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="268dp" />
 
 
     <TextView
@@ -162,12 +162,12 @@
         android:id="@+id/buttonAracKaydet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
         android:clickable="true"
         app:backgroundTint="@color/colorPrimaryDark"
         fancy:fabSize="normal"
-        fancy:srcCompat="@drawable/ic_done_black_24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        fancy:srcCompat="@drawable/ic_done_black_24dp" />
 
 </RelativeLayout>
