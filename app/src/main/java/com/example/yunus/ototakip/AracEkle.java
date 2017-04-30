@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -189,6 +190,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         araba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
         reference=database.getReference("Arabalar").child(userId).child(aracPlakasi);
         reference.setValue(araba);
+        Toast.makeText(AracEkle.this,"Araç başarıyla eklendi!",Toast.LENGTH_LONG).show();
 
     }
 
