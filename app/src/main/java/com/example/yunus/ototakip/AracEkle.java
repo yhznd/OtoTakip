@@ -29,7 +29,7 @@ import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class AracEkle extends AppCompatActivity implements View.OnClickListener{
+public class AracEkle extends AppCompatActivity implements View.OnClickListener {
 
 
     private EditText editTextPlaka;
@@ -39,7 +39,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
     private EditText editTextSigortaTarihi;
     private EditText editTextEmisyonTarihi;
     Calendar myCalendar = Calendar.getInstance();
-    String myFormat = "dd/MM/yyyy"; //In which you need put here
+    String myFormat = "dd/MM/yyyy";
     SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
     String userId;
     String userMail;
@@ -60,12 +60,13 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_arac_ekle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_aracekle);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+
+        firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
 
-        userId=firebaseAuth.getCurrentUser().getUid();
-        userMail=firebaseAuth.getCurrentUser().getEmail();
+        userId = firebaseAuth.getCurrentUser().getUid();
+        userMail = firebaseAuth.getCurrentUser().getEmail();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,23 +75,22 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        editTextPlaka=(EditText)findViewById(R.id.editTextPlaka);
-        editTextModel=(MaterialSpinner) findViewById(R.id.editTextModel);
-        editTextModel.setItems("Araç modelinizi seçiniz:","Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
-        editTextKaskoTarihi=(EditText)findViewById(R.id.editTextKaskoTarihi);
+        editTextPlaka = (EditText) findViewById(R.id.editTextPlaka);
+        editTextModel = (MaterialSpinner) findViewById(R.id.editTextModel);
+        editTextModel.setItems("Araç modelinizi seçiniz:", "Mercedes", "BMW", "Audi", "Toyota", "Opel", "Renault", "Volkswagen", "Range Rover");
+        editTextKaskoTarihi = (EditText) findViewById(R.id.editTextKaskoTarihi);
         editTextKaskoTarihi.setInputType(0);
         editTextKaskoTarihi.setOnClickListener((View.OnClickListener) this);
-        editTextMuayeneTarihi=(EditText)findViewById(R.id.editTextMuayeneTarihi);
+        editTextMuayeneTarihi = (EditText) findViewById(R.id.editTextMuayeneTarihi);
         editTextMuayeneTarihi.setInputType(0);
         editTextMuayeneTarihi.setOnClickListener((View.OnClickListener) this);
-        editTextSigortaTarihi=(EditText)findViewById(R.id.editTextSigortaTarihi);
+        editTextSigortaTarihi = (EditText) findViewById(R.id.editTextSigortaTarihi);
         editTextSigortaTarihi.setInputType(0);
         editTextSigortaTarihi.setOnClickListener((View.OnClickListener) this);
-        editTextEmisyonTarihi=(EditText)findViewById(R.id.editTextEmisyonTarihi);
+        editTextEmisyonTarihi = (EditText) findViewById(R.id.editTextEmisyonTarihi);
         editTextEmisyonTarihi.setInputType(0);
         editTextEmisyonTarihi.setOnClickListener((View.OnClickListener) this);
-        buttonAracKaydet=(FloatingActionButton) findViewById(R.id.buttonAracKaydet);
-
+        buttonAracKaydet = (FloatingActionButton) findViewById(R.id.buttonAracKaydet);
 
 
         buttonAracKaydet.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +99,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                 aracKaydet();
                 CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
                 Snackbar.make(rootLayout, "Araç eklendi!", Snackbar.LENGTH_LONG).show();
-                startActivity(new Intent(AracEkle.this,MainActivity.class));
+                startActivity(new Intent(AracEkle.this, MainActivity.class));
             }
         });
 
@@ -112,7 +112,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                 editTextKaskoTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         sigortaTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -122,7 +122,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                 editTextSigortaTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         muayeneTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -132,7 +132,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                 editTextMuayeneTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
 
         emisyonTarihiDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -143,57 +143,42 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener{
                 editTextEmisyonTarihi.setText(dateFormat.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
 
     }
 
     @Override
-    public void onClick(View view)
-    {
-        if(view == editTextKaskoTarihi)
-        {
+    public void onClick(View view) {
+        if (view == editTextKaskoTarihi) {
             kaskoTarihiDialog.show();
-        }
-        else if(view == editTextEmisyonTarihi)
-        {
+        } else if (view == editTextEmisyonTarihi) {
             emisyonTarihiDialog.show();
-        }
-
-        else if(view == editTextMuayeneTarihi)
-        {
+        } else if (view == editTextMuayeneTarihi) {
             muayeneTarihiDialog.show();
-        }
-
-        else if(view == editTextSigortaTarihi)
-        {
+        } else if (view == editTextSigortaTarihi) {
             sigortaTarihiDialog.show();
         }
     }
 
 
+    private void aracKaydet() {
+
+        String aracPlakasi = editTextPlaka.getText().toString();
+        int indis = editTextModel.getSelectedIndex();
+        String aracModeli = editTextModel.getItems().get(indis).toString();
+        String aracKaskoTrhi = editTextKaskoTarihi.getText().toString();
+        String aracTrafikTrhi = editTextMuayeneTarihi.getText().toString();
+        String aracMuayeneTrhi = editTextSigortaTarihi.getText().toString();
+        String aracSigortaTrhi = editTextEmisyonTarihi.getText().toString();
 
 
-
-    private void aracKaydet(){
-
-        String aracPlakasi=editTextPlaka.getText().toString();
-        int indis=editTextModel.getSelectedIndex();
-        String aracModeli=editTextModel.getItems().get(indis).toString();
-        String aracKaskoTrhi=editTextKaskoTarihi.getText().toString();
-        String aracTrafikTrhi=editTextMuayeneTarihi.getText().toString();
-        String aracMuayeneTrhi=editTextSigortaTarihi.getText().toString();
-        String aracSigortaTrhi=editTextEmisyonTarihi.getText().toString();
-
-
-        araba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
-        reference=database.getReference("Arabalar").child(userId).child(aracPlakasi);
+        araba = new Araba(userMail, aracModeli, aracKaskoTrhi, aracTrafikTrhi, aracMuayeneTrhi, aracSigortaTrhi);
+        reference = database.getReference("Arabalar").child(userId).child(aracPlakasi);
         reference.setValue(araba);
-        Toast.makeText(AracEkle.this,"Araç başarıyla eklendi!",Toast.LENGTH_LONG).show();
+        Toast.makeText(AracEkle.this, "Araç başarıyla eklendi!", Toast.LENGTH_LONG).show();
 
     }
-
 
 
 
