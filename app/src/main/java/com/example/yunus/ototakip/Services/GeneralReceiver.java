@@ -32,10 +32,11 @@ public class GeneralReceiver extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         SharedPreferences settings = context.getSharedPreferences("SaatTercih", Context.MODE_PRIVATE);
-        gelenSaat = settings.getInt("saat", 10); //default olarak 10:00'a
-        gelenDakika=settings.getInt("dakika",00);
+        gelenSaat = settings.getInt("saat", 15); //default olarak 10:00'a
+        gelenDakika=settings.getInt("dakika",0);
         calendar.set(Calendar.HOUR_OF_DAY, gelenSaat);
         calendar.set(Calendar.MINUTE, gelenDakika);
+        calendar.set(Calendar.SECOND,0);
         Log.d("Gelen",String.valueOf(gelenSaat));
         Log.d("Gelen",String.valueOf(gelenDakika));
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
