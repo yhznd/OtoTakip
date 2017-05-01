@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.yunus.ototakip.AyarlarActivity;
 
@@ -18,7 +19,8 @@ import java.util.Calendar;
 public class GeneralReceiver extends BroadcastReceiver {
 
 
-    public int saat,dakika;
+    public int gelenSaat,gelenDakika;
+
     @Override
     public void onReceive(Context context, Intent ıntent) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -30,10 +32,12 @@ public class GeneralReceiver extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         SharedPreferences settings = context.getSharedPreferences("SaatTercih", Context.MODE_PRIVATE);
-        saat = settings.getInt("saat", 10); //default olarak 10:00'a
-        dakika=settings.getInt("dakika",00);
-        calendar.set(Calendar.HOUR_OF_DAY, saat);
-        calendar.set(Calendar.MINUTE, dakika);
+        gelenSaat = settings.getInt("saat", 10); //default olarak 10:00'a
+        gelenDakika=settings.getInt("dakika",00);
+        calendar.set(Calendar.HOUR_OF_DAY, gelenSaat);
+        calendar.set(Calendar.MINUTE, gelenDakika);
+        Log.d("Gelen",String.valueOf(gelenSaat));
+        Log.d("Gelen",String.valueOf(gelenDakika));
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
 

@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.yunus.ototakip.Araba;
+import com.example.yunus.ototakip.AyarlarActivity;
 import com.example.yunus.ototakip.MainActivity;
 import com.example.yunus.ototakip.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +57,9 @@ public class ReminderService extends IntentService{
     @Override
     protected void onHandleIntent(@Nullable Intent ıntent) {
 
-        if(arabalarRef != null){
+        if(arabalarRef != null)
+        {
+
             arabalarRef.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -72,7 +75,7 @@ public class ReminderService extends IntentService{
                     }
                     if(nowDate.compareTo(araba.getEditTextEmisyonTarihi()) == 0)
                     {
-                        bildirimler.add(araba.getEditTextPlaka() + "plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi bugün!");
+                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi bugün!");
                     }
                     if(nowDate.compareTo(araba.getEditTextMuayeneTarihi()) == 0)
                     {
@@ -80,7 +83,7 @@ public class ReminderService extends IntentService{
                     }
                     if(nowDate.compareTo(araba.getEditTextSigortaTarihi()) == 0)
                     {
-                        bildirimler.add(araba.getEditTextSigortaTarihi() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki sigorta zamanı bugün sona eriyor!");
+                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı bugün sona eriyor!");
                     }
 
                     bildirimGuncelle();
@@ -126,7 +129,7 @@ public class ReminderService extends IntentService{
         NotificationCompat.InboxStyle inboxStyle =
                 new NotificationCompat.InboxStyle();
 
-        inboxStyle.setBigContentTitle("Olay detayları:");
+        inboxStyle.setBigContentTitle("Tarih detayları:");
         for (String bildirim : bildirimler)
         {
             inboxStyle.addLine(bildirim);
