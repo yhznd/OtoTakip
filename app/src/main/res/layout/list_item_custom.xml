@@ -15,33 +15,43 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/linearLayout"
         android:layout_alignParentBottom="true">
+
+        <!-- Add as a direct child of your ViewPager -->
+        <com.itsronald.widget.ViewPagerIndicator
+            android:id="@+id/view_pager_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:dotRadius="5dp"
+            app:selectedDotColor="@color/beyaz"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center_vertical" />
     </android.support.v4.view.ViewPager>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
+        android:layout_height="480dp"
+        android:orientation="vertical"
         android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/divide2"
             android:layout_weight="0.14"
+            android:background="@color/divide1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/plakaTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Plaka"
                 android:textColor="@color/beyaz"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true" />
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -56,20 +66,32 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/divide1">
+                android:background="@color/muayene_arka">
 
                 <TextView
                     android:id="@+id/muayeneTarihiTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/muayeneFark"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="23dp"
                     android:gravity="center"
                     android:text="Muayene Tarihi"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="23dp"
-                    android:layout_above="@+id/muayeneFark"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/muayeneTarihiTextView"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:text="Muayene tarihine"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -87,33 +109,45 @@
                     android:id="@+id/muayeneFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView"
+                    android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/beyaz"
                     android:textSize="36sp"
-                    android:textStyle="bold"
-                    android:layout_above="@+id/textView"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/divide1">
+                android:background="@color/bakim_arka">
 
                 <TextView
                     android:id="@+id/sigortaTarihiTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/sigortaFark"
+                    android:layout_alignParentStart="true"
                     android:layout_marginBottom="22dp"
                     android:gravity="center"
                     android:text="Sigorta Tarihi"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:layout_above="@+id/sigortaFark"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/sigortaTarihiTextView"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:text="Sigortasının bitmesine"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -131,13 +165,13 @@
                     android:id="@+id/sigortaFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView8"
+                    android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/beyaz"
                     android:textSize="36sp"
-                    android:textStyle="bold"
-                    android:layout_above="@+id/textView8"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -152,90 +186,120 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/divide1">
+                android:background="@color/kasko_arka">
 
                 <TextView
                     android:id="@+id/kaskoTarihiTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/kaskoFark"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="25dp"
                     android:gravity="center"
                     android:text="Kasko Tarihi"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="25dp"
-                    android:layout_above="@+id/kaskoFark"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/kaskoTarihiTextView"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:text="Kaskosunun bitmesine"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="75dp"
+                    android:layout_marginBottom="51dp"
                     android:gravity="center"
                     android:text="GÜN KALDI"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:id="@+id/kaskoFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView10"
+                    android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/beyaz"
                     android:textSize="36sp"
-                    android:textStyle="bold"
-                    android:layout_above="@+id/textView10"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/divide1">
+                android:background="@color/emisyon_arka">
 
                 <TextView
                     android:id="@+id/emisyonTarihiTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/emisyonFark"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="25dp"
                     android:gravity="center"
                     android:text="Emisyon Tarihi"
-                    android:textColor="@color/beyaz"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="25dp"
-                    android:layout_above="@+id/emisyonFark"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="75dp"
-                    android:gravity="center"
-                    android:text="GÜN KALDI"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/emisyonTarihiTextView"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:text="Emisyon değişimine"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="51dp"
+                    android:gravity="center"
+                    android:text="GÜN KALDI"
+                    android:textColor="@color/beyaz"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
                     android:id="@+id/emisyonFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView13"
+                    android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/beyaz"
                     android:textSize="36sp"
-                    android:textStyle="bold"
-                    android:layout_above="@+id/textView13"
-                    android:layout_alignParentStart="true" />
+                    android:textStyle="bold" />
+
+
             </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>
+
+
 </RelativeLayout>

@@ -23,4 +23,9 @@
     <color name="divide1">#607D8B</color>
     <color name="divide2">#78909C</color>
     <color name="divide3">#90A4AE</color>
+    <color name="muayene_arka">#444C5C</color>
+    <color name="bakim_arka">#B96B6B</color>
+    <color name="emisyon_arka">#78A5A3</color>
+    <color name="kasko_arka">#F9CA64</color>
+    <color name="bosarka">#F7F7F7</color>
 </resources>
