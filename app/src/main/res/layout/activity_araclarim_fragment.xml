@@ -14,21 +14,31 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/iconaracekle"
-        app:backgroundTint="@color/sari"
-        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp">
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/iconaracekle"
+        app:backgroundTint="@color/sari">
     </android.support.design.widget.FloatingActionButton>
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="75dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="75dp"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/emptyData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/araba_emptyview"
+        android:layout_alignBottom="@+id/fab"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="30dp" />
 
 
 </RelativeLayout>

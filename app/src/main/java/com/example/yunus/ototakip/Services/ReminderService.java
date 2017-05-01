@@ -6,10 +6,12 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.yunus.ototakip.Araba;
+import com.example.yunus.ototakip.AyarlarActivity;
 import com.example.yunus.ototakip.MainActivity;
 import com.example.yunus.ototakip.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,9 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,7 +57,9 @@ public class ReminderService extends IntentService{
     @Override
     protected void onHandleIntent(@Nullable Intent ıntent) {
 
-        if(arabalarRef != null){
+        if(arabalarRef != null)
+        {
+
             arabalarRef.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -63,15 +69,21 @@ public class ReminderService extends IntentService{
                     Calendar calendar = Calendar.getInstance();
                     String nowDate = simpleDateFormat.format(calendar.getTime());
 
-
-                    if(nowDate.compareTo(araba.getEditTextKaskoTarihi()) == 0){
-                        bildirimler.add(araba.getEditTextPlaka() + " aracın " + araba.getEditTextKaskoTarihi() + " tarihindeki kasko tarihiniz geldi");
+                    if(nowDate.compareTo(araba.getEditTextKaskoTarihi()) == 0)
+                    {
+                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz bugün sona erdi.");
                     }
-                    if(nowDate.compareTo(araba.getEditTextEmisyonTarihi()) == 0){
-                        bildirimler.add(araba.getEditTextPlaka() + " aracın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon tarihiniz geldi");
+                    if(nowDate.compareTo(araba.getEditTextEmisyonTarihi()) == 0)
+                    {
+                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi bugün!");
                     }
-                    if(nowDate.compareTo(araba.getEditTextMuayeneTarihi()) == 0){
-                        bildirimler.add(araba.getEditTextPlaka() + " aracın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene tarihiniz geldi");
+                    if(nowDate.compareTo(araba.getEditTextMuayeneTarihi()) == 0)
+                    {
+                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı bugün!");
+                    }
+                    if(nowDate.compareTo(araba.getEditTextSigortaTarihi()) == 0)
+                    {
+                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı bugün sona eriyor!");
                     }
 
                     bildirimGuncelle();
@@ -103,14 +115,23 @@ public class ReminderService extends IntentService{
 
     private void bildirimGuncelle(){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ototakip_launcher)
-                .setContentTitle("OTOTAKİP")
-                .setContentText("Yaklaşan Tarihler Var");
+                .setContentTitle("Oto Takip")
+                .setContentText("Yaklaşan önemli tarihleriniz var.");
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            mBuilder.setSmallIcon(R.drawable.ototakip_launcher_transparent);
+        }
+        else
+        {
+            mBuilder.setSmallIcon(R.drawable.otosplash);
+        }
         NotificationCompat.InboxStyle inboxStyle =
                 new NotificationCompat.InboxStyle();
 
-        inboxStyle.setBigContentTitle("Event tracker details:");
-        for (String bildirim : bildirimler){
+        inboxStyle.setBigContentTitle("Tarih detayları:");
+        for (String bildirim : bildirimler)
+        {
             inboxStyle.addLine(bildirim);
         }
         mBuilder.setStyle(inboxStyle);

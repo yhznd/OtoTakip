@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.itsronald.widget.ViewPagerIndicator;
 
 import java.util.ArrayList;
 
@@ -39,7 +37,7 @@ public class YaklasanlarFragment extends Fragment {
         userId=firebaseAuth.getCurrentUser().getUid().toString();
         dref = FirebaseDatabase.getInstance().getReference();
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        adapter=new CustomPageAdapter(getActivity(), new ArrayList<String>(),  dref, userId);
+        adapter=new YaklasanlarAdapter(getActivity(), new ArrayList<String>(),  dref, userId);
         viewPager.setAdapter(adapter);
         return view;
     }
