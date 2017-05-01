@@ -95,7 +95,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
                         String emisyonTarihi = (String) snapshot.child("editTextEmisyonTarihi").getValue();
                         String kaskoTarihi = (String) snapshot.child("editTextKaskoTarihi").getValue();
                         String model = (String) snapshot.child("editTextModel").getValue();
-                        textPlaka.setText(aracPlakasi+" plakalı aracınızın bilgileri:");
+                        textPlaka.setText(aracPlakasi);
                         textMuayeneTarihi.setText(muayeneTarihi);
                         textSigortaTarihi.setText(sigortaTarihi);
                         textEmisyonTarihi.setText(emisyonTarihi);
@@ -129,12 +129,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
                     }
                     buttonAracGuncelle.setVisibility(Button.INVISIBLE);
                     buttonAracSil.setVisibility(Button.INVISIBLE);
-
-
-
-
-
-
+                    textModel.setItems("Araç modelinizi seçiniz:","Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
             }
         });
 
@@ -143,7 +138,6 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
             public void onClick(View view)
             {
                 String aracPlakasi=textPlaka.getText().toString();
-                textModel.setItems("Araç modelinizi seçiniz:","Mercedes","BMW","Audi","Toyota","Opel","Renault","Volkswagen","Range Rover");
                 int indis=textModel.getSelectedIndex();
                 String aracModeli=textModel.getItems().get(indis).toString();
                 String aracKaskoTrhi=textKaskoTarihi.getText().toString();
@@ -155,7 +149,6 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
                 referenceYeni.setValue(newAraba);
                 Toast.makeText(AracListele.this,"Aracınız başarıyla güncellendi!",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(AracListele.this,MainActivity.class));
-
 
             }
         });

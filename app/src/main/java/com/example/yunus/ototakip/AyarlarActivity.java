@@ -56,8 +56,8 @@ public class AyarlarActivity extends AppCompatActivity {
         else
             hatitlatmaDurumu=true;
         SharedPreferences preferences = getSharedPreferences("SaatTercih", Context.MODE_PRIVATE);
-        saat = preferences.getInt("saat", 10);
-        dakika = preferences.getInt("dakika", 00);
+        saat = preferences.getInt("saat", 15);
+        dakika = preferences.getInt("dakika", 0);
         saatSecimi.setText(String.valueOf(saat)+":"+String.valueOf(dakika));
 
         tercihKaydet.setOnClickListener(new View.OnClickListener() {
