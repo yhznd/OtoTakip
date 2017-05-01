@@ -153,7 +153,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
                 DatabaseReference referenceYeni = FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId).child(aracPlakasi);
                 Araba newAraba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
                 referenceYeni.setValue(newAraba);
-                Toast.makeText(AracListele.this,"Araç başarıyla güncellendi!",Toast.LENGTH_LONG).show();
+                Toast.makeText(AracListele.this,"Aracınız başarıyla güncellendi!",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(AracListele.this,MainActivity.class));
 
 
@@ -166,7 +166,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
             {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId).child(aracPlakasi);
                 reference.removeValue();
-                Toast.makeText(AracListele.this,"Araç başarıyla silindi",Toast.LENGTH_LONG).show();
+                Toast.makeText(AracListele.this,"Aracınız başarıyla silindi!",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(AracListele.this,MainActivity.class));
             }
         });

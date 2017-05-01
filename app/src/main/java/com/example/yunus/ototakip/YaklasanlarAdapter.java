@@ -159,10 +159,22 @@ public class YaklasanlarAdapter extends PagerAdapter implements ValueEventListen
     {
         Araba araba = dataSnapshot.getValue(Araba.class);
         String plaka = dataSnapshot.getKey();
-        araba.setEditTextPlaka(plaka);
-        arabalar.put(plaka, araba);
-        if(!arabaPlakalari.contains(plaka)){
-            arabaPlakalari.add(plaka);
+        try
+        {
+            if(plaka!=null)
+            {
+                araba.setEditTextPlaka(plaka);
+                arabalar.put(plaka, araba);
+                if(!arabaPlakalari.contains(plaka))
+                {
+                    arabaPlakalari.add(plaka);
+                }
+
+            }
+        }
+        catch (NullPointerException e)
+        {
+            Log.d("Hata","Plaka boş döndü. Hata: "+e.toString());
         }
 
         notifyDataSetChanged();

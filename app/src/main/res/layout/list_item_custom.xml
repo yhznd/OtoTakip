@@ -30,7 +30,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="480dp"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
@@ -88,7 +88,7 @@
                     android:layout_above="@+id/muayeneTarihiTextView"
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
-                    android:text="Muayene tarihinize"
+                    android:text="Muayene tarihine"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -144,7 +144,7 @@
                     android:layout_above="@+id/sigortaTarihiTextView"
                     android:layout_alignParentStart="true"
                     android:gravity="center"
-                    android:text="Sigortanızın bitmesine"
+                    android:text="Sigortasının bitmesine"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -208,7 +208,7 @@
                     android:layout_above="@+id/kaskoTarihiTextView"
                     android:layout_alignParentStart="true"
                     android:gravity="center"
-                    android:text="Kaskonuzun bitmesine"
+                    android:text="Kaskosunun bitmesine"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -217,13 +217,14 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="75dp"
+                    android:layout_marginBottom="51dp"
                     android:gravity="center"
                     android:text="GÜN KALDI"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:id="@+id/kaskoFark"
@@ -264,7 +265,7 @@
                     android:layout_above="@+id/emisyonTarihiTextView"
                     android:layout_alignParentStart="true"
                     android:gravity="center"
-                    android:text="Emisyon değişiminize"
+                    android:text="Emisyon değişimine"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -273,13 +274,14 @@
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="75dp"
+                    android:layout_marginBottom="51dp"
                     android:gravity="center"
                     android:text="GÜN KALDI"
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:id="@+id/emisyonFark"
