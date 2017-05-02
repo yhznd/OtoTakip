@@ -29,7 +29,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class AracListele extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textPlaka;
+    private EditText textPlaka;
     private MaterialSpinner textModel;
     private EditText textKaskoTarihi;
     private EditText textMuayeneTarihi;
@@ -64,7 +64,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
         firebaseAuth = FirebaseAuth.getInstance();
         userMail=firebaseAuth.getCurrentUser().getEmail();
         userId=firebaseAuth.getCurrentUser().getUid();
-        textPlaka = (TextView) findViewById(R.id.editTextPlaka);
+        textPlaka = (EditText) findViewById(R.id.editTextPlaka);
         textModel = (MaterialSpinner) findViewById(R.id.editTextModel);
         textKaskoTarihi = (EditText) findViewById(R.id.editTextKaskoTarihi);
         textMuayeneTarihi = (EditText) findViewById(R.id.editTextMuayeneTarihi);
@@ -74,6 +74,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
         buttonAracSil = (FloatingActionButton) findViewById(R.id.deleteActionButton);
         buttonAracTamam = (FloatingActionButton) findViewById(R.id.doneActionButton);
         disableEditText(textKaskoTarihi);
+        disableEditText(textPlaka);
         disableEditText(textMuayeneTarihi);
         disableEditText(textSigortaTarihi);
         disableEditText(textEmisyonTarihi);
@@ -117,8 +118,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View view)
             {
-
-
+                    enableEditText(textPlaka);
                     enableTarihYerleri(textKaskoTarihi);
                     enableTarihYerleri(textMuayeneTarihi);
                     enableTarihYerleri(textSigortaTarihi);
@@ -137,7 +137,12 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View view)
             {
-                String aracPlakasi=textPlaka.getText().toString();
+                //asıl güncelleme işlemi burada
+                String eskiPlaka=reference.getKey();
+                DatabaseReference referenceSil = FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId).child(eskiPlaka);
+                referenceSil.removeValue();
+                //eskiyi sil
+                String aracPlakasi=textPlaka.getText().toString().trim().toUpperCase();
                 int indis=textModel.getSelectedIndex();
                 String aracModeli=textModel.getItems().get(indis).toString();
                 String aracKaskoTrhi=textKaskoTarihi.getText().toString();
@@ -147,6 +152,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
                 DatabaseReference referenceYeni = FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId).child(aracPlakasi);
                 Araba newAraba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
                 referenceYeni.setValue(newAraba);
+                //yeniyi ekle
                 Toast.makeText(AracListele.this,"Aracınız başarıyla güncellendi!",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(AracListele.this,MainActivity.class));
 

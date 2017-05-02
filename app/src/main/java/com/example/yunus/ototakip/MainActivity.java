@@ -1,7 +1,9 @@
 package com.example.yunus.ototakip;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -55,7 +57,12 @@ public class MainActivity extends AppCompatActivity
 
         sendBroadcast(new Intent("com.example.yunus.ototakip.generalreceiver"));
 
-
+        if(!internetErisimi()) //net erişimi yoksa hata döndür
+        {
+            Intent intent = new Intent(MainActivity.this, InternetCon.class);
+            intent.putExtra("hataKaynak","MainActivity");
+            startActivity(intent);
+        }
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()==null)
         {
@@ -213,6 +220,21 @@ public class MainActivity extends AppCompatActivity
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy E", new Locale("tr"));
         return sdf.format(takvim.getTime());
     }
+
+    public boolean internetErisimi()
+    {
+
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
+        //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
 
 }

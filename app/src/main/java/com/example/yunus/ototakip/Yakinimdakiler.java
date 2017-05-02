@@ -31,7 +31,8 @@ public class Yakinimdakiler extends Fragment {
     public static CheckBox muayene,bakim,sigorta;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view= inflater.inflate(R.layout.activity_yakinimdakiler, container, false);
         haritayaAktar= (FancyButton) view.findViewById(R.id.buttonHaritayaGotur);
         muayene= (CheckBox) view.findViewById(R.id.checkMuayene);
