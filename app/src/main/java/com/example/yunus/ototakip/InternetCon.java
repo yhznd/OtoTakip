@@ -28,8 +28,17 @@ public class InternetCon extends AppCompatActivity {
 
                 if (internetErisimi())
                 {
-                    finish();
-                    startActivity(new Intent(InternetCon.this, Giris.class));
+                    Intent gelen=getIntent();
+                    String gelenActivity=gelen.getStringExtra("hataKaynak");
+                    switch (gelenActivity)
+                    {
+                        case "Giris":
+                            startActivity(new Intent(InternetCon.this,Giris.class));
+                            break;
+                        case "MainActivity":
+                            startActivity(new Intent(InternetCon.this,MainActivity.class));
+                            break;
+                    }
                 }
                 else
                 {
@@ -41,7 +50,8 @@ public class InternetCon extends AppCompatActivity {
     }
 
 
-    public boolean internetErisimi() {
+    public boolean internetErisimi()
+    {
 
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
         //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder

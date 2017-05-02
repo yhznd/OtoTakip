@@ -313,6 +313,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         else
         {
             Intent hata = new Intent(Giris.this, InternetCon.class);
+            hata.putExtra("hataKaynak","Giris");
             startActivity(hata);
         }
 
