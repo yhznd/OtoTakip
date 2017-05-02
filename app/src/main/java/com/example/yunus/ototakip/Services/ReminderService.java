@@ -1,6 +1,7 @@
 package com.example.yunus.ototakip.Services;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.yunus.ototakip.Araba;
 import com.example.yunus.ototakip.AyarlarActivity;
@@ -37,9 +39,11 @@ public class ReminderService extends IntentService{
 
     private String userId;
     private DatabaseReference arabalarRef;
-
+    private long gunFarki;
     private int notificationId;
     private List<String> bildirimler;
+    private long emisyonFark,sigortaFark,kaskoFark,muayeneFark;
+    private int indis;
 
     public ReminderService() {
         super("ReminderService");
@@ -65,25 +69,45 @@ public class ReminderService extends IntentService{
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Araba araba = dataSnapshot.getValue(Araba.class);
                     araba.setEditTextPlaka(dataSnapshot.getKey());
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    Calendar calendar = Calendar.getInstance();
-                    String nowDate = simpleDateFormat.format(calendar.getTime());
+                    emisyonFark=gunFarkiniGetir(araba.getEditTextEmisyonTarihi());
+                    sigortaFark=gunFarkiniGetir(araba.getEditTextSigortaTarihi());
+                    muayeneFark=gunFarkiniGetir(araba.getEditTextMuayeneTarihi());
+                    kaskoFark=gunFarkiniGetir(araba.getEditTextKaskoTarihi());
+                    indis = AyarlarActivity.tarihAraliklari.getSelectedIndex();
+                    if(indis==0) //gününde seçilmişse
+                    {
+                        if(emisyonFark==0)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi bugün!");
+                        if(sigortaFark==0)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı bugün sona eriyor!");
+                        if(muayeneFark==0)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı bugün!");
+                        if(kaskoFark==0)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz bugün sona erdi.");
+                    }
 
-                    if(nowDate.compareTo(araba.getEditTextKaskoTarihi()) == 0)
+                    if(indis==1) //1 gün önce seçilmişse
                     {
-                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz bugün sona erdi.");
+                        if(emisyonFark==1)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi yarın!");
+                        if(sigortaFark==1)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı yarın sona eriyor!");
+                        if(muayeneFark==1)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı yarın!");
+                        if(kaskoFark==1)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz yarın sona erecek.");
                     }
-                    if(nowDate.compareTo(araba.getEditTextEmisyonTarihi()) == 0)
+
+                    if(indis==2) //1 hafta önce seçilmişse
                     {
-                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi bugün!");
-                    }
-                    if(nowDate.compareTo(araba.getEditTextMuayeneTarihi()) == 0)
-                    {
-                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı bugün!");
-                    }
-                    if(nowDate.compareTo(araba.getEditTextSigortaTarihi()) == 0)
-                    {
-                        bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı bugün sona eriyor!");
+                        if(emisyonFark==7)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi 7 gün sonra!");
+                        if(sigortaFark==7)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı 7 gün sonra sona eriyor!");
+                        if(muayeneFark==7)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı 7 gün sonra!");
+                        if(kaskoFark==7)
+                            bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz 7 gün sonra sona erecek.");
                     }
 
                     bildirimGuncelle();
@@ -116,6 +140,7 @@ public class ReminderService extends IntentService{
     private void bildirimGuncelle(){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle("Oto Takip")
+                .setDefaults(Notification.DEFAULT_ALL)
                 .setContentText("Yaklaşan önemli tarihleriniz var.");
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -126,9 +151,7 @@ public class ReminderService extends IntentService{
         {
             mBuilder.setSmallIcon(R.drawable.otosplash);
         }
-        NotificationCompat.InboxStyle inboxStyle =
-                new NotificationCompat.InboxStyle();
-
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         inboxStyle.setBigContentTitle("Tarih detayları:");
         for (String bildirim : bildirimler)
         {
@@ -149,6 +172,29 @@ public class ReminderService extends IntentService{
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(notificationId, mBuilder.build());
+    }
+
+    public long gunFarkiniGetir(String gelenTarih)
+    {
+        Calendar takvim = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try
+        {
+
+            Date date1 = sdf.parse(gelenTarih);
+            Date date2 = sdf.parse(sdf.format(takvim.getTime()));
+            if(date1.after(date2))
+                gunFarki = (date1.getTime() - date2.getTime())/86400000;
+            else
+                gunFarki=0;
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        Log.d("geldi", String.valueOf(gunFarki));
+        return gunFarki;
     }
 
 }

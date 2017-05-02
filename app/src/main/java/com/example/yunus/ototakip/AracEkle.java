@@ -164,7 +164,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener 
 
     private void aracKaydet() {
 
-        String aracPlakasi = editTextPlaka.getText().toString().trim();
+        String aracPlakasi = editTextPlaka.getText().toString().trim().toUpperCase();
         int indis = editTextModel.getSelectedIndex();
         String aracModeli = editTextModel.getItems().get(indis).toString();
         String aracKaskoTrhi = editTextKaskoTarihi.getText().toString();

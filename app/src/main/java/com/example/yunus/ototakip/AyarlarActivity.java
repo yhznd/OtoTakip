@@ -22,7 +22,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class AyarlarActivity extends AppCompatActivity {
 
-    public MaterialSpinner tarihAraliklari;
+    public static MaterialSpinner tarihAraliklari;
     public EditText saatSecimi;
     public TimePickerDialog timePickerDialog;
     public FancyButton tercihKaydet;
@@ -47,7 +47,7 @@ public class AyarlarActivity extends AppCompatActivity {
         });
 
         tarihAraliklari = (MaterialSpinner) findViewById(R.id.spinnerTarihAraliklari);
-        tarihAraliklari.setItems("Gününde","1 gün önce");
+        tarihAraliklari.setItems("Gününde","1 gün önce","1 hafta önce");
         saatSecimi.setInputType(0);
         if(!ayarOnOff.isChecked())
         {
@@ -70,9 +70,7 @@ public class AyarlarActivity extends AppCompatActivity {
                 editor.putInt("saat", saat);
                 editor.putInt("dakika", dakika);
                 editor.commit();
-                Log.d("Giden",String.valueOf(saat));
-                Log.d("Giden",String.valueOf(dakika));
-                Toast.makeText(AyarlarActivity.this,"Hatırla saatiniz "+saat+":"+dakika+" olarak değiştirildi.",Toast.LENGTH_LONG).show();
+                Toast.makeText(AyarlarActivity.this,"Hatırlatma saatiniz "+saat+":"+dakika+" olarak değiştirildi.",Toast.LENGTH_LONG).show();
             }
         });
 

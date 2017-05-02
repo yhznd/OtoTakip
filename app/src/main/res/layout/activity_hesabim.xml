@@ -119,7 +119,21 @@
                 fancy:fb_focusColor="@color/sari"
                 fancy:fb_radius="6dp"
                 fancy:fb_text="Hesabı Sil"
-                fancy:fb_textColor="@color/beyaz"></mehdi.sakout.fancybuttons.FancyButton>
+                fancy:fb_textColor="@color/beyaz">
+            </mehdi.sakout.fancybuttons.FancyButton>
+
+            <TextView
+                android:id="@+id/textBilgilendirme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="40dp"
+                android:elevation="0dp"
+                android:text="Hesabınız Facebook ile bağlı ise hesap silme işlemi yapamazsınız.
+                Facebook hesabınızda Uygulama Ayarları ile hesap ilişkinizi Oto Takip ile kesmeniz hesabınızı silecektir."
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
         </LinearLayout>
     </LinearLayout>
