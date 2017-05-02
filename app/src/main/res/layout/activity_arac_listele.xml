@@ -152,18 +152,17 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <EditText
         android:id="@+id/editTextPlaka"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editTextModel"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="42dp"
-        android:layout_toEndOf="@+id/appBarAracGoruntuleLayout"
-        android:text="34OTOTAKİP34 plakalı aracınızın bilgileri:"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_alignStart="@+id/editTextModel"
+        android:layout_marginBottom="14dp"
+        android:hint="Araç Plakası"
+        android:textAlignment="textStart"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/modelTxt"
@@ -215,6 +214,16 @@
         android:layout_marginBottom="8dp"
         android:text="Muayene tarihi:"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/plakaTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plaka"
+        android:textSize="16sp"
+        android:layout_alignBaseline="@+id/editTextPlaka"
+        android:layout_alignBottom="@+id/editTextPlaka"
+        android:layout_alignStart="@+id/modelTxt" />
 
 
 </RelativeLayout>
