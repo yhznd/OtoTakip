@@ -93,6 +93,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener 
         buttonAracKaydet = (FloatingActionButton) findViewById(R.id.buttonAracKaydet);
 
 
+
         buttonAracKaydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
