@@ -48,11 +48,21 @@
             android:background="@color/colorPrimary" >
 
             <!-- Email Label -->
+            <TextView
+                android:id="@+id/textApp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="OTO TAKİP"
+                android:textAlignment="center"
+                android:textColor="@color/beyaz"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
                 android:textColorHint="@color/beyaz">
 
                 <EditText
@@ -97,6 +107,7 @@
             android:id="@+id/lay3"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:orientation="vertical"
@@ -109,30 +120,28 @@
                 android:background="@color/sari"
                 fancy:fb_borderColor="@color/sari"
                 fancy:fb_borderWidth="1dp"
-                fancy:fb_textSize="15sp"
                 fancy:fb_defaultColor="@color/sari"
                 fancy:fb_focusColor="@color/sari"
                 fancy:fb_radius="6dp"
                 fancy:fb_text="GİRİŞ YAP"
-                fancy:fb_textColor="@color/beyaz" />
+                fancy:fb_textColor="@color/beyaz"
+                fancy:fb_textSize="15sp" />
 
             <ImageView
                 android:id="@+id/ayirac"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:src="@drawable/ayrac" />
 
-            <com.facebook.login.widget.LoginButton
-                xmlns:facebook="http://schemas.android.com/apk/res-auto"
+            <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/login_button"
-                facebook:com_facebook_login_text="Facebook ile bağlan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="13dp"
                 android:paddingTop="13dp"
-                android:textSize="15sp">
-            </com.facebook.login.widget.LoginButton>
+                android:textSize="15sp"
+                facebook:com_facebook_login_text="Facebook ile bağlan"></com.facebook.login.widget.LoginButton>
         </LinearLayout>
 
 
