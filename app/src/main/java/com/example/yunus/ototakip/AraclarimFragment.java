@@ -29,29 +29,22 @@ public class AraclarimFragment extends Fragment {
     public FirebaseAuth firebaseAuth;
     public DatabaseReference dref;
     public ListView listview;
-    public Dialog progressDialog;
     public ImageView bosArac;
     public ArrayList<String> list=new ArrayList<>();
-    public ArrayAdapter<String> adapter;
+    public static ArrayAdapter<String> adapter;
     public AraclarimFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view=inflater.inflate(R.layout.activity_araclarim_fragment, container, false);
-        progressDialog = new Dialog(getActivity(), R.style.progress_dialog);
-        progressDialog.setContentView(R.layout.dialog);
-        progressDialog.setCancelable(true);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         firebaseAuth=FirebaseAuth.getInstance();
         listview=(ListView)view.findViewById(R.id.listview);
         userId=firebaseAuth.getCurrentUser().getUid().toString();
         bosArac= (ImageView) view.findViewById(R.id.emptyData);
         dref = FirebaseDatabase.getInstance().getReference();
         adapter=new ArabaAdapter(getActivity(), new ArrayList<String>(),  dref, userId);
-        progressDialog.show();
         listview.setAdapter(adapter);
-        progressDialog.dismiss();
         listview.setEmptyView(bosArac);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
