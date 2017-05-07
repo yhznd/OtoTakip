@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.yunus.ototakip.Araba;
+import com.example.yunus.ototakip.AraclarimFragment;
 import com.example.yunus.ototakip.AyarlarActivity;
 import com.example.yunus.ototakip.MainActivity;
 import com.example.yunus.ototakip.R;
@@ -80,7 +81,9 @@ public class ReminderService extends IntentService{
                     aktiflik = settings.getBoolean("aktiflik", true);
                     Log.v("indis", String.valueOf(indis));
                     Log.v("tercih", String.valueOf(aktiflik));
-                    if (aktiflik) //eğer hatırlatma açıksa açık=0, kapalı=1
+                    Log.v("adapter", "Toplam kayıt:"+String.valueOf(AraclarimFragment.adapter.getCount()));
+                    if (aktiflik && AraclarimFragment.adapter.getCount()!=0) //eğer hatırlatma açıksa ve liste boş değilse
+                    // açık=0, kapalı=1
                     {
                         if (indis == 0) //gününde seçilmişse
                         {

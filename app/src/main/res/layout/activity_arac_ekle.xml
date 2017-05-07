@@ -72,7 +72,7 @@
         android:layout_alignStart="@+id/editTextPlaka"
         android:layout_below="@+id/editTextPlaka"
         android:layout_marginTop="20dp"
-        android:hint="Araç markanınızı seçin"
+        android:hint="Araç modelinizi seçin"
         android:textSize="14sp"
         tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="268dp" />
