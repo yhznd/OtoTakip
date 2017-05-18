@@ -69,6 +69,7 @@
         android:drawableLeft="@drawable/ic_event_available_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
+        android:focusableInTouchMode="false"
         android:hint="Kasko Tarihi"
         android:inputType="date" />
 
@@ -83,6 +84,7 @@
         android:drawableLeft="@drawable/ic_event_available_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
+        android:focusableInTouchMode="false"
         android:hint="Emisyon Tarihi"
         android:inputType="date" />
 
@@ -96,6 +98,7 @@
         android:ems="10"
         android:hint="Sigorta Tarihi"
         android:inputType="date"
+        android:focusableInTouchMode="false"
         android:layout_alignBottom="@+id/editTextMuayeneTarihi"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="53dp" />
@@ -110,6 +113,7 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Muayene Tarihi"
+        android:focusableInTouchMode="false"
         android:inputType="date"
         android:layout_above="@+id/editActionButton"
         android:layout_alignParentEnd="true" />

@@ -31,7 +31,6 @@ public class AyarlarActivity extends AppCompatActivity {
     public int indis;
     public boolean aktifMi;
     public ToggleButton ayarOnOff;
-    public static boolean hatitlatmaDurumu=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

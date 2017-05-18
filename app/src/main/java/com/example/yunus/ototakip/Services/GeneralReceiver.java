@@ -32,7 +32,7 @@ public class GeneralReceiver extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         SharedPreferences settings = context.getSharedPreferences("Tercih", Context.MODE_PRIVATE);
-        gelenSaat = settings.getInt("saat", 15); //default olarak 10:00'a
+        gelenSaat = settings.getInt("saat", 15); //default olarak 15:00'a
         gelenDakika=settings.getInt("dakika",0);
         calendar.set(Calendar.HOUR_OF_DAY, gelenSaat);
         calendar.set(Calendar.MINUTE, gelenDakika);
