@@ -111,6 +111,7 @@
         android:drawableLeft="@drawable/ic_event_available_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
+        android:focusableInTouchMode="false"
         android:hint="Kasko Tarihi"
         android:inputType="date"
         android:layout_alignEnd="@+id/editTextPlaka" />
@@ -125,6 +126,7 @@
         android:background="@color/beyaz"
         android:drawablePadding="5dp"
         android:hint="Emisyon Tarihi"
+        android:focusableInTouchMode="false"
         android:inputType="date"
         android:layout_below="@+id/editTextKaskoTarihi"
         android:layout_alignStart="@+id/editTextKaskoTarihi" />
@@ -139,6 +141,7 @@
         android:background="@color/beyaz"
         android:drawablePadding="5dp"
         android:hint="Sigorta Tarihi"
+        android:focusableInTouchMode="false"
         android:inputType="date"
         android:layout_below="@+id/editTextEmisyonTarihi"
         android:layout_alignStart="@+id/editTextEmisyonTarihi" />
@@ -153,6 +156,7 @@
         android:background="@color/beyaz"
         android:drawablePadding="5dp"
         android:hint="Muayene Tarihi"
+        android:focusableInTouchMode="false"
         android:inputType="date"
         android:layout_below="@+id/editTextSigortaTarihi"
         android:layout_alignStart="@+id/editTextSigortaTarihi" />

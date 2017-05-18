@@ -36,7 +36,7 @@ public class YaklasanlarAdapter extends PagerAdapter implements ValueEventListen
     private LayoutInflater inflater;
     private List<String> arabaPlakalari;
     private long gunFarki;
-
+    private String gunKalma;
 
     public YaklasanlarAdapter(@NonNull Context context,
                               @NonNull List<String> arabaPlakalar,
@@ -108,10 +108,9 @@ public class YaklasanlarAdapter extends PagerAdapter implements ValueEventListen
         TextView sigortaTarihiTextView;
         TextView kaskoTarihiTextView;
         TextView plakaTextView;
+        TextView muaGun,sigGun,kaskoGun,emiGun;
         TextView emisyonFark,sigortaFark,muayeneFark,kaskoFark;
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.list_item_custom, null);
         muayeneTarihiTextView = (TextView) viewLayout.findViewById(R.id.muayeneTarihiTextView);
         kaskoTarihiTextView = (TextView) viewLayout.findViewById(R.id.kaskoTarihiTextView);
@@ -122,17 +121,25 @@ public class YaklasanlarAdapter extends PagerAdapter implements ValueEventListen
         sigortaFark= (TextView) viewLayout.findViewById(R.id.sigortaFark);
         muayeneFark= (TextView) viewLayout.findViewById(R.id.muayeneFark);
         kaskoFark= (TextView) viewLayout.findViewById(R.id.kaskoFark);
-
+        muaGun= (TextView) viewLayout.findViewById(R.id.muaGunKaldi);
+        sigGun= (TextView) viewLayout.findViewById(R.id.sigortaGunKaldi);
+        kaskoGun= (TextView) viewLayout.findViewById(R.id.kaskoGunKaldi);
+        emiGun= (TextView) viewLayout.findViewById(R.id.emisyonGunKaldi);
         muayeneTarihiTextView.setText(arabaBilgisi.getEditTextMuayeneTarihi());
         kaskoTarihiTextView.setText(arabaBilgisi.getEditTextKaskoTarihi());
         sigortaTarihiTextView.setText(arabaBilgisi.getEditTextSigortaTarihi());
         emisyonTarihiTextView.setText(arabaBilgisi.getEditTextEmisyonTarihi());
         plakaTextView.setText(arabaBilgisi.getEditTextPlaka()+" plakalı aracınızın");
-
         emisyonFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextEmisyonTarihi())));
+        emiGun.setText(gunKalma);
         sigortaFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextSigortaTarihi())));
+        sigGun.setText(gunKalma);
         muayeneFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextMuayeneTarihi())));
+        muaGun.setText(gunKalma);
         kaskoFark.setText(String.valueOf(gunFarkiniGetir(arabaBilgisi.getEditTextKaskoTarihi())));
+        kaskoGun.setText(gunKalma);
+
+
 
 
         container.addView(viewLayout,0);
@@ -203,15 +210,31 @@ public class YaklasanlarAdapter extends PagerAdapter implements ValueEventListen
             Date date1 = sdf.parse(gelenTarih);
             Date date2 = sdf.parse(sdf.format(takvim.getTime()));
             if(date1.after(date2))
-                gunFarki = (date1.getTime() - date2.getTime())/86400000;
-            else
-                gunFarki=0;
+            {
+                gunFarki = (date1.getTime() - date2.getTime()) / 86400000;
+                gunKalma="GÜN KALDI";
+
+            }
+
+            if(date1.before(date2))
+            {
+                gunFarki = (date2.getTime() - date1.getTime())/86400000;
+                gunKalma="GÜN GECİKTİ";
+
+            }
+            if(date1.compareTo(date2)==0)
+            {
+                gunFarki = (date2.getTime() - date1.getTime())/86400000;
+                gunKalma="GÜN KALDI - BUGÜN";
+
+            }
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
         Log.d("geldi", String.valueOf(gunFarki));
+
         return gunFarki;
     }
 
