@@ -1,7 +1,9 @@
 package com.example.yunus.ototakip;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +43,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener 
     private EditText editTextEmisyonTarihi;
     Calendar myCalendar = Calendar.getInstance();
     String myFormat = "dd/MM/yyyy";
+    public boolean cancel = false;
     SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
     String userId;
     String userMail;
@@ -95,11 +99,10 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener 
 
         buttonAracKaydet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 aracKaydet();
-                CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
-                Snackbar.make(rootLayout, "Araç eklendi!", Snackbar.LENGTH_LONG).show();
-                startActivity(new Intent(AracEkle.this, MainActivity.class));
+
             }
         });
 
@@ -161,26 +164,62 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    public boolean internetErisimi() {
 
-    private void aracKaydet() {
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    private void aracKaydet()
+    {
 
         String aracPlakasi = editTextPlaka.getText().toString().trim().toUpperCase();
+        editTextPlaka.setError(null);
         int indis = editTextModel.getSelectedIndex();
         String aracModeli = editTextModel.getItems().get(indis).toString();
         String aracKaskoTrhi = editTextKaskoTarihi.getText().toString();
         String aracTrafikTrhi = editTextMuayeneTarihi.getText().toString();
         String aracMuayeneTrhi = editTextSigortaTarihi.getText().toString();
         String aracSigortaTrhi = editTextEmisyonTarihi.getText().toString();
+        View focusView = null;
+        if (TextUtils.isEmpty(aracPlakasi))
+        {
+            editTextPlaka.setError(getString(R.string.plaka_alan_gerekli));
+            focusView = editTextPlaka;
+            cancel = true;
+        }
 
+        if (internetErisimi())
+        {
+            if (cancel == false)
+            {
+                araba = new Araba(userMail, aracModeli, aracKaskoTrhi, aracTrafikTrhi, aracMuayeneTrhi, aracSigortaTrhi);
+                reference = database.getReference("Arabalar").child(userId).child(aracPlakasi);
+                reference.setValue(araba);
+                Toast.makeText(AracEkle.this, "Araç başarıyla eklendi!", Toast.LENGTH_LONG).show();
+                CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.myCoordinatorLayout);
+                Snackbar.make(rootLayout, "Araç eklendi!", Snackbar.LENGTH_LONG).show();
+                startActivity(new Intent(AracEkle.this, MainActivity.class));
+            }
 
-        araba = new Araba(userMail, aracModeli, aracKaskoTrhi, aracTrafikTrhi, aracMuayeneTrhi, aracSigortaTrhi);
-        reference = database.getReference("Arabalar").child(userId).child(aracPlakasi);
-        reference.setValue(araba);
-        Toast.makeText(AracEkle.this, "Araç başarıyla eklendi!", Toast.LENGTH_LONG).show();
+        }
+
+        else
+        {
+            Intent hata = new Intent(AracEkle.this, InternetCon.class);
+            startActivity(hata);
+        }
+        cancel = false;
+
 
     }
-
-
-
 }
 

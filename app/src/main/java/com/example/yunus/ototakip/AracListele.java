@@ -1,12 +1,15 @@
 package com.example.yunus.ototakip;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +45,7 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
     String userId,userMail;
     String aracPlakasi;
     Araba araba;
+    public boolean cancel = false;
     FloatingActionButton buttonAracGuncelle,buttonAracSil,buttonAracTamam;
     private DatePickerDialog kaskoTarihiDialog;
     private DatePickerDialog sigortaTarihiDialog;
@@ -143,18 +147,43 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
                 referenceSil.removeValue();
                 //eskiyi sil
                 String aracPlakasi=textPlaka.getText().toString().trim().toUpperCase();
+                textPlaka.setError(null);
                 int indis=textModel.getSelectedIndex();
                 String aracModeli=textModel.getItems().get(indis).toString();
                 String aracKaskoTrhi=textKaskoTarihi.getText().toString();
                 String aracTrafikTrhi=textMuayeneTarihi.getText().toString();
                 String aracMuayeneTrhi=textSigortaTarihi.getText().toString();
                 String aracSigortaTrhi=textEmisyonTarihi.getText().toString();
-                DatabaseReference referenceYeni = FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId).child(aracPlakasi);
-                Araba newAraba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
-                referenceYeni.setValue(newAraba);
-                //yeniyi ekle
-                Toast.makeText(AracListele.this,"Aracınız başarıyla güncellendi!",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(AracListele.this,MainActivity.class));
+
+                View focusView = null;
+                if (TextUtils.isEmpty(aracPlakasi))
+                {
+                    textPlaka.setError(getString(R.string.plaka_alan_gerekli));
+                    focusView = textPlaka;
+                    cancel = true;
+                }
+
+                if (internetErisimi())
+                {
+                    if (cancel == false)
+                    {
+                        DatabaseReference referenceYeni = FirebaseDatabase.getInstance().getReference().child("Arabalar").child(userId).child(aracPlakasi);
+                        Araba newAraba =new Araba(userMail,aracModeli,aracKaskoTrhi,aracTrafikTrhi,aracMuayeneTrhi,aracSigortaTrhi);
+                        referenceYeni.setValue(newAraba);
+                        //yeniyi ekle
+                        Toast.makeText(AracListele.this,"Aracınız başarıyla güncellendi!",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(AracListele.this,MainActivity.class));
+                    }
+
+                }
+
+                else
+                {
+                    Intent hata = new Intent(AracListele.this, InternetCon.class);
+                    startActivity(hata);
+                }
+                cancel = false;
+
 
             }
         });
@@ -271,6 +300,19 @@ public class AracListele extends AppCompatActivity implements View.OnClickListen
         {
             sigortaTarihiDialog.show();
         }
+    }
+
+    public boolean internetErisimi() {
+
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        //net bağlantısı varsa, erişilebilir ve bağlı ise true gönder
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 
