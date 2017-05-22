@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +55,21 @@ public class MainActivity extends AppCompatActivity
         this.setTitle("");
         setContentView(R.layout.activity_main);
 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
+        SharedPreferences.Editor dateEditor  = dateShared.edit();
+        SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (settings.getBoolean("ilk_calisma_zamani", true))
+        {
+            Log.d("Comments", "İlk çalışma");
+            Calendar cal = Calendar.getInstance();
+            dateEditor.putString("dateVal",dfDate.format(cal.getTime()));
+            dateEditor.commit();
+            settings.edit().putBoolean("ilk_calisma_zamani", false).commit();
+        }
+
+        AppRating.app_launched(this);
 
         sendBroadcast(new Intent("com.example.yunus.ototakip.generalreceiver"));
 
@@ -71,22 +87,6 @@ public class MainActivity extends AppCompatActivity
             finish();
 
         }
-
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences dateShared = getSharedPreferences(SHAREDPREF_DATE, 0);
-        SharedPreferences.Editor dateEditor  = dateShared.edit();
-        SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy");
-
-        if (settings.getBoolean("ilk_calisma_zamani", true))
-        {
-            Log.d("Comments", "İlk çalışma");
-            Calendar cal = Calendar.getInstance();
-            dateEditor.putString("dateVal",dfDate.format(cal.getTime()));
-            dateEditor.commit();
-            settings.edit().putBoolean("ilk_calisma_zamani", false).commit();
-        }
-
-        AppRating.app_launched(this);
 
         tarih = (TextView) findViewById(R.id.tarihText);
         tarih.setText("Bugün - "+sistemTarihiniGetir());
@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_oyla)
         {
 
+            Toast.makeText(MainActivity.this,"Uygulama henüz Google Play'de bulunmamakta. Takipte kalın!",Toast.LENGTH_LONG).show();
 
         }
         else if (id == R.id.nav_cikis)

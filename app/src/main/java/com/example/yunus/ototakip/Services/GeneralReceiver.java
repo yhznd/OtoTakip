@@ -31,14 +31,14 @@ public class GeneralReceiver extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
-        SharedPreferences settings = context.getSharedPreferences("SaatTercih", Context.MODE_PRIVATE);
-        gelenSaat = settings.getInt("saat", 15); //default olarak 10:00'a
+        SharedPreferences settings = context.getSharedPreferences("Tercih", Context.MODE_PRIVATE);
+        gelenSaat = settings.getInt("saat", 15); //default olarak 15:00'a
         gelenDakika=settings.getInt("dakika",0);
         calendar.set(Calendar.HOUR_OF_DAY, gelenSaat);
         calendar.set(Calendar.MINUTE, gelenDakika);
         calendar.set(Calendar.SECOND,0);
-        Log.d("Gelen",String.valueOf(gelenSaat));
-        Log.d("Gelen",String.valueOf(gelenDakika));
+        Log.v("gelen",String.valueOf(gelenSaat));
+        Log.v("gelen",String.valueOf(gelenDakika));
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
 

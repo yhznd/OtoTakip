@@ -32,7 +32,7 @@ dependencies {
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.2'
     compile 'com.github.lzyzsd:circleprogress:1.2.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.github.paolorotolo:appintro:3.3.0'
+    compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'com.github.medyo:fancybuttons:1.8.2'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.0'

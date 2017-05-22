@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -105,17 +106,7 @@ public class AppRating
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
-                        Uri uri = Uri.parse("market://details?id=" + APP_PNAME);
-                        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-                        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                        try {
-                            mContext.startActivity(goToMarket);
-                        } catch (ActivityNotFoundException e) {
-                            mContext.startActivity(new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("http://play.google.com/store/apps/details?id=" + APP_PNAME)));
-                        }
+                        Toast.makeText(mContext,"Uygulama henüz Google Play'de bulunmamakta. Takipte kalın!",Toast.LENGTH_LONG).show();
                     }
                 })
                 .show();

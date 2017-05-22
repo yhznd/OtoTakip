@@ -131,7 +131,7 @@
                 android:layout_marginTop="40dp"
                 android:elevation="0dp"
                 android:text="Hesabınız Facebook ile bağlı ise hesap silme işlemi yapamazsınız.
-                Facebook hesabınızda Uygulama Ayarları ile hesap ilişkinizi Oto Takip ile kesmeniz hesabınızı silecektir."
+  Facebook hesabınızda Uygulama Ayarları ile hesap ilişkinizi Oto Takip ile kesmeniz hesabınızı silecektir."
                 android:textAlignment="center"
                 android:textSize="12sp" />
 
