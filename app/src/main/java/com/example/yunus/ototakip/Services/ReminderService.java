@@ -11,8 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-
 import com.example.yunus.ototakip.Araba;
 import com.example.yunus.ototakip.AraclarimFragment;
 import com.example.yunus.ototakip.AyarlarActivity;
@@ -25,13 +23,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Eren Özhan on 28.4.2017.
@@ -54,7 +52,8 @@ public class ReminderService extends IntentService{
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
-        if(user != null){
+        if(user != null)
+        {
             userId = user.getUid();
             arabalarRef = dbRef.child("Arabalar").child(userId);
         }
@@ -69,7 +68,8 @@ public class ReminderService extends IntentService{
 
             arabalarRef.addChildEventListener(new ChildEventListener() {
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
                     Araba araba = dataSnapshot.getValue(Araba.class);
                     araba.setEditTextPlaka(dataSnapshot.getKey());
                     emisyonFark = gunFarkiniGetir(araba.getEditTextEmisyonTarihi());
@@ -79,50 +79,98 @@ public class ReminderService extends IntentService{
                     SharedPreferences settings = getSharedPreferences("Tercih", Context.MODE_PRIVATE);
                     indis = settings.getInt("gelenIndis", 0);
                     aktiflik = settings.getBoolean("aktiflik", true);
-                    Log.v("indis", String.valueOf(indis));
-                    Log.v("tercih", String.valueOf(aktiflik));
-                    Log.v("adapter", "Toplam kayıt:"+String.valueOf(AraclarimFragment.adapter.getCount()));
                     if (aktiflik && AraclarimFragment.adapter.getCount()!=0) //eğer hatırlatma açıksa ve liste boş değilse
                     // açık=0, kapalı=1
                     {
                         if (indis == 0) //gününde seçilmişse
                         {
                             if (emisyonFark == 0)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi bugün!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Emisyon değişim tarihi bugün.");
+                                bildirimGuncelle();
+
+                            }
                             if (sigortaFark == 0)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı bugün sona eriyor!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Sigortası bugün sona eriyor.");
+                            bildirimGuncelle();
+
+                            }
                             if (muayeneFark == 0)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı bugün!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Muayene günü bugün.");
+                                bildirimGuncelle();
+
+                            }
                             if (kaskoFark == 0)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz bugün sona erdi.");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Kaskosu bugün sona erdi.");
+                                bildirimGuncelle();
+
+                            }
+
                         }
 
                         if (indis == 1) //1 gün önce seçilmişse
                         {
                             if (emisyonFark == 1)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi yarın!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Emisyon değişim tarihi yarın.");
+                                bildirimGuncelle();
+
+                            }
                             if (sigortaFark == 1)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı yarın sona eriyor!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Sigortası yarın sona eriyor.");
+                                bildirimGuncelle();
+
+                            }
                             if (muayeneFark == 1)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı yarın!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Muayene günü yarın.");
+                                bildirimGuncelle();
+
+                            }
                             if (kaskoFark == 1)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz yarın sona erecek.");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Kaskosu yarın sona erecek.");
+                                bildirimGuncelle();
+
+                            }
                         }
 
                         if (indis == 2) //1 hafta önce seçilmişse
                         {
                             if (emisyonFark == 7)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextEmisyonTarihi() + " tarihindeki emisyon değişim tarihi 7 gün sonra!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Emisyon değişim tarihi 7 gün sonra.");
+                                bildirimGuncelle();
+
+                            }
                             if (sigortaFark == 7)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextSigortaTarihi() + " tarihindeki sigorta zamanı 7 gün sonra sona eriyor!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Sigortası 7 gün sonra sona eriyor.");
+                                bildirimGuncelle();
+
+                            }
                             if (muayeneFark == 7)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın  " + araba.getEditTextMuayeneTarihi() + " tarihindeki muayene zamanı 7 gün sonra!");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Muayenesi 7 gün sonra.");
+                                bildirimGuncelle();
+
+                            }
                             if (kaskoFark == 7)
-                                bildirimler.add(araba.getEditTextPlaka() + " plakalı aracınızın " + araba.getEditTextKaskoTarihi() + " tarihindeki kaskonuz 7 gün sonra sona erecek.");
+                            {
+                                bildirimler.add(araba.getEditTextPlaka() + " - Kaskosu 7 gün sonra sona erecek.");
+                                bildirimGuncelle();
+
+                            }
+
                         }
 
-                        bildirimGuncelle();
+
                     }
+
                 }
 
                 @Override
@@ -149,7 +197,8 @@ public class ReminderService extends IntentService{
 
     }
 
-    private void bildirimGuncelle(){
+    private void bildirimGuncelle()
+      {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle("Oto Takip")
                 .setDefaults(Notification.DEFAULT_ALL)
@@ -163,13 +212,14 @@ public class ReminderService extends IntentService{
         {
             mBuilder.setSmallIcon(R.drawable.otosplash);
         }
-        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-        bigTextStyle.setBigContentTitle("Tarih detayları:");
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        inboxStyle.setBigContentTitle("Tarih detayları:");
+
         for (String bildirim : bildirimler)
         {
-            bigTextStyle.bigText(bildirim);
+            inboxStyle.addLine(bildirim);
         }
-        mBuilder.setStyle(bigTextStyle);
+        mBuilder.setStyle(inboxStyle);
 
         Intent resultIntent = new Intent(ReminderService.this, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(ReminderService.this);
@@ -181,15 +231,15 @@ public class ReminderService extends IntentService{
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(notificationId, mBuilder.build());
+
     }
 
     public long gunFarkiniGetir(String gelenTarih)
     {
         Calendar takvim = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 
         try
         {
@@ -197,16 +247,29 @@ public class ReminderService extends IntentService{
             Date date1 = sdf.parse(gelenTarih);
             Date date2 = sdf.parse(sdf.format(takvim.getTime()));
             if(date1.after(date2))
-                gunFarki = (date1.getTime() - date2.getTime())/86400000;
-            else
-                gunFarki=0;
+            {
+                gunFarki = (date1.getTime() - date2.getTime()) / 86400000;
+
+
+            }
+            if(date1.before(date2))
+            {
+                gunFarki = (date2.getTime() - date1.getTime())/86400000;
+            }
+            if(date1.compareTo(date2)==0)
+            {
+                gunFarki = (date2.getTime() - date1.getTime())/86400000;
+
+            }
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
-        Log.d("geldi", String.valueOf(gunFarki));
+
         return gunFarki;
     }
+
+
 
 }
