@@ -94,13 +94,13 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/muaGunKaldi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="75dp"
                     android:gravity="center"
-                    android:text="GÜN KALDI"
+                    android:text=""
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -109,7 +109,7 @@
                     android:id="@+id/muayeneFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView"
+                    android:layout_above="@+id/muaGunKaldi"
                     android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
@@ -150,13 +150,13 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/sigortaGunKaldi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="75dp"
                     android:gravity="center"
-                    android:text="GÜN KALDI"
+                    android:text=""
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -165,7 +165,7 @@
                     android:id="@+id/sigortaFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView8"
+                    android:layout_above="@+id/sigortaGunKaldi"
                     android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
@@ -214,12 +214,12 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/kaskoGunKaldi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="51dp"
                     android:gravity="center"
-                    android:text="GÜN KALDI"
+                    android:text=""
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -230,7 +230,7 @@
                     android:id="@+id/kaskoFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView10"
+                    android:layout_above="@+id/kaskoGunKaldi"
                     android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"
@@ -271,12 +271,12 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/emisyonGunKaldi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="51dp"
                     android:gravity="center"
-                    android:text="GÜN KALDI"
+                    android:text=""
                     android:textColor="@color/beyaz"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -287,7 +287,7 @@
                     android:id="@+id/emisyonFark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView13"
+                    android:layout_above="@+id/emisyonGunKaldi"
                     android:layout_alignParentStart="true"
                     android:text="0"
                     android:textAlignment="center"

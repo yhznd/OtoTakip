@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -85,6 +86,8 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         });
         // Start the thread
         t.start();
+        Log.v("MyIntro","ilk baslama:"+String.valueOf(isFirstStart));
+
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         firebaseAuth = FirebaseAuth.getInstance();
@@ -164,7 +167,9 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void userLogin() {
+
+    private void userLogin()
+    {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         editTextEmail.setError(null);
@@ -313,6 +318,7 @@ public class Giris extends AppCompatActivity implements View.OnClickListener {
         else
         {
             Intent hata = new Intent(Giris.this, InternetCon.class);
+            hata.putExtra("hataKaynak","Giris");
             startActivity(hata);
         }
 

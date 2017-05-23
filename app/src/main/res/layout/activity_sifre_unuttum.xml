@@ -37,20 +37,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/otosplash" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lay2"
             android:layout_width="wrap_content"
-            android:layout_height="170dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:text="OTO TAKİP"
+                android:textAlignment="center"
+                android:textColor="@color/beyaz"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textBilgilendirme"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"
                 android:text="Şifresini sıfırlamak istediğin hesabının \n e-posta adresini gir. \n Girdiğin e-posta adresine sıfırlama linkini yollayacağız."
                 android:textAlignment="center"
                 android:textColor="@color/beyaz"

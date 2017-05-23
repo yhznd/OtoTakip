@@ -28,8 +28,9 @@ public class AyarlarActivity extends AppCompatActivity {
     public FancyButton tercihKaydet;
     public int saat;
     public int dakika;
+    public int indis;
+    public boolean aktifMi;
     public ToggleButton ayarOnOff;
-    public static boolean hatitlatmaDurumu=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,32 +48,32 @@ public class AyarlarActivity extends AppCompatActivity {
         });
 
         tarihAraliklari = (MaterialSpinner) findViewById(R.id.spinnerTarihAraliklari);
-        tarihAraliklari.setItems("Gününde","1 gün önce");
+        tarihAraliklari.setItems("Gününde","1 gün önce","1 hafta önce");
         saatSecimi.setInputType(0);
-        if(!ayarOnOff.isChecked())
-        {
-            hatitlatmaDurumu=false;
-        }
-        else
-            hatitlatmaDurumu=true;
-        SharedPreferences preferences = getSharedPreferences("SaatTercih", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("Tercih", Context.MODE_PRIVATE);
         saat = preferences.getInt("saat", 15);
         dakika = preferences.getInt("dakika", 0);
         saatSecimi.setText(String.valueOf(saat)+":"+String.valueOf(dakika));
+        indis=preferences.getInt("gelenIndis",0);
+        tarihAraliklari.setSelectedIndex(indis);
+        aktifMi=preferences.getBoolean("aktiflik",true);
+        ayarOnOff.setChecked(aktifMi);
 
         tercihKaydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                SharedPreferences settings = getSharedPreferences("SaatTercih", Context.MODE_PRIVATE);
+                indis = tarihAraliklari.getSelectedIndex();
+                aktifMi=ayarOnOff.isChecked();
+                SharedPreferences settings = getSharedPreferences("Tercih", Context.MODE_PRIVATE);
                 //değerleri yerleştir
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("saat", saat);
                 editor.putInt("dakika", dakika);
+                editor.putInt("gelenIndis",indis);
+                editor.putBoolean("aktiflik",aktifMi);
                 editor.commit();
-                Log.d("Giden",String.valueOf(saat));
-                Log.d("Giden",String.valueOf(dakika));
-                Toast.makeText(AyarlarActivity.this,"Hatırla saatiniz "+saat+":"+dakika+" olarak değiştirildi.",Toast.LENGTH_LONG).show();
+                Toast.makeText(AyarlarActivity.this,"Hatırlatma saatiniz "+saat+":"+dakika+" olarak değiştirildi.",Toast.LENGTH_LONG).show();
             }
         });
 

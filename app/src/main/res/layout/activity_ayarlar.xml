@@ -46,7 +46,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/ayarOnOffButton"
         android:layout_marginEnd="28dp"
-        android:checked="true"
         android:layout_alignBaseline="@+id/textBildirim"
         android:layout_alignBottom="@+id/textBildirim"
         android:layout_alignParentEnd="true" />
