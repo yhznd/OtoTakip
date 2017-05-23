@@ -10,18 +10,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -29,8 +24,6 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class AracEkle extends AppCompatActivity implements View.OnClickListener {
 
@@ -215,6 +208,7 @@ public class AracEkle extends AppCompatActivity implements View.OnClickListener 
         else
         {
             Intent hata = new Intent(AracEkle.this, InternetCon.class);
+            hata.putExtra("hataKaynak","AracEkle");
             startActivity(hata);
         }
         cancel = false;

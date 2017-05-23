@@ -14,7 +14,6 @@ public class Araba {
     private String editTextSigortaTarihi;
     private String editTextEmisyonTarihi;
 
-    //public Araba(){}
 
 
 

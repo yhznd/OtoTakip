@@ -3,14 +3,12 @@ package com.example.yunus.ototakip;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-import mehdi.sakout.fancybuttons.FancyButton;
 
 public class InternetCon extends AppCompatActivity {
 
@@ -37,6 +35,9 @@ public class InternetCon extends AppCompatActivity {
                             break;
                         case "MainActivity":
                             startActivity(new Intent(InternetCon.this,MainActivity.class));
+                        break;
+                        case "AracEkle":
+                            startActivity(new Intent(InternetCon.this,AracEkle.class));
                             break;
                     }
                 }
